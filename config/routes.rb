@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   # Main landing page (Mahé)
   root "pages#home"
-  get "/home", to: "pages#home"
 
   # User profile page (Charlotte)
   resources :users, only: [:show]
@@ -21,6 +20,5 @@ Rails.application.routes.draw do
   get "participations/destroy"
 
   # Home page
-  root "pages#home"
   get "up" => "rails/health#show", as: :rails_health_check
 end
