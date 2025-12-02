@@ -7,3 +7,6 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Seed Chacha - cree un enregistrement initial
+Chacha.find_or_create_by!(name: "Mon premier Chacha")

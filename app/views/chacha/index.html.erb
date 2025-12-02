@@ -1,0 +1,9 @@
+<%# Vue Chacha - affiche @chacha ou message fallback %>
+<div class="chacha-container">
+  <h1>Chacha</h1>
+  <% if @chacha %>
+    <p><%= @chacha.name %></p>
+  <% else %>
+    <p>Aucun chacha trouve</p>
+  <% end %>
+</div>
