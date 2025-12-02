@@ -10,6 +10,7 @@
     </div>
   <% end %>
 
+  <!-- Basic event info -->
   <div>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -35,9 +36,35 @@
     <%= f.date_field :ends_on %>
   </div>
 
+  <!-- Privacy (backed by event_private in DB) -->
   <div>
     <%= f.label :event_private, "Private event?" %>
     <%= f.check_box :event_private %>
+  </div>
+
+  <!-- New: Discoverability + Guest approval (UI only for now) -->
+  <hr>
+
+  <div>
+    <h3>Discoverability</h3>
+    <label>
+      <%= check_box_tag :discoverable, "1" %>
+      Make this event discoverable
+    </label>
+    <p style="font-size: 0.85em; color: #666;">
+      (Placeholder option – not yet connected to the database.)
+    </p>
+  </div>
+
+  <div>
+    <h3>Guest approval</h3>
+    <label>
+      <%= check_box_tag :require_guest_approval, "1" %>
+      Require host approval for new guests
+    </label>
+    <p style="font-size: 0.85em; color: #666;">
+      (Placeholder – final behaviour will be added when participation logic is ready.)
+    </p>
   </div>
 
   <div>

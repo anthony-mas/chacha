@@ -1,18 +1,70 @@
-<h1><%= @event.title.presence || "Event" %></h1>
+<div class="event-page">
+  <!-- Event header -->
+  <header class="event-header">
+    <h1><%= @event.title.presence || "Event" %></h1>
+    <p>
+      <strong>Date:</strong>
+      <%= @event.starts_on %>
+      <% if @event.ends_on.present? && @event.ends_on != @event.starts_on %>
+        – <%= @event.ends_on %>
+      <% end %>
+    </p>
+    <p>
+      <strong>Location:</strong> <%= @event.location %>
+    </p>
+    <p>
+      <strong>Private:</strong> <%= @event.event_private ? "Yes" : "No" %>
+    </p>
+  </header>
 
-<p><strong>Description:</strong> <%= @event.description %></p>
-<p><strong>Location:</strong> <%= @event.location %></p>
-<p><strong>Starts on:</strong> <%= @event.starts_on %></p>
-<p><strong>Ends on:</strong> <%= @event.ends_on %></p>
-<p><strong>Private:</strong> <%= @event.event_private ? "Yes" : "No" %></p>
+  <!-- Host-only tools -->
+  <% if user_signed_in? && @event.user == current_user %>
+    <section class="event-host-tools">
+      <h2>Host tools</h2>
 
-<% if user_signed_in? && @event.user == current_user %>
+      <p>
+        <%= link_to "Edit event", edit_event_path(@event) %> |
+        <%= link_to "Delete", @event, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </p>
+
+      <div class="host-actions-buttons">
+        <!-- Placeholder buttons – no logic yet -->
+        <button type="button" disabled>
+          Send a blast (coming soon)
+        </button>
+        <button type="button" disabled>
+          Invite guests (coming soon)
+        </button>
+      </div>
+    </section>
+  <% end %>
+
+  <!-- Main layout: Guests + Activity -->
+  <section class="event-main-layout">
+    <div class="event-guests-panel">
+      <h2>Guests</h2>
+      <p>
+        Guest list and RSVP statuses will appear here.
+        This will be powered by participations later.
+      </p>
+    </div>
+
+    <div class="event-activity-panel">
+      <h2>Activity</h2>
+      <p>
+        Activity feed (posts, comments, reactions) will appear here.
+        This will be powered by posts/comments/reactions later.
+      </p>
+    </div>
+  </section>
+
+  <!-- Event description at the bottom -->
+  <section class="event-description">
+    <h2>About this event</h2>
+    <p><%= @event.description.presence || "No description yet." %></p>
+  </section>
+
   <p>
-    <%= link_to "Edit event", edit_event_path(@event) %> |
-    <%= link_to "Delete", @event, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <%= link_to "Back to my events", events_path %>
   </p>
-<% end %>
-
-<p>
-  <%= link_to "Back to my events", events_path %>
-</p>
+</div>
