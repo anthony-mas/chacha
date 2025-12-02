@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  guest_approval: false
+  role: MyString
+  event: one
+  user: one
+
+two:
+  status: MyString
+  guest_approval: false
+  role: MyString
+  event: two
+  user: two

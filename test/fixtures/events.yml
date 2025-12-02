@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location: MyString
+  starts_on: 2025-12-02
+  ends_on: 2025-12-02
+  event_private: false
+  title: MyString
+  description: MyString
+  user: one
+
+two:
+  location: MyString
+  starts_on: 2025-12-02
+  ends_on: 2025-12-02
+  event_private: false
+  title: MyString
+  description: MyString
+  user: two
