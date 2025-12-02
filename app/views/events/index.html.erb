@@ -8,11 +8,7 @@
   <% if @events.any? %>
     <ul>
       <% @events.each do |event| %>
-        <li>
-          <%= link_to(event.title.presence || "Untitled event", event_path(event)) %>
-          –
-          <%= event.starts_on %>
-        </li>
+        <%= render "event", event: event %>
       <% end %>
     </ul>
   <% else %>
