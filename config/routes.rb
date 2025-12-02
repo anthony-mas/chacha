@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
-  # Devise routes for authentication
   devise_for :users
 
-  # Main landing page (Mahé)
   root "pages#home"
 
-  # User profile page (Charlotte)
   resources :users, only: [:show]
 
-  # 🔹 Your part: Events resource (host + guest)
-  resources :events
+  resources :events do
+    resources :participations, only: [:create, :destroy]
+    resources :posts, only: [:create, :destroy] do
+      resources :comments, only: [:create, :destroy]
+      resources :reactions, only: [:create, :destroy]
+    end
+  end
 
   # Temporary auto-generated routes (will be cleaned later)
   get "reactions/create"
