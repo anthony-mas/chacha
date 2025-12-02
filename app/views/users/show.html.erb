@@ -1,0 +1,22 @@
+<h1>Welcome, <%= @user.name %></h1>
+
+<h2>Your Upcoming Events</h2>
+<ul>
+  <% @participations.each do |p| %>
+    <li>
+      <strong><%= link_to p.event.location, event_path(p.event) %></strong>
+      — <%= p.event.starts_on.strftime("%b %d, %Y") if p.event.starts_on %>
+      <em>(status: <%= p.status %>)</em>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Your Recent Posts</h2>
+<ul>
+  <% @recent_posts.each do |post| %>
+    <li>
+      <%= post.content %>
+      <small>— <%= post.created_at.strftime("%b %d") %></small>
+    </li>
+  <% end %>
+</ul>
