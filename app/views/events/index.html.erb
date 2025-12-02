@@ -1,0 +1,23 @@
+<h1>My events</h1>
+
+<% if user_signed_in? %>
+  <p>
+    <%= link_to "Create a new event", new_event_path %>
+  </p>
+
+  <% if @events.any? %>
+    <ul>
+      <% @events.each do |event| %>
+        <li>
+          <%= link_to(event.title.presence || "Untitled event", event_path(event)) %>
+          –
+          <%= event.starts_on %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You don't have any events yet.</p>
+  <% end %>
+<% else %>
+  <p>You need to log in to see your events.</p>
+<% end %>
