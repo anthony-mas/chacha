@@ -1,21 +1,21 @@
-<h1>Welcome to the App</h1>
+<div class="homepage">
 
-<% if current_user %>
-  <p>Hello <%= current_user.name %>!</p>
-  <%= link_to "Go to My Dashboard", user_path(current_user), class: "btn btn-primary" %>
-<% else %>
-  <p>You are not signed in.</p>
-  <%= link_to "Sign In", new_user_session_path %>
-<% end %>
+  <h1>Welcome to ChaCha!</h1>
 
-<hr>
+  <h2>Plan events in seconds.</h2>
 
-<h2>Upcoming Events</h2>
-<ul>
-  <% @events&.each do |event| %>
-    <li>
-      <strong><%= link_to event.title, event_path(event) %></strong>
-      — <%= event.starts_on&.strftime("%b %d, %Y") %>
-    </li>
-  <% end %>
-</ul>
+  <p class="intro-text">
+    The easiest way to get your guests on the same page.
+  </p>
+
+  <p class="sub-text">
+    Share with anyone, anywhere.<br>
+    No login required. Click, RSVP, done.<br>
+    See who’s going.
+  </p>
+
+  <div class="cta">
+    <%= link_to "Create event", new_event_path, class: "cta-button" %>
+  </div>
+
+</div>
