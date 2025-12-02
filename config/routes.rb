@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get "participations/create"
   get "participations/destroy"
 
+  # Chacha page
+  get "/chacha", to: "chacha#index"
+
   # Home page
   get "up" => "rails/health#show", as: :rails_health_check
 end
