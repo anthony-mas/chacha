@@ -1,13 +1,9 @@
-<h1>Welcome, <%= @user.name %></h1>
+<h1>Your Dashboard</h1>
 
 <h2>Your Upcoming Events</h2>
 <ul>
   <% @participations.each do |p| %>
-    <li>
-      <strong><%= link_to p.event.title, event_path(p.event) %></strong>
-      — <%= p.event.starts_on.strftime("%b %d, %Y") if p.event.starts_on %>
-      <em>(status: <%= p.status %>)</em>
-    </li>
+    <%= render "events/event", event: p.event %>
   <% end %>
 </ul>
 
@@ -16,7 +12,7 @@
   <% @recent_posts.each do |post| %>
     <li>
       <%= post.content %>
-      <small>— <%= post.created_at.strftime("%b %d") %></small>
+      <small>(<%= post.created_at.strftime("%b %d, %Y") %>)</small>
     </li>
   <% end %>
 </ul>
