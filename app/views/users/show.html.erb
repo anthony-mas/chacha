@@ -4,7 +4,7 @@
 <ul>
   <% @participations.each do |p| %>
     <li>
-      <strong><%= link_to p.event.location, event_path(p.event) %></strong>
+      <strong><%= link_to p.event.title, event_path(p.event) %></strong>
       — <%= p.event.starts_on.strftime("%b %d, %Y") if p.event.starts_on %>
       <em>(status: <%= p.status %>)</em>
     </li>
