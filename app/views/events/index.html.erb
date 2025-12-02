@@ -1,4 +1,6 @@
-<h1>My events</h1>
+<header class="dashboard-header">
+  <h1>My events</h1>
+</header>
 
 <% if user_signed_in? %>
   <p>
@@ -6,11 +8,11 @@
   </p>
 
   <% if @events.any? %>
-    <ul>
+    <div class="event-card-container">
       <% @events.each do |event| %>
-        <%= render "event", event: event %>
+        <%= render "event_card", event: event %>
       <% end %>
-    </ul>
+    </div>
   <% else %>
     <p>You don't have any events yet.</p>
   <% end %>

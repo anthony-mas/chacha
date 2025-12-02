@@ -1,0 +1,16 @@
+<div class="event-card">
+  <%= link_to event_path(event), class: "event-card-link" do %>
+    <!-- Placeholder Image -->
+    <div class="event-hero-image placeholder-box">
+      <span class="placeholder-icon">🖼️</span>
+    </div>
+
+    <!-- Event Details -->
+    <div class="event-card-details">
+      <h3 class="event-card-title"><%= event.title.presence || "Untitled Event" %></h3>
+      <p class="event-card-date">
+        <%= event.starts_on&.strftime("%A, %B %d") %>
+      </p>
+    </div>
+  <% end %>
+</div>

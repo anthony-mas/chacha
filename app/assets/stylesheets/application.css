@@ -1,25 +1,21 @@
 /*
- * ChaCha Social - Mobile-First Dark Theme
- * Fonts: Alegreya (Titles), Nunito (Body)
- *
- * NOTE: This file is a complete replacement for your existing application.css
+ * ChaCha Social - Vibrant Theme (Yellow Background, Purple Titles)
+ * Fonts: Rubik Doodle Shadow (Titles), Nunito (Body)
  */
 
-/* --- Import Directives (Keep these for Rails Assets) --- */
 /*
  *= require_tree .
  *= require_self
  */
 
-/* --- Global Variables and Fonts --- */
 :root {
-    --color-dark: #1e1e1e;
-    --color-medium: #333333;
-    --color-light: #f5f5f5;
-    --color-accent: #f8c372; /* Subtle gold/peach accent */
-    --color-primary-text: #ffffff;
-    --color-secondary-text: #c0c0c0;
-    --font-title: 'Alegreya', serif;
+    --color-background: #F8E094;
+    --color-card: #ffffff;
+    --color-title: #40559D;
+    --color-body-text: #1E1E1E;
+    --color-secondary-text: #666666;
+    --color-accent-button: #FF6B6B;
+    --font-title: 'Rubik Doodle Shadow', sans-serif;
     --font-body: 'Nunito', sans-serif;
     --spacing-xs: 4px;
     --spacing-sm: 8px;
@@ -28,10 +24,9 @@
     --spacing-xl: 40px;
 }
 
-/* --- Base Body and Layout --- */
 body {
-    background-color: var(--color-dark);
-    color: var(--color-primary-text);
+    background-color: var(--color-background);
+    color: var(--color-body-text);
     font-family: var(--font-body);
     margin: 0;
     padding: 0;
@@ -39,17 +34,16 @@ body {
 }
 
 .container-app {
-    max-width: 500px; /* Constrain for mobile-first feel */
+    max-width: 500px;
     margin: 0 auto;
     padding: var(--spacing-md);
 }
 
-/* --- Typography and Headings --- */
 h1, h2, h3, h4, .title-lg, .title-md {
     font-family: var(--font-title);
-    color: var(--color-primary-text);
+    color: var(--color-title);
     margin-top: 0;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 h1 { font-size: 2.2rem; margin-bottom: var(--spacing-lg); }
@@ -58,18 +52,105 @@ h3 { font-size: 1.2rem; margin-bottom: var(--spacing-sm); }
 p {
     font-size: 1rem;
     line-height: 1.5;
+    color: var(--color-body-text);
+}
+
+.centered-title {
+    text-align: center;
+}
+
+
+.event-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.event-card {
+    background-color: var(--color-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-card-link {
+    display: block;
+}
+
+.event-card-details {
+    padding: var(--spacing-md);
+}
+
+.event-card-title {
+    font-size: 1.6rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-title);
+    font-family: var(--font-title);
+}
+
+.event-card-date {
+    font-size: 0.9rem;
     color: var(--color-secondary-text);
 }
 
-/* --- Links and Buttons (Common Styles) --- */
+.event-card .placeholder-box {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.event-card-detail {
+    background-color: var(--color-card);
+    border-radius: 18px;
+    padding: 0;
+    margin-bottom: var(--spacing-xl);
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.event-content-wrapper {
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.event-card-detail .placeholder-box {
+    width: 100%;
+    height: 180px;
+    margin-bottom: var(--spacing-lg);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 3px solid var(--color-title);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+}
+
+
 a {
-    color: var(--color-accent);
+    color: var(--color-title);
     text-decoration: none;
     transition: color 0.2s;
 }
 
 a:hover {
-    color: #ffdaaa;
+    color: #5d6ea7;
 }
 
 .btn {
@@ -86,17 +167,16 @@ a:hover {
 }
 
 .btn-primary {
-    background-color: var(--color-light);
-    color: var(--color-dark);
+    background-color: var(--color-title);
+    color: var(--color-card);
     margin-top: var(--spacing-lg);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
-    background-color: #ffffff;
+    background-color: #314481;
 }
 
-/* --- Forms (Event Creation Page - Screenshot 3 concept) --- */
 .form-group {
     margin-bottom: var(--spacing-md);
 }
@@ -106,10 +186,10 @@ input[type="date"],
 textarea {
     width: 100%;
     padding: var(--spacing-sm) var(--spacing-md);
-    background-color: var(--color-medium);
-    border: 1px solid #555;
+    background-color: var(--color-card);
+    border: 1px solid #ccc;
     border-radius: 8px;
-    color: var(--color-primary-text);
+    color: var(--color-body-text);
     font-family: var(--font-body);
     box-sizing: border-box;
 }
@@ -120,17 +200,16 @@ textarea {
 
 input:focus, textarea:focus {
     outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 2px rgba(248, 195, 114, 0.3);
+    border-color: var(--color-title);
+    box-shadow: 0 0 0 2px rgba(64, 85, 157, 0.3);
 }
 
-/* --- Toggles/Switches (Placeholder for form controls in Screenshot 3) --- */
 .toggle-switch-group {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-sm) 0;
-    border-bottom: 1px solid #3e3e3e;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .toggle-switch-group:last-child {
@@ -138,7 +217,6 @@ input:focus, textarea:focus {
     margin-bottom: var(--spacing-xl);
 }
 
-/* --- Standard Homepage (Screenshot 1 concept) --- */
 .homepage-hero {
     min-height: 80vh;
     display: flex;
@@ -158,16 +236,16 @@ input:focus, textarea:focus {
 .homepage-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
-    color: var(--color-accent);
+    color: var(--color-title);
     margin-bottom: var(--spacing-md);
 }
 
 .homepage-description {
     max-width: 300px;
     margin: 0 auto var(--spacing-xl) auto;
+    color: var(--color-secondary-text);
 }
 
-/* --- User Homepage / Dashboard (Screenshot 2 concept - List View) --- */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -183,37 +261,26 @@ input:focus, textarea:focus {
 }
 
 .upcoming-events-list li, .recent-posts-list li {
-    background-color: var(--color-medium);
+    background-color: var(--color-card);
     padding: var(--spacing-md);
     border-radius: 8px;
     margin-bottom: var(--spacing-sm);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .upcoming-events-list strong a {
-    color: var(--color-primary-text);
+    color: var(--color-title);
     font-weight: 700;
 }
 .upcoming-events-list em {
-    color: var(--color-accent);
+    color: var(--color-secondary-text);
     font-style: normal;
-}
-
-/* --- Event Detail/Show Page (Screenshot 4 concept) --- */
-.event-card-detail {
-    background-color: var(--color-medium);
-    border-radius: 18px;
-    padding: var(--spacing-lg) var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 80%);
-    /* Replace with actual image placeholder logic in HTML if possible */
 }
 
 .event-title-detail {
     font-size: 2.8rem;
     margin-top: var(--spacing-lg);
+    color: var(--color-title);
 }
 
 .event-metadata p {
@@ -226,8 +293,8 @@ input:focus, textarea:focus {
     display: flex;
     justify-content: space-around;
     padding: var(--spacing-md) 0;
-    border-top: 1px solid #444;
-    border-bottom: 1px solid #444;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
     margin: var(--spacing-lg) 0;
 }
 
@@ -239,6 +306,7 @@ input:focus, textarea:focus {
     font-size: 1.5rem;
     display: block;
     margin-bottom: var(--spacing-xs);
+    color: var(--color-title);
 }
 
 .guest-list-section {
@@ -258,15 +326,15 @@ input:focus, textarea:focus {
 .guest-avatar {
     width: 36px;
     height: 36px;
-    background-color: var(--color-accent);
+    background-color: var(--color-title);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
     font-weight: 700;
-    color: var(--color-dark);
-    border: 2px solid var(--color-dark);
+    color: var(--color-card);
+    border: 2px solid var(--color-card);
 }
 
 .activity-feed {
@@ -277,30 +345,28 @@ input:focus, textarea:focus {
     padding: var(--spacing-md);
     border-radius: 8px;
     margin-bottom: var(--spacing-sm);
-    background-color: var(--color-medium);
+    background-color: var(--color-card);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .activity-author {
     font-weight: 700;
-    color: var(--color-accent);
+    color: var(--color-title);
     margin-right: var(--spacing-sm);
 }
 
-/* --- Alerts and Notices (Simplified) --- */
-.notice {
-    background-color: #4CAF50; /* Green for success */
-    color: white;
+.notice, .alert {
     padding: var(--spacing-sm);
     border-radius: 4px;
     margin-bottom: var(--spacing-md);
     text-align: center;
+    color: var(--color-body-text);
+}
+
+.notice {
+    color: #4CAF50;
 }
 
 .alert {
-    background-color: #f44336; /* Red for errors */
-    color: white;
-    padding: var(--spacing-sm);
-    border-radius: 4px;
-    margin-bottom: var(--spacing-md);
-    text-align: center;
+    color: #f44336;
 }
