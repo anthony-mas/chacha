@@ -60,11 +60,7 @@
 
       <section class="event-main-layout">
         <div class="event-guests-panel">
-          <h2>Guests</h2>
-          <p>
-            Guest list and RSVP statuses will appear here.
-This will be powered by participations later.
-          </p>
+          <%= render "guests_list", event: @event %>
         </div>
 
         <div class="event-activity-panel">
@@ -85,3 +81,4 @@ This will be powered by posts/comments/reactions later.
 </div>
 
 <%= render "events/share_modal" %>
+<%= render "events/manage_guests_modal", event: @event %>
