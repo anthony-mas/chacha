@@ -9,7 +9,8 @@
     <div class="event-content-wrapper">
 
       <header class="event-header">
-        <h1 class="centered-title"><%= @event.title.presence || "Event" %></h1>
+        <h1 class="centered-title"><%= @event.title.presence ||
+"Event" %></h1>
 
         <div class="event-metadata">
           <p>
@@ -34,15 +35,18 @@
 
           <p>
             <%= link_to "Edit event", edit_event_path(@event) %> |
-            <%= link_to "Delete", @event, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<%= link_to "Delete", @event, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"
+} %>
           </p>
 
           <div class="host-actions-buttons">
-            <button type="button" class="btn" disabled>
-              Send a blast (coming soon)
+            <button type="button" class="btn btn-action-large btn-send-blast" disabled>
+              <i class="fa-solid fa-bullhorn"></i>
+              Send a blast
             </button>
-            <button type="button" class="btn" disabled>
-              Invite guests (coming soon)
+            <button type="button" class="btn btn-action-large btn-invite-guests" data-action="click->modal#open">
+              <i class="fa-solid fa-share-from-square"></i>
+              Invite Guests
             </button>
           </div>
         </section>
@@ -50,7 +54,8 @@
 
       <section class="event-description">
         <h2>About this event</h2>
-        <p><%= @event.description.presence || "No description yet." %></p>
+        <p><%= @event.description.presence ||
+"No description yet." %></p>
       </section>
 
       <section class="event-main-layout">
@@ -58,7 +63,7 @@
           <h2>Guests</h2>
           <p>
             Guest list and RSVP statuses will appear here.
-            This will be powered by participations later.
+This will be powered by participations later.
           </p>
         </div>
 
@@ -66,7 +71,7 @@
           <h2>Activity</h2>
           <p>
             Activity feed (posts, comments, reactions) will appear here.
-            This will be powered by posts/comments/reactions later.
+This will be powered by posts/comments/reactions later.
           </p>
         </div>
       </section>
@@ -78,3 +83,5 @@
     </div>
   </div>
 </div>
+
+<%= render "events/share_modal" %>
