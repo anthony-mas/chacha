@@ -1,10 +1,12 @@
 <%# Modal for sharing and inviting guests (Screenshot 2) %>
 
-<div class="share-modal-backdrop" data-controller="modal" data-action="click->modal#closeBackground">
-  <div class="share-modal-content" data-modal-target="container">
+<%# FIX: Removed data-controller="modal" from backdrop, added ID %>
+<div class="share-modal-backdrop" id="share-modal" data-action="click->modal#closeBackground">
+  <div class="share-modal-content">
 
     <%# 1. Close Button %>
-    <button class="close-btn" data-action="modal#close">
+    <%# FIX: Close button targets the modal by its selector %>
+    <button class="close-btn" data-action="modal#close" data-modal-target="#share-modal">
       <i class="fa-solid fa-xmark"></i>
     </button>
 
@@ -13,9 +15,9 @@
       <div class="modal-preview-image placeholder-box">
         <span class="placeholder-icon">🖼️</span>
       </div>
-      <%# Simplified Event Info for preview %>
       <div class="modal-preview-details">
-        <h3 class="event-card-title"><%= @event.title.presence || "Event" %></h3>
+        <h3 class="event-card-title"><%= @event.title.presence ||
+"Event" %></h3>
         <p class="event-card-date">
           <%= @event.starts_on&.strftime("%a %d %B at %H:%M") %>
         </p>
@@ -65,6 +67,7 @@
           <input class="form-check-input" type="checkbox" role="switch" checked>
         </label>
       </div>
+
       <p class="modal-description">
         Send a public link for guests to RSVP. When they accept, they will appear in your guest list.
       </p>

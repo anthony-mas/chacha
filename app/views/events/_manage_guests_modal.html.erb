@@ -1,14 +1,15 @@
-<%# Manage Guests Modal (Screenshot 2: Search, Filters, List) %>
+<%# Manage Guests Modal (Screenshot 2: Search, Filters, List, covering full screen) %>
 
-<%# Use the same participants variable from the event show page %>
 <% participants = @event.participations.includes(:user).order("users.name ASC") %>
 
-<div class="manage-guests-modal-backdrop" id="manage-guests-modal" data-controller="modal" data-action="click->modal#closeBackground">
-  <div class="manage-guests-modal-content" data-modal-target="container">
+<%# FIX: Removed data-controller="modal" from backdrop, added ID %>
+<div class="manage-guests-modal-backdrop" id="manage-guests-modal" data-action="click->modal#closeBackground">
+  <div class="manage-guests-modal-content">
 
     <%# Modal Header %>
     <header class="modal-header">
-      <button class="back-btn" data-action="modal#close"><i class="fa-solid fa-arrow-left"></i></button>
+      <%# FIX: Close button targets the modal by its selector %>
+      <button class="back-btn" data-action="modal#close" data-modal-target="#manage-guests-modal"><i class="fa-solid fa-arrow-left"></i></button>
       <h1 class="centered-title">Manage Guests</h1>
     </header>
 
@@ -38,7 +39,6 @@
       <% participants.each do |participation| %>
         <li class="guest-list-item">
           <div class="guest-info">
-            <%# Avatar/Profile Picture %>
             <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
               <%= participation.user.name.first.upcase %>
             </div>
@@ -50,7 +50,6 @@
             </div>
           </div>
 
-          <%# Status Dropdown (Right side) %>
           <select class="form-select guest-status-select">
             <option value="going" <%= 'selected' if participation.status == 'going' %>>👍 Going</option>
             <option value="maybe" <%= 'selected' if participation.status == 'maybe' %>>🤔 Maybe</option>

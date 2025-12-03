@@ -460,27 +460,37 @@ input:focus, textarea:focus {
     background-color: var(--light-gray);
 }
 
-.share-modal-backdrop {
+/* --- Share Modal (Bottom Sheet Style) --- */
+
+.share-modal-backdrop,
+.manage-guests-modal-backdrop {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 2000;
 
+    /* FIX: Set opacity to 0 and visibility hidden by default */
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
 
+    z-index: 2000;
+}
+
+/* FIX: This single selector ensures BOTH modals become visible when the shared class is added by Stimulus */
+.share-modal-backdrop.share-modal-active,
+.manage-guests-modal-backdrop.share-modal-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Share Modal - Style (Bottom Sheet) */
+.share-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: flex-end;
     justify-content: center;
-}
-
-.share-modal-backdrop.share-modal-active {
-    visibility: visible;
-    opacity: 1;
 }
 
 .share-modal-content {
@@ -497,7 +507,35 @@ input:focus, textarea:focus {
     min-height: 50vh;
 }
 
-.share-modal-active .share-modal-content {
+/* Manage Guests Modal - Style (Full Screen) */
+.manage-guests-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.manage-guests-modal-content {
+    background-color: #1E1E1E;
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    padding: var(--spacing-md);
+
+    border-radius: 0;
+    box-shadow: none;
+
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+    overflow-y: auto;
+
+    padding-bottom: 80px;
+}
+
+
+.share-modal-active .share-modal-content,
+.share-modal-active .manage-guests-modal-content {
     transform: translateY(0);
 }
 
@@ -598,4 +636,23 @@ input:focus, textarea:focus {
     font-size: 1.5rem;
     line-height: 1;
     cursor: pointer;
+}
+
+/* Manage Guests Modal Specific Styles */
+
+.manage-guests-modal-content .modal-header {
+    /* Use !important to override the share modal's relative positioning */
+    position: sticky !important;
+}
+
+.guest-management-tools .search-box input {
+    /* Ensure the manage guest search box uses the correct colors */
+    background-color: #333;
+    color: white;
+}
+
+.guest-management-tools .status-filter {
+    /* Ensure the manage guest filter uses the correct colors */
+    background-color: #333;
+    color: white;
 }

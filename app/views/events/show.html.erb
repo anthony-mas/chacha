@@ -44,7 +44,8 @@
               <i class="fa-solid fa-bullhorn"></i>
               Send a blast
             </button>
-            <button type="button" class="btn btn-action-large btn-invite-guests" data-action="click->modal#open">
+            <%# CRITICAL FIX: Explicitly target share-modal ID %>
+            <button type="button" class="btn btn-action-large btn-invite-guests" data-action="click->modal#open" data-modal-id="share-modal">
               <i class="fa-solid fa-share-from-square"></i>
               Invite Guests
             </button>
@@ -80,5 +81,6 @@ This will be powered by posts/comments/reactions later.
   </div>
 </div>
 
-<%= render "events/share_modal" %>
+<%# Both modals must have IDs and be present on the page %>
+<%= render "events/share_modal", event: @event %>
 <%= render "events/manage_guests_modal", event: @event %>
