@@ -1,12 +1,74 @@
+/* ========== Sticky Navbar ========== */
+
 .navbar-lewagon {
-  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   background: white;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  /* Spread elements across full width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Keep navbar aligned with 500px app layout */
+  padding-left: calc((100% - 500px) / 2);
+  padding-right: calc((100% - 500px) / 2);
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
+/* Logo */
+.navbar-brand img {
   width: 40px;
+}
+
+/* Right side links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Avatar */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Push content down below navbar */
+.container-app {
+  padding-top: 90px;
+}
+
+/* ============================================
+   📱 MOBILE VERSION
+   ============================================ */
+
+@media (max-width: 480px) {
+
+  .navbar-lewagon {
+    padding-left: 20px;   /* mobile safe space */
+    padding-right: 20px;
+  }
+
+  .navbar-links {
+    gap: 12px;
+  }
+
+  .navbar-brand img {
+    width: 32px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .navbar-link {
+    font-size: 0.9rem;
+  }
 }
