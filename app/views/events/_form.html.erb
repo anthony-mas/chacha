@@ -2,7 +2,9 @@
   <%= f.error_notification %>
 
   <%= f.input :title %>
-  <%= f.input :description %>
+
+  <%# Description is now a multi-line input (textarea) with additional rows attribute %>
+  <%= f.input :description, as: :text, input_html: { rows: 8 } %>
 
   <%= f.input :category_ids,
               collection: @categories,
@@ -11,9 +13,14 @@
               input_html: { multiple: false, class: "form-select" }
               %>
 
-  <%= f.input :location %>
+  <%# Location input wired to the new 'geocode' Stimulus controller for autocomplete %>
+  <%= f.input :location,
+              input_html: {
+                data: {
+                  controller: "geocode"
+                }
+              } %>
 
-  <%# FIX: Changed :datetime_field to Simple Form's correct input type: :datetime %>
   <%= f.input :starts_on,
               as: :datetime,
               html5: true,
@@ -23,7 +30,6 @@
               }
   %>
 
-  <%# FIX: Changed :datetime_field to Simple Form's correct input type: :datetime %>
   <%= f.input :ends_on,
               as: :datetime,
               html5: true,
