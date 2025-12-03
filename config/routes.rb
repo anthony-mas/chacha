@@ -16,15 +16,15 @@ Rails.application.routes.draw do
   end
 
   # Temporary auto-generated routes (will be cleaned later)
-  get "reactions/create"
-  get "reactions/destroy"
-  get "comments/create"
-  get "comments/destroy"
-  get "participations/create"
-  get "participations/destroy"
+  # get "reactions/create"
+  # get "reactions/destroy"
+  # get "comments/create"
+  # get "comments/destroy"
+  # get "participations/create"
+  # get "participations/destroy"
 
-  # Chacha page
-  get "/chacha", to: "chacha#index"
+  # # Chacha page
+  # get "/chacha", to: "chacha#index"
 
   # Home page
   get "up" => "rails/health#show", as: :rails_health_check
