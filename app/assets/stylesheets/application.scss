@@ -1,27 +1,12 @@
-// Graphical variables
 @import "config/fonts";
 @import "config/colors";
 @import "config/bootstrap_variables";
 
-// External libraries
 @import "bootstrap";
 @import "font-awesome";
 
-
-// Your CSS partials
 @import "components/index";
 @import "pages/index";
-
-
-/*
- * ChaCha Social - Vibrant Theme (Yellow Background, Purple Titles)
- * Fonts: Rubik Doodle Shadow (Titles), Nunito (Body)
- */
-
-/*
- *= require_tree .
- *= require_self
- */
 
 :root {
     --color-background: #F8E094;
@@ -210,7 +195,7 @@ textarea {
 }
 
 textarea {
-    min-height: 100px;
+    min-height: 300px; /* THIS IS THE CHANGE for a bigger description box */
 }
 
 input:focus, textarea:focus {
