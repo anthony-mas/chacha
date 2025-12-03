@@ -1,5 +1,24 @@
 <%= simple_form_for(@event, data: { controller: "event-form" }) do |f| %>
   <%= f.error_notification %>
+<!-- ============================= -->
+<!-- HERO IMAGE UPLOAD + LIBRARY  -->
+<!-- ============================= -->
+<div data-controller="hero-library">
+
+  <!-- Hidden field to store the selected library image -->
+  <%= f.hidden_field :hero_image_choice,
+                     data: { "hero-library-target": "input" } %>
+
+  <!-- Trigger button -->
+  <button type="button"
+          class="btn-secondary"
+          data-action="hero-library#open">
+    Choose from library
+  </button>
+
+  <!-- Modal -->
+  <%= render "events/hero_library_modal" %>
+</div>
 
   <%= f.input :title %>
 
