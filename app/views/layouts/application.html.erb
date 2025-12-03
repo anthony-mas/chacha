@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
   </head>
 
-  <body>
+  <%# FIX: Attach modal controller globally to body %>
+  <body data-controller="modal">
     <%= render "shared/navbar" %>
     <div class="container-app">
       <p class="notice"><%= notice %></p>
