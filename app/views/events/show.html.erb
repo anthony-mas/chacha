@@ -97,50 +97,92 @@ This will be powered by posts/comments/reactions later.
 
 <script>
 (function() {
-  const overlay = document.querySelector('.rsvp-modal-overlay');
-  const modal = document.querySelector('.rsvp-modal');
-  const closeBtn = document.querySelector('.rsvp-modal-close');
-  const triggers = document.querySelectorAll('.rsvp-emoji-trigger');
-  const modalEmojis = document.querySelectorAll('.rsvp-emoji-choice');
+  // ─────────────────────────────────────────────────────────────
+  // RSVP Modal
+  // ─────────────────────────────────────────────────────────────
+  const rsvpOverlay = document.querySelector('.rsvp-modal-overlay:not(.manage-guests-overlay)');
+  const rsvpCloseBtn = rsvpOverlay ? rsvpOverlay.querySelector('.rsvp-modal-close') : null;
+  const rsvpTriggers = document.querySelectorAll('.rsvp-emoji-trigger');
+  const rsvpModalEmojis = rsvpOverlay ? rsvpOverlay.querySelectorAll('.rsvp-emoji-choice') : [];
 
-  function openModal(status) {
-    overlay.classList.remove('is-hidden');
+  function openRsvpModal(status) {
+    if (!rsvpOverlay) return;
+    rsvpOverlay.classList.remove('is-hidden');
     document.body.style.overflow = 'hidden';
-    // Highlight the selected emoji in the modal
-    modalEmojis.forEach(btn => {
+    rsvpModalEmojis.forEach(btn => {
       btn.classList.toggle('selected', btn.dataset.rsvpStatus === status);
     });
   }
 
-  function closeModal() {
-    overlay.classList.add('is-hidden');
+  function closeRsvpModal() {
+    if (!rsvpOverlay) return;
+    rsvpOverlay.classList.add('is-hidden');
     document.body.style.overflow = '';
   }
 
-  // Open modal when clicking emoji triggers on the page
-  triggers.forEach(btn => {
-    btn.addEventListener('click', () => openModal(btn.dataset.rsvpStatus));
+  rsvpTriggers.forEach(btn => {
+    btn.addEventListener('click', () => openRsvpModal(btn.dataset.rsvpStatus));
   });
 
-  // Close modal when clicking the close button
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
+  if (rsvpCloseBtn) {
+    rsvpCloseBtn.addEventListener('click', closeRsvpModal);
   }
 
-  // Close modal when clicking backdrop (but not the modal card itself)
-  if (overlay) {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        closeModal();
-      }
+  if (rsvpOverlay) {
+    rsvpOverlay.addEventListener('click', (e) => {
+      if (e.target === rsvpOverlay) closeRsvpModal();
     });
   }
 
-  // Allow emoji selection inside the modal
-  modalEmojis.forEach(btn => {
+  rsvpModalEmojis.forEach(btn => {
     btn.addEventListener('click', () => {
-      modalEmojis.forEach(b => b.classList.remove('selected'));
+      rsvpModalEmojis.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
+    });
+  });
+
+  // ─────────────────────────────────────────────────────────────
+  // Manage Guests Modal
+  // ─────────────────────────────────────────────────────────────
+  const guestsOverlay = document.querySelector('.manage-guests-overlay');
+  const guestsCloseBtn = guestsOverlay ? guestsOverlay.querySelector('.manage-guests-close') : null;
+  const guestsTriggers = document.querySelectorAll('.manage-guests-trigger');
+  const statusTabs = guestsOverlay ? guestsOverlay.querySelectorAll('.status-tab') : [];
+
+  function openGuestsModal() {
+    if (!guestsOverlay) return;
+    guestsOverlay.classList.remove('is-hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGuestsModal() {
+    if (!guestsOverlay) return;
+    guestsOverlay.classList.add('is-hidden');
+    document.body.style.overflow = '';
+  }
+
+  guestsTriggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openGuestsModal();
+    });
+  });
+
+  if (guestsCloseBtn) {
+    guestsCloseBtn.addEventListener('click', closeGuestsModal);
+  }
+
+  if (guestsOverlay) {
+    guestsOverlay.addEventListener('click', (e) => {
+      if (e.target === guestsOverlay) closeGuestsModal();
+    });
+  }
+
+  // Status tab selection (visual only for now)
+  statusTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      statusTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
     });
   });
 })();

@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_03_145341) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "extra_guests"
+    t.integer "extra_guests", default: 0
     t.index ["event_id"], name: "index_participations_on_event_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
   end

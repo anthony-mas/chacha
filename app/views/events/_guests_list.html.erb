@@ -9,8 +9,7 @@
   <div class="guests-header">
     <h2 class="title-md"><strong>Guest List</strong></h2>
 
-    <%# FIX: Use data-modal-target="#manage-guests-modal" %>
-    <%= link_to "View all", "#", class: "btn-view-all", data: { action: "click->modal#open", modal_target: "#manage-guests-modal" } %>
+    <button type="button" class="btn-view-all manage-guests-trigger">View all</button>
   </div>
 
   <p class="guest-count"><%= total_guests %> Guests Attending</p>
