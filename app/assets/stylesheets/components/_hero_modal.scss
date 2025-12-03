@@ -1,0 +1,74 @@
+/* ===== Modal Backdrop ===== */
+.hero-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: none;             /* HIDDEN by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* ===== Show modal when Stimulus adds .open ===== */
+.hero-modal.open {
+  display: flex;
+}
+
+/* ===== Modal Card ===== */
+.hero-modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 380px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 20px;
+  animation: modalIn 0.25s ease-out;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Header ===== */
+.hero-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.hero-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ===== Section Title ===== */
+.hero-section-title {
+  font-size: 1.1rem;
+  margin: 16px 0 10px 0;
+}
+
+/* ===== Thumbnail Grid ===== */
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+/* ===== Thumbnail ===== */
+.hero-thumb img {
+  width: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-thumb img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
