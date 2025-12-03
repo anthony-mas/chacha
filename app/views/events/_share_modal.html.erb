@@ -1,0 +1,89 @@
+<%# Modal for sharing and inviting guests (Screenshot 2) %>
+
+<div class="share-modal-backdrop" data-controller="modal" data-action="click->modal#closeBackground">
+  <div class="share-modal-content" data-modal-target="container">
+
+    <%# 1. Close Button %>
+    <button class="close-btn" data-action="modal#close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <%# 2. Event Preview (Top Centered Card) %>
+    <div class="modal-event-preview">
+      <div class="modal-preview-image placeholder-box">
+        <span class="placeholder-icon">🖼️</span>
+      </div>
+      <%# Simplified Event Info for preview %>
+      <div class="modal-preview-details">
+        <h3 class="event-card-title"><%= @event.title.presence || "Event" %></h3>
+        <p class="event-card-date">
+          <%= @event.starts_on&.strftime("%a %d %B at %H:%M") %>
+        </p>
+        <p class="event-card-location"><%= @event.location %></p>
+      </div>
+    </div>
+
+    <%# --- Separator --- %>
+    <hr class="modal-separator">
+
+    <%# 3. Invite with Public Link Section %>
+    <section class="invite-public-section">
+      <h2 class="section-title title-md">Invite with Public Link</h2>
+
+      <div class="public-link-actions">
+
+        <%# Messages %>
+        <a href="sms:" class="share-icon-btn">
+          <i class="fa-solid fa-comment icon-messages"></i>
+          <span>Messages</span>
+        </a>
+
+        <%# Mail %>
+        <a href="mailto:?subject=<%= @event.title %>&body=Join my event: <%= event_url(@event) %>" class="share-icon-btn">
+          <i class="fa-solid fa-envelope icon-mail"></i>
+          <span>Mail</span>
+        </a>
+
+        <%# Share Link (Generic) %>
+        <button class="share-icon-btn" disabled>
+          <i class="fa-solid fa-arrow-up-from-bracket icon-share"></i>
+          <span>Share Link</span>
+        </button>
+
+        <%# Copy Link %>
+        <button class="share-icon-btn copy-btn" data-action="click->share#copyLink" data-share-url="<%= event_url(@event) %>">
+          <i class="fa-solid fa-link icon-copy"></i>
+          <span>Copy Link</span>
+        </button>
+
+      </div>
+
+      <%# Guest Approval Toggle %>
+      <div class="toggle-switch-group">
+        <h2 class="section-title title-md">Approve Guests</h2>
+        <label class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" checked>
+        </label>
+      </div>
+      <p class="modal-description">
+        Send a public link for guests to RSVP. When they accept, they will appear in your guest list.
+      </p>
+    </section>
+
+    <%# --- Separator --- %>
+    <hr class="modal-separator">
+
+    <%# 4. Invite Individual Contacts Section %>
+    <section class="invite-individual-section">
+      <h2 class="section-title title-md">Invite Individuals</h2>
+      <div class="form-group">
+        <input type="text" placeholder="Choose a Guest" class="form-control">
+        <button class="btn-add-guest">+</button>
+      </div>
+      <p class="modal-description">
+        Send a one-off link to a single guest.
+      </p>
+    </section>
+
+  </div>
+</div>
