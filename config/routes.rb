@@ -2,16 +2,17 @@ Rails.application.routes.draw do
   root to: "pages#home"
   devise_for :users
 
-  root "pages#home"
 
   resources :users, only: [:show]
 
   resources :events do
     resources :participations, only: [:create, :destroy]
-    resources :posts, only: [:create, :destroy] do
-      resources :comments, only: [:create, :destroy]
-      resources :reactions, only: [:create, :destroy]
-    end
+    resources :posts, only: [:create, :destroy]
+  end
+
+  resources :posts, only: :show do
+    resources :comments, only: [:create, :destroy]
+    resources :reactions, only: [:create, :destroy]
   end
 
   # Temporary auto-generated routes (will be cleaned later)
