@@ -2,22 +2,31 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="hero-library"
 export default class extends Controller {
-  static targets = ["modal", "input"]
+  static targets = ["modal", "input", "preview"]
 
-  // Open the modal
+  // Show modal
   open() {
     this.modalTarget.classList.add("open")
   }
 
-  // Close the modal
+  // Hide modal
   close() {
     this.modalTarget.classList.remove("open")
   }
 
-  // Select an image and close modal
+  // User clicks on a hero image
   choose(event) {
     const selectedImage = event.currentTarget.dataset.image
+
+    // Update hidden field
     this.inputTarget.value = selectedImage
+
+    // Update live preview on the form
+    this.previewTarget.innerHTML = `
+      <img src="/assets/hero_library/${selectedImage}" class="hero-image-preview">
+    `
+
+    // Close the modal
     this.close()
   }
 }

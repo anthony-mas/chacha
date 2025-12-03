@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   attr_accessor :hero_image_choice
-
+  has_one_attached :hero_image 
   # Associations based on schema
   belongs_to :user
 
