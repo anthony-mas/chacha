@@ -1,48 +1,24 @@
-<%= form_with(model: @event, local: true) do |f| %>
-  <% if @event.errors.any? %>
-    <div>
-      <p><strong><%= pluralize(@event.errors.count, "error") %> prevented this event from being saved:</strong></p>
-      <ul>
-        <% @event.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for(@event) do |f| %>
+  <%= f.error_notification %>
 
-  <!-- Basic event info -->
-  <div>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
+  <%= f.input :title %>
+  <%= f.input :description %>
 
-  <div>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
+  <%= f.input :category_ids,
+              collection: @categories,
+              as: :select,
+              label: "Category",
+              input_html: { multiple: false }
+              %>
 
-  <div>
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
+  <%= f.input :location %>
 
-  <div>
-    <%= f.label :starts_on, "Starts on" %><br>
-    <%= f.date_field :starts_on %>
-  </div>
+  <%= f.input :starts_on, as: :date, html5: true %>
+  <%= f.input :ends_on, as: :date, html5: true %>
 
-  <div>
-    <%= f.label :ends_on, "Ends on" %><br>
-    <%= f.date_field :ends_on %>
-  </div>
+  <%= f.input :event_private, as: :boolean, label: "Private event?" %>
 
-  <!-- Privacy (backed by event_private in DB) -->
-  <div>
-    <%= f.label :event_private, "Private event?" %>
-    <%= f.check_box :event_private %>
-  </div>
 
-  <!-- New: Discoverability + Guest approval (UI only for now) -->
   <hr>
 
   <div>
@@ -68,6 +44,6 @@
   </div>
 
   <div>
-    <%= f.submit %>
+    <%= f.button :submit, class: "btn-primary" %>
   </div>
 <% end %>
