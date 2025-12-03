@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   # Add set_categories for new and edit actions
-  before_action :set_categories, only: [:new, :edit] # New line
+  before_action :set_categories, only: [:new, :edit]
 
   # Host dashboard – list only current_user's events
   def index
@@ -56,9 +56,9 @@ class EventsController < ApplicationController
   end
 
   # New method to set categories
-  def set_categories # New method
-    @categories = Category.all.order(:name) # New method
-  end # New method
+  def set_categories
+    @categories = Category.all.order(:name)
+  end
 
   # Adapt to your schema: location, title, description, starts_on, ends_on, event_private
   def event_params
@@ -66,10 +66,10 @@ class EventsController < ApplicationController
       :location,
       :title,
       :description,
-      :starts_on,
-      :ends_on,
+      :starts_on, # CHANGED: Removed `:date` type hint
+      :ends_on,   # CHANGED: Removed `:date` type hint
       :event_private,
-      category_ids: [] # IMPORTANT: Permit the category_ids array
+      category_ids: []
     )
   end
 end
