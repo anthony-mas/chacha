@@ -81,6 +81,10 @@ p {
 
 .event-card-details {
     padding: var(--spacing-md);
+    /* FIX: Remove default browser margins from all p tags within card details for tight spacing */
+    & p {
+        margin: 0;
+    }
 }
 
 .event-card-title {
@@ -470,7 +474,6 @@ input:focus, textarea:focus {
     width: 100%;
     height: 100%;
 
-    /* FIX: Set opacity to 0 and visibility hidden by default */
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
@@ -478,7 +481,6 @@ input:focus, textarea:focus {
     z-index: 2000;
 }
 
-/* FIX: This single selector ensures BOTH modals become visible when the shared class is added by Stimulus */
 .share-modal-backdrop.share-modal-active,
 .manage-guests-modal-backdrop.share-modal-active {
     visibility: visible;
@@ -638,10 +640,6 @@ input:focus, textarea:focus {
     cursor: pointer;
 }
 
-// ─────────────────────────────────────────────────────────────
-// RSVP Modal
-// ─────────────────────────────────────────────────────────────
-
 .rsvp-emoji-trigger {
     background: none;
     border: none;
@@ -778,21 +776,17 @@ input:focus, textarea:focus {
 
 .rsvp-submit-button:hover {
     background-color: #314481;
-/* Manage Guests Modal Specific Styles */
 }
 .manage-guests-modal-content .modal-header {
-    /* Use !important to override the share modal's relative positioning */
     position: sticky !important;
 }
 
 .guest-management-tools .search-box input {
-    /* Ensure the manage guest search box uses the correct colors */
     background-color: #333;
     color: white;
 }
 
 .guest-management-tools .status-filter {
-    /* Ensure the manage guest filter uses the correct colors */
     background-color: #333;
     color: white;
 }
