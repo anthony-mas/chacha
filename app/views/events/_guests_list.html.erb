@@ -1,0 +1,36 @@
+<%# Event Guest List Preview (Screenshot 1: Avatars, Count, View All button) %>
+
+<% participants = event.participations.includes(:user).order("users.name ASC") %>
+<% total_guests = participants.sum(:extra_guests) + participants.count %>
+<% displayed_avatars = participants.first(6) %>
+<% remaining_guests_count = participants.count > 6 ? participants.count - 6 : 0 %>
+
+<div class="guests-list-container">
+  <div class="guests-header">
+    <h2 class="title-md"><strong>Guest List</strong></h2>
+
+    <%# FIX: Use data-modal-target="#manage-guests-modal" %>
+    <%= link_to "View all", "#", class: "btn-view-all", data: { action: "click->modal#open", modal_target: "#manage-guests-modal" } %>
+  </div>
+
+  <p class="guest-count"><%= total_guests %> Guests Attending</p>
+
+  <div class="guest-avatars-scroll">
+    <% displayed_avatars.each do |participation| %>
+      <div class="guest-card">
+        <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
+          <%= participation.user.name.first.upcase %>
+        </div>
+        <span class="guest-name"><%= participation.user.name.split.first %></span>
+      </div>
+    <% end %>
+
+    <% if remaining_guests_count > 0 %>
+      <div class="guest-card">
+        <div class="guest-avatar guest-overflow">
+          +<%= remaining_guests_count %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
