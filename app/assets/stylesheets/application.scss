@@ -777,6 +777,128 @@ input:focus, textarea:focus {
 .rsvp-submit-button:hover {
     background-color: #314481;
 }
+
+// ─────────────────────────────────────────────────────────────
+// Manage Guests Modal (uses same base as RSVP modal)
+// ─────────────────────────────────────────────────────────────
+
+// .manage-guests-overlay inherits all styles from .rsvp-modal-overlay
+
+.manage-guests-modal {
+    // Larger card for the guest list
+    max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding-bottom: var(--spacing-lg);
+}
+
+.manage-guests-title {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    padding-top: var(--spacing-sm);
+}
+
+.manage-guests-tools {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.manage-guests-search input,
+.manage-guests-filter select {
+    width: 100%;
+}
+
+.status-filter-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}
+
+.manage-guests-status-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+.status-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-width: 70px;
+}
+
+.status-tab:hover {
+    background-color: rgba(64, 85, 157, 0.1);
+}
+
+.status-tab.active {
+    border-color: var(--color-title);
+    background-color: rgba(64, 85, 157, 0.1);
+}
+
+.status-tab .status-emoji {
+    font-size: 1.5rem;
+}
+
+.status-tab .status-label {
+    font-size: 0.75rem;
+    color: var(--color-secondary-text);
+    font-weight: 600;
+}
+
+.status-tab .status-count {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-title);
+}
+
+.manage-guests-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.manage-guests-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid #eee;
+}
+
+.manage-guests-item:last-child {
+    border-bottom: none;
+}
+
+.manage-guests-item .guest-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.manage-guests-item .guest-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
 .manage-guests-modal-content .modal-header {
     position: sticky !important;
 }
@@ -789,4 +911,35 @@ input:focus, textarea:focus {
 .guest-management-tools .status-filter {
     background-color: #333;
     color: white;
+    flex-shrink: 0;
+}
+
+.manage-guests-item .guest-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-guests-item .guest-name {
+    font-weight: 600;
+    color: var(--color-body-text);
+}
+
+.manage-guests-item .extra-guests-badge {
+    font-size: 0.75rem;
+    color: var(--color-secondary-text);
+}
+
+.guest-status-select {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    background-color: var(--color-card);
+    cursor: pointer;
+}
+
+.guest-status-select:focus {
+    outline: none;
+    border-color: var(--color-title);
 }

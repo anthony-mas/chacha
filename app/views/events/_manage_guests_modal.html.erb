@@ -1,59 +1,67 @@
-<%# Manage Guests Modal (Screenshot 2: Search, Filters, List, covering full screen) %>
+<%# Manage Guests Modal - Uses same design as RSVP modal %>
 
 <% participants = @event.participations.includes(:user).order("users.name ASC") %>
 
-<%# FIX: Removed data-controller="modal" from backdrop, added ID %>
-<div class="manage-guests-modal-backdrop" id="manage-guests-modal" data-action="click->modal#closeBackground">
-  <div class="manage-guests-modal-content">
+<div class="rsvp-modal-overlay manage-guests-overlay is-hidden" id="manage-guests-modal">
+  <div class="rsvp-modal manage-guests-modal">
+    <button type="button" class="rsvp-modal-close manage-guests-close" aria-label="Close">&times;</button>
 
-    <%# Modal Header %>
-    <header class="modal-header">
-      <%# FIX: Close button targets the modal by its selector %>
-      <button class="back-btn" data-action="modal#close" data-modal-target="#manage-guests-modal"><i class="fa-solid fa-arrow-left"></i></button>
-      <h1 class="centered-title">Manage Guests</h1>
-    </header>
+    <h2 class="manage-guests-title">Manage Guests</h2>
 
     <%# Search and Filter %>
-    <div class="guest-management-tools">
-      <div class="search-box">
-        <input type="search" placeholder="Find a guest..." class="form-control">
+    <div class="manage-guests-tools">
+      <div class="manage-guests-search">
+        <input type="search" placeholder="Find a guest..." class="rsvp-input">
       </div>
-      <div class="filter-controls">
-        <select class="form-select status-filter">
-          <option value="all">Status</option>
-          <option value="attending">Attending</option>
-          <option value="maybe">Maybe</option>
-          <option value="declined">Declined</option>
-        </select>
 
-        <div class="status-tabs">
-          <button class="status-tab active">👍 Going <%= participants.where(status: 'going').count %></button>
-          <button class="status-tab">🤔 Maybe <%= participants.where(status: 'maybe').count %></button>
-          <button class="status-tab">⭐ Interested <%= participants.where(status: 'interested').count %></button>
-        </div>
+      <div class="manage-guests-filter">
+        <select class="rsvp-input status-filter-select">
+          <option value="all">All Statuses</option>
+          <option value="going">Going</option>
+          <option value="maybe">Maybe</option>
+          <option value="not_going">Not going</option>
+        </select>
+      </div>
+
+      <div class="manage-guests-status-tabs">
+        <button type="button" class="status-tab active" data-status="going">
+          <span class="status-emoji">👍</span>
+          <span class="status-label">Going</span>
+          <span class="status-count"><%= participants.where(status: 'going').count %></span>
+        </button>
+        <button type="button" class="status-tab" data-status="maybe">
+          <span class="status-emoji">🤔</span>
+          <span class="status-label">Maybe</span>
+          <span class="status-count"><%= participants.where(status: 'maybe').count %></span>
+        </button>
+        <button type="button" class="status-tab" data-status="not_going">
+          <span class="status-emoji">👎</span>
+          <span class="status-label">Not going</span>
+          <span class="status-count"><%= participants.where(status: ['not_going', 'declined']).count %></span>
+        </button>
       </div>
     </div>
 
     <%# Guest Full List %>
-    <ul class="guest-full-list">
+    <ul class="manage-guests-list">
       <% participants.each do |participation| %>
-        <li class="guest-list-item">
+        <li class="manage-guests-item">
           <div class="guest-info">
             <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
               <%= participation.user.name.first.upcase %>
             </div>
             <div class="guest-details">
-              <span class="guest-name-full"><%= participation.user.name %></span>
+              <span class="guest-name"><%= participation.user.name %></span>
               <% if participation.extra_guests && participation.extra_guests > 0 %>
-                <small class="extra-guests-count"> and <%= participation.extra_guests %> more</small>
+                <small class="extra-guests-badge">+<%= participation.extra_guests %></small>
               <% end %>
             </div>
           </div>
 
-          <select class="form-select guest-status-select">
+          <select class="guest-status-select">
             <option value="going" <%= 'selected' if participation.status == 'going' %>>👍 Going</option>
             <option value="maybe" <%= 'selected' if participation.status == 'maybe' %>>🤔 Maybe</option>
-            <option value="declined" <%= 'selected' if participation.status == 'declined' %>>👎 Declined</option>
+            <option value="not_going" <%= 'selected' if participation.status == 'not_going' || participation.status == 'declined' %>>👎 Not going</option>
           </select>
         </li>
       <% end %>
