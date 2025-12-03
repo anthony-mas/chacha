@@ -1,0 +1,28 @@
+<nav class="navbar-lewagon navbar">
+  <!-- Left side: Logo -->
+  <div class="navbar-brand">
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png", alt: "Logo" %>
+    <% end %>
+  </div>
+
+  <!-- Right side: Links -->
+  <div class="navbar-links">
+
+    <% if user_signed_in? %>
+      <!-- Create Event -->
+      <%= link_to "Create Event", new_event_path, class: "navbar-link" %>
+
+      <!-- Profile picture / dashboard link -->
+      <%= link_to user_path(current_user), class: "navbar-profile" do %>
+        <%= image_tag "default_avatar.png", alt: "Profile", class: "avatar" %>
+      <% end %>
+
+    <% else %>
+      <!-- For logged-out users -->
+      <%= link_to "Sign In", new_user_session_path, class: "navbar-link" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "navbar-link" %>
+    <% end %>
+
+  </div>
+</nav>
