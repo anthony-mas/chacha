@@ -2,6 +2,8 @@ class EventsController < ApplicationController
   # Only logged-in users can create / edit / delete
   before_action :authenticate_user!, except: [:show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  # Add set_categories for new and edit actions
+  before_action :set_categories, only: [:new, :edit] # New line
 
   # Host dashboard – list only current_user's events
   def index
@@ -21,6 +23,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    # Use category_ids setter to assign the category (even if only one is selected)
     @event = current_user.events.build(event_params)
 
     if @event.save
@@ -52,6 +55,11 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  # New method to set categories
+  def set_categories # New method
+    @categories = Category.all.order(:name) # New method
+  end # New method
+
   # Adapt to your schema: location, title, description, starts_on, ends_on, event_private
   def event_params
     params.require(:event).permit(
@@ -60,7 +68,8 @@ class EventsController < ApplicationController
       :description,
       :starts_on,
       :ends_on,
-      :event_private
+      :event_private,
+      category_ids: [] # IMPORTANT: Permit the category_ids array
     )
   end
 end
