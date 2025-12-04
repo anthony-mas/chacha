@@ -8,15 +8,21 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+
+    <!-- Mapbox GL -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
+
+    <!-- Mapbox Geocoder -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" rel="stylesheet" />
   </head>
 
-  <%# FIX: Attach modal controller globally to body %>
   <body data-controller="modal">
     <%= render "shared/navbar" %>
     <div class="container-app">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-
+      <%= notice %>
+      <%= alert %>
       <%= yield %>
     </div>
   </body>
