@@ -1,0 +1,44 @@
+// ===========================================
+// Forms
+// ===========================================
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-card);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    color: var(--color-body-text);
+    font-family: var(--font-body);
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 300px;
+}
+
+input:focus, 
+textarea:focus {
+    outline: none;
+    border-color: var(--color-title);
+    box-shadow: 0 0 0 2px rgba(64, 85, 157, 0.3);
+}
+
+.toggle-switch-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid #e0e0e0;
+
+    &:last-child {
+        border-bottom: none;
+        margin-bottom: var(--spacing-xl);
+    }
+}

@@ -1,30 +1,27 @@
-<%# Renders a single event preview card for the discover view %>
-<div class="event-card-v2 mb-4 card shadow-sm">
-  <%= link_to event_path(event), class: "event-card-link-wrapper text-decoration-none text-dark" do %>
-    <%# Hero Image %>
-    <div class="event-image-wrapper">
-      <% if event.hero_image.attached? %>
-        <%= cl_image_tag event.hero_image.key, class: "event-hero-image", crop: :fill %>
-      <% else %>
-        <div class="placeholder-box text-center py-5" style="height: 180px; background-color: #f0f0f0;">
-          <i class="fa-regular fa-image fa-2x text-muted"></i>
-        </div>
-      <% end %>
-    </div>
+<%# Renders a single event preview card for the index view - Overlay Style %>
+<div class="event-card overlay-style">
+  <%= link_to event_path(event), class: "event-card-link" do %>
 
-    <div class="card-body">
-      <h3 class="event-title"><%= event.title.presence || "Untitled Event" %></h3>
+    <%# Hero image %>
+    <% if event.hero_image.attached? %>
+      <%= image_tag event.hero_image, class: "event-card-image" %>
+    <% else %>
+      <div class="event-card-image placeholder">
+        <span class="placeholder-icon">🖼️</span>
+      </div>
+    <% end %>
 
-      <%# Time and Location (e.g., Today 10pm - PARIS) %>
-      <p class="event-time-location">
-        <strong><%= event.display_time_and_location %></strong>
+    <%# Overlay with event info %>
+    <div class="event-card-overlay">
+      <h3 class="event-card-title"><%= event.title.presence || "Untitled Event" %></h3>
+      <p class="event-card-date">
+        <%= event.starts_on&.strftime("%A %d %B, %H:%M") %>
       </p>
-
-      <%# Description Preview %>
-      <p class="event-description-preview text-muted">
-        <%= truncate(event.description, length: 70) %>
+      <p class="event-card-location">
+        <%= event.location %>
       </p>
     </div>
+
   <% end %>
 
   <%# Action Row (Save and Share) - Outside the link_to for clickability %>
