@@ -1,0 +1,316 @@
+// Manage Guests Modal (uses same base as RSVP modal)
+
+// Legacy backdrop styles (for compatibility)
+.share-modal-backdrop,
+.manage-guests-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+
+    z-index: 2000;
+}
+
+.share-modal-backdrop.share-modal-active,
+.manage-guests-modal-backdrop.share-modal-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+// Manage Guests Modal - Style (Full Screen)
+.manage-guests-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.manage-guests-modal-content {
+    background-color: #1E1E1E;
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    padding: var(--spacing-md);
+
+    border-radius: 0;
+    box-shadow: none;
+
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+    overflow-y: auto;
+
+    padding-bottom: 80px;
+}
+
+.share-modal-active .share-modal-content,
+.share-modal-active .manage-guests-modal-content {
+    transform: translateY(0);
+}
+
+.share-modal-content .close-btn {
+    position: absolute;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    background: none;
+    border: none;
+    color: var(--color-title);
+    font-size: 1.5rem;
+    padding: 0;
+    cursor: pointer;
+    z-index: 2010;
+}
+
+.modal-event-preview {
+    width: 180px;
+    margin: var(--spacing-lg) auto var(--spacing-xl) auto;
+    text-align: center;
+}
+
+.modal-event-preview .modal-preview-image {
+    height: 120px;
+    border-radius: 12px;
+    margin-bottom: var(--spacing-sm);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-separator {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: var(--spacing-xl) 0;
+}
+
+.section-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--color-title);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.public-link-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.share-icon-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--color-secondary-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+}
+
+.share-icon-btn i {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.icon-messages { background-color: #25d366; color: white; }
+.icon-mail { background-color: #007aff; color: white; }
+.icon-share { background-color: #f0f0f0; color: #1E1E1E; }
+.icon-copy { background-color: #f0f0f0; color: #1E1E1E; }
+
+.invite-individual-section .form-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.invite-individual-section .form-group input {
+    flex-grow: 1;
+}
+
+.invite-individual-section .btn-add-guest {
+    background-color: var(--color-title);
+    color: var(--color-card);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+// .manage-guests-overlay inherits all styles from .rsvp-modal-overlay
+
+.manage-guests-modal {
+    // Larger card for the guest list
+    max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding-bottom: var(--spacing-lg);
+}
+
+.manage-guests-title {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    padding-top: var(--spacing-sm);
+}
+
+.manage-guests-tools {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.manage-guests-search input,
+.manage-guests-filter select {
+    width: 100%;
+}
+
+.status-filter-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}
+
+.manage-guests-status-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+.status-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-width: 70px;
+}
+
+.status-tab:hover {
+    background-color: rgba(64, 85, 157, 0.1);
+}
+
+.status-tab.active {
+    border-color: var(--color-title);
+    background-color: rgba(64, 85, 157, 0.1);
+}
+
+.status-tab .status-emoji {
+    font-size: 1.5rem;
+}
+
+.status-tab .status-label {
+    font-size: 0.75rem;
+    color: var(--color-secondary-text);
+    font-weight: 600;
+}
+
+.status-tab .status-count {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-title);
+}
+
+.manage-guests-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.manage-guests-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid #eee;
+}
+
+.manage-guests-item:last-child {
+    border-bottom: none;
+}
+
+.manage-guests-item .guest-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.manage-guests-item .guest-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.manage-guests-modal-content .modal-header {
+    position: sticky !important;
+}
+
+.guest-management-tools .search-box input {
+    background-color: #333;
+    color: white;
+}
+
+.guest-management-tools .status-filter {
+    background-color: #333;
+    color: white;
+    flex-shrink: 0;
+}
+
+.manage-guests-item .guest-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-guests-item .guest-name {
+    font-weight: 600;
+    color: var(--color-body-text);
+}
+
+.manage-guests-item .extra-guests-badge {
+    font-size: 0.75rem;
+    color: var(--color-secondary-text);
+}
+
+.guest-status-select {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    background-color: var(--color-card);
+    cursor: pointer;
+}
+
+.guest-status-select:focus {
+    outline: none;
+    border-color: var(--color-title);
+}
