@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: white;
+  background: var(--color-title);
   padding: 10px 0;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
@@ -30,6 +30,29 @@
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navbar-link:hover {
+  color: #e0e0e0;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Avatar */
