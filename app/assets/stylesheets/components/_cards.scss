@@ -1,0 +1,221 @@
+// ===========================================
+// Cards - Event Cards & Preview Cards
+// ===========================================
+
+// Event Card Container
+.event-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+// Base Event Card
+.event-card {
+    background-color: var(--color-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-card-link {
+    display: block;
+}
+
+.event-card-details {
+    padding: var(--spacing-md);
+    
+    p { margin: 0; }
+}
+
+.event-card-title {
+    font-size: 1.6rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-title);
+    font-family: var(--font-title);
+}
+
+.event-card-date {
+    font-size: 0.9rem;
+    color: var(--color-secondary-text);
+}
+
+.event-card .placeholder-box {
+    width: 100%;
+    height: 180px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// ===========================================
+// Event Card - Overlay Style
+// ===========================================
+.event-card.overlay-style {
+    position: relative;
+    height: 220px;
+    border-radius: 16px;
+
+    .event-card-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .event-card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+
+        &.placeholder {
+            background: linear-gradient(145deg, #e0e0e0 0%, #f5f5f5 50%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .placeholder-icon {
+        font-size: 3rem;
+        opacity: 0.5;
+    }
+
+    .event-card-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px 16px;
+        background: linear-gradient(transparent, rgba(0,0,0,0.75));
+        color: white;
+    }
+
+    .event-card-title {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: white;
+        margin-bottom: 4px;
+    }
+
+    .event-card-date {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.9);
+        margin: 0;
+    }
+
+    .event-card-location {
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.8);
+        margin: 4px 0 0 0;
+    }
+}
+
+// ===========================================
+// Event Card Detail (Show page)
+// ===========================================
+.event-card-detail {
+    background-color: var(--color-card);
+    border-radius: 18px;
+    padding: 0;
+    margin-bottom: var(--spacing-xl);
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+    .placeholder-box {
+        width: 100%;
+        height: 180px;
+        margin-bottom: var(--spacing-lg);
+        border-radius: 18px 18px 0 0;
+        border-bottom: 3px solid var(--color-title);
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+}
+
+.event-content-wrapper {
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+}
+
+// ===========================================
+// Event Preview Cards (Homepage)
+// ===========================================
+.event-preview-container {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl) 0;
+}
+
+.event-preview {
+    width: 180px;
+    height: 250px;
+    background: linear-gradient(145deg, #ffffff 0%, #f5f5f7 50%, #e8e8ed 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+
+    img { display: none; }
+    .card-content, .card-overlay { display: none; }
+
+    &:hover {
+        transform: scale(1.05) translateY(-8px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18), 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+}
+
+// Cover Style
+.event-preview.cover-style img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+// ===========================================
+// Mobile Carousel
+// ===========================================
+@media (max-width: 480px) {
+    .event-preview-container {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        padding: 20px 0;
+        margin: 0;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        
+        &::-webkit-scrollbar { display: none; }
+    }
+
+    .event-preview {
+        flex: 0 0 auto;
+        width: 72%;
+        max-width: 290px;
+        height: 280px;
+        border-radius: 28px;
+        scroll-snap-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        transform: scale(0.9);
+        opacity: 0.7;
+
+        &:first-child { margin-left: calc((100% - 72%) / 2); }
+        &:last-child { margin-right: calc((100% - 72%) / 2); }
+        &:hover { transform: scale(0.9); }
+        &:active { transform: scale(0.88); }
+    }
+}
