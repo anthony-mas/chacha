@@ -1,23 +1,26 @@
-<%# Renders a single event preview card for the index view %>
-<div class="event-card">
+<%# Renders a single event preview card for the index view - Overlay Style %>
+<div class="event-card overlay-style">
   <%= link_to event_path(event), class: "event-card-link" do %>
-    <div class="event-hero-image placeholder-box">
-      <span class="placeholder-icon">🖼️</span>
-    </div>
 
-    <div class="event-card-details">
+    <%# Hero image %>
+    <% if event.hero_image.attached? %>
+      <%= image_tag event.hero_image, class: "event-card-image" %>
+    <% else %>
+      <div class="event-card-image placeholder">
+        <span class="placeholder-icon">🖼️</span>
+      </div>
+    <% end %>
+
+    <%# Overlay with event info %>
+    <div class="event-card-overlay">
       <h3 class="event-card-title"><%= event.title.presence || "Untitled Event" %></h3>
-
-      <%# Date and Time %>
       <p class="event-card-date">
-        <%# Format: "Friday 31 December, 18:00" %>
         <%= event.starts_on&.strftime("%A %d %B, %H:%M") %>
       </p>
-
-      <%# FIX: Location is now in a <p> tag using the same class for consistent styling %>
-      <p class="event-card-date">
+      <p class="event-card-location">
         <%= event.location %>
       </p>
     </div>
+
   <% end %>
 </div>

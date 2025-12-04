@@ -1,0 +1,103 @@
+// ===========================================
+// Buttons
+// ===========================================
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-md) 0;
+    border-radius: 12px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--color-title);
+    color: var(--color-card);
+    margin-top: var(--spacing-lg);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background-color: #314481;
+    }
+}
+
+// CTA Buttons
+.cta-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: var(--spacing-md) 0;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background-color: var(--color-title);
+    color: var(--color-card);
+    border-radius: 25px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+        background-color: #314481;
+        color: var(--color-card);
+        transform: scale(1.02);
+    }
+}
+
+.login-btn {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background-color: var(--color-title);
+    color: var(--color-card);
+    border-radius: 25px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+        background-color: #314481;
+        color: var(--color-card);
+        transform: scale(1.02);
+    }
+}
+
+// Host Actions
+.host-actions-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.btn-action-large {
+    background: var(--color-card);
+    color: var(--color-title);
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    height: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+}
