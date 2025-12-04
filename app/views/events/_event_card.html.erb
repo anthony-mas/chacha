@@ -1,23 +1,49 @@
-<%# Renders a single event preview card for the index view %>
-<div class="event-card">
+<%# Renders a single event preview card for the index view - Overlay Style %>
+<div class="event-card overlay-style">
   <%= link_to event_path(event), class: "event-card-link" do %>
-    <div class="event-hero-image placeholder-box">
-      <span class="placeholder-icon">🖼️</span>
-    </div>
 
-    <div class="event-card-details">
+    <%# Hero image %>
+    <% if event.hero_image.attached? %>
+      <%= image_tag event.hero_image, class: "event-card-image" %>
+    <% else %>
+      <div class="event-card-image placeholder">
+        <span class="placeholder-icon">🖼️</span>
+      </div>
+    <% end %>
+
+    <%# Overlay with event info %>
+    <div class="event-card-overlay">
       <h3 class="event-card-title"><%= event.title.presence || "Untitled Event" %></h3>
-
-      <%# Date and Time %>
       <p class="event-card-date">
-        <%# Format: "Friday 31 December, 18:00" %>
         <%= event.starts_on&.strftime("%A %d %B, %H:%M") %>
       </p>
-
-      <%# FIX: Location is now in a <p> tag using the same class for consistent styling %>
-      <p class="event-card-date">
+      <p class="event-card-location">
         <%= event.location %>
       </p>
     </div>
+
   <% end %>
+
+  <%# Action Row (Save and Share) - Outside the link_to for clickability %>
+  <div class="event-actions d-flex justify-content-between align-items-center px-4 pb-3">
+    <% if current_user %>
+      <% saved = event.saved_by?(current_user) %>
+      <%# Star/Save Button (Interested) - Assuming Rails UJS/Turbo handles the POST/DELETE %>
+      <%= link_to reactions_path(reaction: { reactable_type: 'Event', reactable_id: event.id, reaction_type: 'save' }),
+          method: saved ? :delete : :post,
+          class: "event-save-btn text-decoration-none",
+          data: { turbo_method: saved ? :delete : :post } do %>
+        <i class="<%= saved ? 'fa-solid' : 'fa-regular' %> fa-star star-icon <%= 'text-warning' if saved %>"></i>
+        <span class="save-text <%= 'interested-text' if saved %>">Interested</span>
+      <% end %>
+    <% else %>
+      <%# Non-logged-in state %>
+      <span class="event-save-btn text-muted"><i class="fa-regular fa-star star-icon"></i> Interested</span>
+    <% end %>
+
+    <%# Share Button (Arrow Icon) %>
+    <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#shareModal_#{event.id}" }, class: "event-share-btn text-muted" do %>
+      <i class="fa-solid fa-share arrow-icon"></i>
+    <% end %>
+  </div>
 </div>

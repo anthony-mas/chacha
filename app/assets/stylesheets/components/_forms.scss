@@ -1,4 +1,7 @@
-// Form and input styles
+// ===========================================
+// Forms
+// ===========================================
+
 .form-group {
     margin-bottom: var(--spacing-md);
 }
@@ -20,7 +23,8 @@ textarea {
     min-height: 300px;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline: none;
     border-color: var(--color-title);
     box-shadow: 0 0 0 2px rgba(64, 85, 157, 0.3);
@@ -32,11 +36,11 @@ input:focus, textarea:focus {
     align-items: center;
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid #e0e0e0;
-}
 
-.toggle-switch-group:last-child {
-    border-bottom: none;
-    margin-bottom: var(--spacing-xl);
+    &:last-child {
+        border-bottom: none;
+        margin-bottom: var(--spacing-xl);
+    }
 }
 
 // Flash messages
