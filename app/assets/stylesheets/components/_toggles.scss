@@ -1,0 +1,76 @@
+/* ========================================= */
+/* CLEAN TOGGLE                             */
+/* ========================================= */
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) 0;
+}
+
+.toggle-label {
+  font-size: 1rem;
+  color: var(--color-body-text);
+  flex: 1;
+}
+
+/* hide checkbox */
+.toggle-checkbox {
+  display: none;
+}
+
+/* toggle track */
+.toggle-switch {
+  width: 48px;
+  height: 26px;
+  background: rgba(64, 85, 157, 0.25); /* CTA tint */
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s ease-out;
+}
+
+/* toggle knob */
+.toggle-switch::after {
+  content: "";
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease-out;
+}
+
+/* ON state */
+.toggle-checkbox:checked + .toggle-switch {
+  background: #40559D; /* CTA color */
+}
+
+.toggle-checkbox:checked + .toggle-switch::after {
+  transform: translateX(22px);
+}
+
+/* settings card */
+.settings-card {
+  background: var(--color-card);
+  padding: var(--spacing-md);
+  border-radius: 16px;
+  margin: var(--spacing-md) 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.settings-hint {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 6px;
+}
+
+.toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
