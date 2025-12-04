@@ -1,0 +1,24 @@
+// ===========================================
+// Variables CSS - Design Tokens
+// ===========================================
+
+:root {
+    // Colors
+    --color-background: #F8E094;
+    --color-card: #ffffff;
+    --color-title: #40559D;
+    --color-body-text: #1E1E1E;
+    --color-secondary-text: #666666;
+    --color-accent-button: #FF6B6B;
+
+    // Fonts
+    --font-title: 'Rubik Doodle Shadow', sans-serif;
+    --font-body: 'Nunito', sans-serif;
+
+    // Spacing
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 40px;
+}
