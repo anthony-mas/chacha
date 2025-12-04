@@ -47,10 +47,21 @@
   <!-- ============================= -->
   <!-- LOCATION -->
   <!-- ============================= -->
+<div data-controller="mapbox-autocomplete"
+     data-mapbox-autocomplete-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+
   <%= f.input :location,
               input_html: {
-                data: { controller: "geocode" }
-              } %>
+                data: { "mapbox-autocomplete-target": "input" },
+                autocomplete: "off",
+                class: "d-none"
+              },
+              label_html: {
+                class: "pb-1"
+              },
+              label: "Location" %>
+</div>
+
 
   <!-- ============================= -->
   <!-- DATES -->
@@ -64,6 +75,9 @@
                   "event-form-target": "startsOn",
                   action: "change->event-form#updateEndsOn"
                 }
+              },
+              wrapper_html: {
+                class: "my-3"
               } %>
 
 
