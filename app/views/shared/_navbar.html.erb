@@ -13,6 +13,9 @@
       <!-- Create Event -->
       <%= link_to "Create Event", new_event_path, class: "navbar-link" %>
 
+      <!-- Log out -->
+      <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "navbar-link logout-btn" %>
+
       <!-- Profile picture / dashboard link -->
       <%= link_to user_path(current_user), class: "navbar-profile" do %>
         <%= image_tag "default_avatar.png", alt: "Profile", class: "avatar" %>
