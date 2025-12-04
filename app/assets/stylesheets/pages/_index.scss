@@ -1,6 +1,4 @@
-// ===========================================
-// Pages Index
-// ===========================================
-
-@import "discover";
-@import "homepage";
+// Import page-specific CSS files here.
+@import "home";
+@import "dashboard";
+@import "event_show";

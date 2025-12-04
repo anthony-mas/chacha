@@ -1,0 +1,138 @@
+// RSVP Modal styles
+.rsvp-emoji-trigger {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    transition: transform 0.15s ease;
+}
+
+.rsvp-emoji-trigger:hover {
+    transform: scale(1.2);
+}
+
+.rsvp-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    box-sizing: border-box;
+}
+
+.rsvp-modal-overlay.is-hidden {
+    display: none;
+}
+
+.rsvp-modal {
+    background-color: var(--color-card);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.rsvp-modal-close {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--color-secondary-text);
+    cursor: pointer;
+    line-height: 1;
+    padding: var(--spacing-xs);
+}
+
+.rsvp-modal-close:hover {
+    color: var(--color-body-text);
+}
+
+.rsvp-modal .rsvp-emoji-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding-top: var(--spacing-sm);
+}
+
+.rsvp-emoji-choice {
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 2.2rem;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rsvp-emoji-choice:hover {
+    background-color: rgba(64, 85, 157, 0.1);
+    transform: scale(1.1);
+}
+
+.rsvp-emoji-choice.selected {
+    border-color: var(--color-title);
+    background-color: rgba(64, 85, 157, 0.15);
+}
+
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.rsvp-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-body-text);
+}
+
+.rsvp-field .rsvp-input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.rsvp-field .rsvp-input:focus {
+    outline: none;
+    border-color: var(--color-title);
+    box-shadow: 0 0 0 2px rgba(64, 85, 157, 0.3);
+}
+
+.rsvp-submit-button {
+    background-color: var(--color-title);
+    color: var(--color-card);
+    border: none;
+    border-radius: 12px;
+    padding: var(--spacing-md);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: var(--spacing-sm);
+    transition: background-color 0.2s ease;
+}
+
+.rsvp-submit-button:hover {
+    background-color: #314481;
+}

@@ -1,0 +1,114 @@
+// Specific CSS for your home-page
+.homepage-hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    padding-bottom: var(--spacing-xl);
+}
+
+.homepage-title {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.1;
+}
+
+.homepage-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--color-title);
+    margin-bottom: var(--spacing-md);
+}
+
+.homepage-description {
+    max-width: 300px;
+    margin: 0 auto var(--spacing-xl) auto;
+    color: var(--color-secondary-text);
+}
+
+.homepage {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+// Event preview cards (carousel)
+.event-preview-container {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl) 0;
+}
+
+.event-preview {
+    width: 180px;
+    height: 250px;
+    background: linear-gradient(145deg, #ffffff 0%, #f5f5f7 50%, #e8e8ed 100%);
+    border-radius: 20px;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.12),
+        0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.event-preview:hover {
+    transform: scale(1.05) translateY(-8px);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.18),
+        0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+// MOBILE: Apple Invites Style Carousel
+@media (max-width: 480px) {
+    .event-preview-container {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        padding: 20px 0;
+        margin: 0;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .event-preview-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .event-preview {
+        flex: 0 0 auto;
+        width: 72%;
+        max-width: 290px;
+        height: 280px;
+        border-radius: 28px;
+        scroll-snap-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        transform: scale(0.9);
+        opacity: 0.7;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .event-preview:first-child {
+        margin-left: calc((100% - 72%) / 2);
+    }
+
+    .event-preview:last-child {
+        margin-right: calc((100% - 72%) / 2);
+    }
+
+    .event-preview:hover {
+        transform: scale(0.9);
+    }
+
+    .event-preview:active {
+        transform: scale(0.88);
+    }
+}
