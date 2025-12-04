@@ -1,92 +1,87 @@
-<%# Modal for sharing and inviting guests (Screenshot 2) %>
+<%# Share Modal - Bottom sheet style like Apple Invites %>
 
-<%# FIX: Removed data-controller="modal" from backdrop, added ID %>
-<div class="share-modal-backdrop" id="share-modal" data-action="click->modal#closeBackground">
+<% share_url = event_url(@event) %>
+<% share_title = @event.title.presence || "Event" %>
+<% share_text = "You're invited to #{share_title}! Join here: #{share_url}" %>
+<% encoded_text = ERB::Util.url_encode(share_text) %>
+
+<div class="share-modal-backdrop" id="share-modal">
   <div class="share-modal-content">
 
-    <%# 1. Close Button %>
-    <%# FIX: Close button targets the modal by its selector %>
-    <button class="close-btn" data-action="modal#close" data-modal-target="#share-modal">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+    <%# Drag Handle %>
+    <div class="share-modal-handle"></div>
 
-    <%# 2. Event Preview (Top Centered Card) %>
-    <div class="modal-event-preview">
-      <div class="modal-preview-image placeholder-box">
+    <%# Close Button %>
+    <button type="button" class="share-modal-close-btn" aria-label="Close">&times;</button>
+
+    <%# Event Preview Card %>
+    <div class="share-event-preview">
+      <div class="share-preview-image placeholder-box">
         <span class="placeholder-icon">🖼️</span>
       </div>
-      <div class="modal-preview-details">
-        <h3 class="event-card-title"><%= @event.title.presence ||
-"Event" %></h3>
-        <p class="event-card-date">
-          <%= @event.starts_on&.strftime("%a %d %B at %H:%M") %>
-        </p>
-        <p class="event-card-location"><%= @event.location %></p>
+      <div class="share-preview-info">
+        <h3 class="share-event-title"><%= share_title %></h3>
+        <p class="share-event-date"><%= @event.starts_on&.strftime("%a, %b %d at %l:%M %p") %></p>
+        <p class="share-event-location"><%= @event.location %></p>
       </div>
     </div>
 
-    <%# --- Separator --- %>
-    <hr class="modal-separator">
+    <%# Share Options %>
+    <div class="share-options">
+      <h4 class="share-section-title">Share via</h4>
 
-    <%# 3. Invite with Public Link Section %>
-    <section class="invite-public-section">
-      <h2 class="section-title title-md">Invite with Public Link</h2>
-
-      <div class="public-link-actions">
-
-        <%# Messages %>
-        <a href="sms:" class="share-icon-btn">
-          <i class="fa-solid fa-comment icon-messages"></i>
-          <span>Messages</span>
+      <div class="share-buttons-row">
+        <%# WhatsApp %>
+        <a href="https://wa.me/?text=<%= encoded_text %>" target="_blank" rel="noopener" class="share-option-btn">
+          <span class="share-icon share-icon-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </span>
+          <span class="share-option-label">WhatsApp</span>
         </a>
 
-        <%# Mail %>
-        <a href="mailto:?subject=<%= @event.title %>&body=Join my event: <%= event_url(@event) %>" class="share-icon-btn">
-          <i class="fa-solid fa-envelope icon-mail"></i>
-          <span>Mail</span>
+        <%# Messages / SMS %>
+        <a href="sms:&body=<%= encoded_text %>" class="share-option-btn">
+          <span class="share-icon share-icon-messages">
+            <i class="fa-solid fa-comment"></i>
+          </span>
+          <span class="share-option-label">Messages</span>
         </a>
 
-        <%# Share Link (Generic) %>
-        <button class="share-icon-btn" disabled>
-          <i class="fa-solid fa-arrow-up-from-bracket icon-share"></i>
-          <span>Share Link</span>
-        </button>
+        <%# Email %>
+        <a href="mailto:?subject=<%= ERB::Util.url_encode("You're invited: " + share_title) %>&body=<%= encoded_text %>" class="share-option-btn">
+          <span class="share-icon share-icon-email">
+            <i class="fa-solid fa-envelope"></i>
+          </span>
+          <span class="share-option-label">Email</span>
+        </a>
 
         <%# Copy Link %>
-        <button class="share-icon-btn copy-btn" data-action="click->share#copyLink" data-share-url="<%= event_url(@event) %>">
-          <i class="fa-solid fa-link icon-copy"></i>
-          <span>Copy Link</span>
+        <button type="button" class="share-option-btn share-copy-btn" data-share-url="<%= share_url %>">
+          <span class="share-icon share-icon-copy">
+            <i class="fa-solid fa-link"></i>
+          </span>
+          <span class="share-option-label">Copy Link</span>
         </button>
-
       </div>
 
-      <%# Guest Approval Toggle %>
-      <div class="toggle-switch-group">
-        <h2 class="section-title title-md">Approve Guests</h2>
-        <label class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" role="switch" checked>
-        </label>
+      <%# Native Share Button (shown only if navigator.share is supported) %>
+      <button type="button" class="share-native-btn" data-share-url="<%= share_url %>" data-share-title="<%= share_title %>" data-share-text="You're invited to <%= share_title %>!">
+        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        <span>More sharing options...</span>
+      </button>
+    </div>
+
+    <%# Event Link Display %>
+    <div class="share-link-section">
+      <h4 class="share-section-title">Event Link</h4>
+      <div class="share-link-box">
+        <input type="text" readonly value="<%= share_url %>" class="share-link-input" id="share-link-input">
+        <button type="button" class="share-link-copy-btn" data-share-url="<%= share_url %>">
+          <i class="fa-solid fa-copy"></i>
+        </button>
       </div>
-
-      <p class="modal-description">
-        Send a public link for guests to RSVP. When they accept, they will appear in your guest list.
-      </p>
-    </section>
-
-    <%# --- Separator --- %>
-    <hr class="modal-separator">
-
-    <%# 4. Invite Individual Contacts Section %>
-    <section class="invite-individual-section">
-      <h2 class="section-title title-md">Invite Individuals</h2>
-      <div class="form-group">
-        <input type="text" placeholder="Choose a Guest" class="form-control">
-        <button class="btn-add-guest">+</button>
-      </div>
-      <p class="modal-description">
-        Send a one-off link to a single guest.
-      </p>
-    </section>
+      <p class="share-copied-feedback" id="share-copied-feedback">Copied to clipboard!</p>
+    </div>
 
   </div>
 </div>
