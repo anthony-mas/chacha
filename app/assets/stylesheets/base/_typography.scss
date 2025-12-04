@@ -1,0 +1,21 @@
+// Typography styles
+h1, h2, h3, h4, .title-lg, .title-md {
+    font-family: var(--font-title);
+    color: var(--color-title);
+    margin-top: 0;
+    font-weight: 400;
+}
+
+h1 { font-size: 2.2rem; margin-bottom: var(--spacing-lg); }
+h2 { font-size: 1.6rem; margin-bottom: var(--spacing-md); }
+h3 { font-size: 1.2rem; margin-bottom: var(--spacing-sm); }
+
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-body-text);
+}
+
+.centered-title {
+    text-align: center;
+}
