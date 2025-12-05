@@ -2,13 +2,11 @@ Rails.application.routes.draw do
   root to: "pages#home"
   devise_for :users
 
-  # Ensure the route is at the top level and creates the helper 'discover_path'
   get "/discover", to: "events#discover"
 
-  resources :users, only: [:show]
+  # resources :users, only: [:show] <-- REMOVED
 
   resources :events do
-    # REMOVE 'collection do get :discover end'
     resources :participations, only: [:create, :destroy]
     resources :posts, only: [:create, :destroy]
   end
@@ -18,9 +16,7 @@ Rails.application.routes.draw do
     resources :reactions, only: [:create, :destroy]
   end
 
-  # Standalone route for deleting comments
   resources :comments, only: [:destroy]
 
-  # Home page
   get "up" => "rails/health#show", as: :rails_health_check
 end
