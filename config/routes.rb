@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   root to: "pages#home"
   devise_for :users
 
+  # Ensure the route is at the top level and creates the helper 'discover_path'
+  get "/discover", to: "events#discover"
+
   resources :users, only: [:show]
 
   resources :events do
-    # NEW ROUTE FOR DISCOVER PAGE
-    collection do
-      get :discover
-    end
+    # REMOVE 'collection do get :discover end'
     resources :participations, only: [:create, :destroy]
     resources :posts, only: [:create, :destroy]
   end
