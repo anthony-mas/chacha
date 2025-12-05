@@ -1,16 +1,14 @@
-/* ========== Sticky Navbar ========== */
+/* ========== Fixed Navbar Base Style ========== */
 
 .navbar-lewagon {
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
   background: var(--color-title);
   padding: 10px 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  /* Spread elements across full width */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,63 +20,88 @@
 
 /* Logo */
 .navbar-brand a {
-  text-decoration: none; /* Ensure no underline on the link wrapping the logo */
+  text-decoration: none;
 }
 
-/* New Logo Text Styles */
 .navbar-logo-text {
   font-family: 'Rubik Doodle Shadow', sans-serif;
-  color: #F8E094; /* Requested color */
-  font-size: 2.2rem; /* Adjusted for a clear text logo */
+  color: #F8E094;
+  font-size: 2.2rem;
   line-height: 1;
 }
 
-/* Removing old image logo styles:
-.navbar-brand img {
-  width: 40px;
+/* --- Upper Navbar --- */
+.upper-navbar {
+  top: 0;
+  padding: 10px calc((100% - 500px) / 2);
 }
-*/
 
-/* Right side links */
-.navbar-links {
+/* --- Bottom Navbar --- */
+.bottom-navbar {
+  bottom: 0;
+  height: 60px;
+  background: var(--color-title);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.15);
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
-}
 
-.navbar-link {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-}
+  /* Center link container (left placeholder) */
+  .navbar-center-actions {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-.navbar-link:hover {
-  color: #e0e0e0;
-}
+  /* Create Event Icon (The plus button) */
+  .create-event-link {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: white;
+    color: var(--color-title);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    margin: 0;
+    padding: 0;
 
-.logout-btn {
-  background: transparent;
-  border: 1px solid white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
+    &:hover {
+      transform: scale(1.05);
+      background-color: #f0f0f0;
+      color: var(--color-title);
+    }
+  }
 
-.logout-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
+  /* User Icon - now inside a dropdown */
+  .navbar-profile {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0;
+    cursor: pointer;
+  }
 
-/* Avatar */
-.avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
+  /* Fallback link style for user icon if not signed in */
+  .navbar-link {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: 600;
+  }
 
-/* Push content down below navbar */
-.container-app {
-  padding-top: 90px;
+  /* Dropdown Menu Styles (Standard Bootstrap dropdown) */
+  .dropdown-menu {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 }
 
 /* ============================================
@@ -88,31 +111,18 @@
 @media (max-width: 480px) {
 
   .navbar-lewagon {
-    padding-left: 20px;   /* mobile safe space */
+    padding-left: 20px;
     padding-right: 20px;
   }
 
-  .navbar-links {
-    gap: 12px;
-  }
-
-  /* Adjust logo size for mobile */
   .navbar-logo-text {
     font-size: 1.8rem;
   }
 
-  /* Removing old image logo mobile styles:
-  .navbar-brand img {
-    width: 32px;
-  }
-  */
-
-  .avatar {
-    width: 28px;
-    height: 28px;
-  }
-
-  .navbar-link {
-    font-size: 0.9rem;
+  .bottom-navbar {
+    .navbar-links {
+      /* Pushes the user icon to the far right end */
+      margin-left: auto;
+    }
   }
 }
