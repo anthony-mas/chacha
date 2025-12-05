@@ -14,9 +14,12 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: :show do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create]
     resources :reactions, only: [:create, :destroy]
   end
+
+  # Standalone route for deleting comments
+  resources :comments, only: [:destroy]
 
   # Home page
   get "up" => "rails/health#show", as: :rails_health_check

@@ -1,0 +1,18 @@
+<%# Single Comment/Reply %>
+<div class="comment-item">
+  <div class="comment-avatar">
+    <%= comment.user.name.present? ? comment.user.name[0].upcase : "?" %>
+  </div>
+  <div class="comment-body">
+    <div class="comment-header">
+      <span class="comment-author"><%= comment.user.name.presence || comment.user.email.split("@").first %></span>
+      <span class="comment-time"><%= time_ago_in_words(comment.created_at) %> ago</span>
+    </div>
+    <p class="comment-content"><%= comment.content %></p>
+  </div>
+  <% if user_signed_in? && (comment.user == current_user || event.user == current_user) %>
+    <%= button_to comment_path(comment), method: :delete, class: "comment-delete-btn", data: { turbo_confirm: "Delete this reply?" } do %>
+      <i class="fa-solid fa-times"></i>
+    <% end %>
+  <% end %>
+</div>

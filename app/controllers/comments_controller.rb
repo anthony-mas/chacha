@@ -7,22 +7,35 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params.merge(user: current_user))
 
     if @comment.save
-      head :ok
+      respond_to do |format|
+        format.html { redirect_to @post.event }
+        format.json { render json: @comment, status: :created }
+      end
     else
-      head :unprocessable_entity
+      respond_to do |format|
+        format.html { redirect_to @post.event, alert: "Could not add reply." }
+        format.json { head :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /comments/:id
   def destroy
     @comment = Comment.find(params[:id])
+    event = @comment.post.event
 
-    # Ensure only the commenter or a post owner can delete the comment
-    if @comment.user == current_user
+    # Ensure only the commenter or event host can delete the comment
+    if @comment.user == current_user || event.user == current_user
       @comment.destroy
-      head :ok
+      respond_to do |format|
+        format.html { redirect_to event }
+        format.json { head :ok }
+      end
     else
-      head :forbidden
+      respond_to do |format|
+        format.html { redirect_to event, alert: "You cannot delete this reply." }
+        format.json { head :forbidden }
+      end
     end
   end
 
