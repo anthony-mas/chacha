@@ -56,13 +56,13 @@
     transform: translate(-50%, -50%);
   }
 
-  /* Create Event Icon (The plus button) */
+  /* Create Event Icon (The plus button) - CORRECTED STYLES */
   .create-event-link {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background-color: white;
-    color: var(--color-title);
+    background-color: var(--color-card); /* White background */
+    color: var(--color-title); /* Blue icon color */
     font-size: 1.4rem;
     display: flex;
     align-items: center;
@@ -75,6 +75,11 @@
     &:hover {
       transform: scale(1.05);
       background-color: #f0f0f0;
+      color: var(--color-title);
+    }
+
+    i {
+      // Ensures the icon itself is colored correctly if it inherits the link's color
       color: var(--color-title);
     }
   }
@@ -121,7 +126,6 @@
 
   .bottom-navbar {
     .navbar-links {
-      /* Pushes the user icon to the far right end */
       margin-left: auto;
     }
   }
