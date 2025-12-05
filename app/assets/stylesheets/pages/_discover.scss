@@ -46,26 +46,42 @@
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--color-body-text);
-  // Default non-active tag background
-  background-color: #E9E9E9;
   text-decoration: none;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 
-  // Active state: Using the accent button color for high visibility
-  &.active {
-    background-color: var(--color-accent-button);
-    color: var(--color-card); // White text
-    font-weight: 700;
+  // --- Default (Non-Active) Filter Tag Style: #40559D at 30% Opacity ---
+  background-color: rgba(64, 85, 157, 0.3);
+  color: var(--color-title) !important; // FIX: Ensure color applies over generic <a> tag
+  border: 1px solid rgba(64, 85, 157, 0.5);
+
+  &:hover {
+    color: var(--color-title) !important;
   }
 
-  &.location-tag {
-    // Styling the location tag to stand out, using the title blue as a base.
-    background-color: rgba(64, 85, 157, 0.2); // Light blue tint based on --color-title
-    color: var(--color-title);
+  // --- Active Filter Tag Style: #40559D at 70% Opacity ---
+  &.active {
+    background-color: rgba(64, 85, 157, 0.7);
+    color: var(--color-card) !important; // FIX: Ensure white text applies over generic <a> tag
+    font-weight: 700;
+    border-color: rgba(64, 85, 157, 0.9);
 
+    &:hover {
+      color: var(--color-card) !important;
+    }
+  }
+
+  // --- Specific Styling for Location Tag (Active is Full Color) ---
+  &.location-tag {
+    // Non-active location tag (inherits the default 30% opacity)
+    background-color: rgba(64, 85, 157, 0.3);
+    color: var(--color-title) !important;
+
+    // Active Location Tag (Full Opaque Blue)
     &.active {
       background-color: var(--color-title);
-      color: var(--color-card);
+      color: var(--color-card) !important;
+      border-color: var(--color-title);
     }
   }
 }
