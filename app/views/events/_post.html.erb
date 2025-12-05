@@ -1,0 +1,68 @@
+<%# Single Post in Activity Feed %>
+<div class="post-card" data-controller="post">
+  <div class="post-header">
+    <div class="post-author">
+      <div class="post-avatar">
+        <%= post.user.name.present? ? post.user.name[0].upcase : "?" %>
+      </div>
+      <div class="post-meta">
+        <span class="post-author-name"><%= post.user.name.presence || post.user.email.split("@").first %></span>
+        <span class="post-time"><%= time_ago_in_words(post.created_at) %> ago</span>
+      </div>
+    </div>
+    <% if user_signed_in? && (post.user == current_user || event.user == current_user) %>
+      <%= button_to event_post_path(event, post), method: :delete, class: "post-delete-btn", data: { turbo_confirm: "Delete this post?" } do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="post-content">
+    <%= simple_format(post.content) %>
+  </div>
+
+  <%# Reactions %>
+  <div class="post-reactions">
+    <% user_reacted = user_signed_in? && post.reactions.exists?(user: current_user) %>
+    <% reaction_count = post.reactions.size %>
+
+    <% if user_signed_in? %>
+      <%= form_with url: post_reactions_path(post), method: :post, local: true, class: "reaction-form" do %>
+        <button type="submit" class="reaction-btn <%= user_reacted ? 'reacted' : '' %>">
+          <span class="reaction-emoji"><%= user_reacted ? '❤️' : '🤍' %></span>
+          <span class="reaction-count"><%= reaction_count if reaction_count > 0 %></span>
+        </button>
+      <% end %>
+    <% else %>
+      <div class="reaction-display">
+        <span class="reaction-emoji">❤️</span>
+        <span class="reaction-count"><%= reaction_count if reaction_count > 0 %></span>
+      </div>
+    <% end %>
+
+    <button type="button" class="reply-toggle-btn" data-action="click->post#toggleReplies">
+      <i class="fa-solid fa-comment"></i>
+      <span><%= post.comments.size > 0 ? "#{post.comments.size} #{post.comments.size == 1 ? 'reply' : 'replies'}" : 'Reply' %></span>
+    </button>
+  </div>
+
+  <%# Comments/Replies Section %>
+  <div class="post-replies is-hidden" data-post-target="replies">
+    <% if post.comments.any? %>
+      <div class="replies-list">
+        <% post.comments.order(created_at: :asc).each do |comment| %>
+          <%= render "events/comment", comment: comment, event: event %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= form_with url: post_comments_path(post), method: :post, local: true, class: "reply-form", scope: :comment do |f| %>
+        <div class="reply-input-row">
+          <%= f.text_field :content, placeholder: "Write a reply...", required: true, class: "reply-input" %>
+          <%= f.submit "Reply", class: "btn btn-reply" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
