@@ -1,12 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="aurora" lang="fr">
   <head>
-    <title>Chacha</title>
+    <meta charset="UTF-8">
+    <title>ChaCha - Plan Events in Seconds</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Plan events in seconds with ChaCha">
+
+    <!-- 🔤 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- 🎨 Theme Management: Apply saved theme immediately before CSS loads -->
+    <script>
+      (function() {
+        const theme = localStorage.getItem('chacha-theme') || 'aurora';
+        document.documentElement.setAttribute('data-theme', theme);
+        // Prevent flash by hiding until theme is ready
+        document.documentElement.style.visibility = 'hidden';
+      })();
+    </script>
+
+    <!-- Stylesheets -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+
+    <!-- Show content once CSS is loaded -->
+    <script>
+      window.addEventListener('load', () => {
+        document.documentElement.style.visibility = 'visible';
+      });
+      setTimeout(() => {
+        document.documentElement.style.visibility = 'visible';
+      }, 100);
+    </script>
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
@@ -14,13 +43,26 @@
 
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" rel="stylesheet" />
+
+    <!-- Scripts -->
+    <%= javascript_importmap_tags %>
   </head>
 
   <body data-controller="modal">
+    <!-- Navigation -->
     <%= render "shared/navbar" %>
+
+    <!-- Main Content Container -->
     <div class="container-app">
-      <%= notice %>
-      <%= alert %>
+      <!-- Flash Messages -->
+      <% if notice.present? %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if alert.present? %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+
+      <!-- Page Content (from routes) -->
       <%= yield %>
     </div>
     <%= render "shared/bottom_navbar" %>
