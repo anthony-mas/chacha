@@ -9,6 +9,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    padding-bottom: 60px; /* ADDED: Space for the fixed bottom navbar */
 }
 
 // Container
@@ -16,7 +17,7 @@ body {
     max-width: 500px;
     margin: 0 auto;
     padding: var(--spacing-md);
-    padding-top: 90px;
+    padding-top: 52px; /* MODIFIED: Adjusted for upper navbar height (approx 52px) */
 }
 
 // Typography

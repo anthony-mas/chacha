@@ -1,0 +1,25 @@
+<nav class="navbar-lewagon bottom-navbar">
+  <div class="navbar-center-actions">
+    <%= link_to new_event_path, class: "navbar-link create-event-link" do %>
+      <i class="fa-solid fa-plus"></i>
+    <% end %>
+  </div>
+
+  <div class="navbar-links">
+    <% if user_signed_in? %>
+      <div class="dropdown dropup" data-controller="dropdown">
+        <button class="navbar-profile dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-user"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><%= link_to "My Events", events_path, class: "dropdown-item" %></li>
+          <li><%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item logout-btn" %></li>
+        </ul>
+      </div>
+    <% else %>
+      <%= link_to new_user_session_path, class: "navbar-link" do %>
+        <i class="fa-solid fa-user"></i>
+      <% end %>
+    <% end %>
+  </div>
+</nav>
