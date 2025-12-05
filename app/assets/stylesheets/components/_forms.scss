@@ -59,3 +59,16 @@ textarea:focus {
 .alert {
     color: #f44336;
 }
+
+.hidden-location-input {
+  display: none !important;
+}
+
+.mapbox-geocoder-container {
+  margin-top: 4px;
+}
+
+.tight-label {
+  margin-bottom: 4px !important; /* brings label closer to field */
+  display: block;
+}
