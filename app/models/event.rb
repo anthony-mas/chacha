@@ -1,13 +1,57 @@
 class Event < ApplicationRecord
   attr_accessor :hero_image_choice
-  has_one_attached :hero_image 
-  # Associations based on schema
-  belongs_to :user
+  has_one_attached :hero_image
 
+  belongs_to :user
   has_many :participations, dependent: :destroy
+  has_many :participants, through: :participations, source: :user
   has_many :posts, dependent: :destroy
 
-  # Many-to-many relationship with categories
   has_many :category_events, dependent: :destroy
   has_many :categories, through: :category_events
+
+  scope :most_popular, -> {
+    joins(:participations)
+      .group('events.id')
+      .order('COUNT(participations.id) DESC')
+  }
+
+  scope :by_location, ->(location) { where("location ILIKE ?", "%#{location.downcase}%") if location.present? }
+
+  scope :by_category_name, ->(category_name) {
+    joins(:categories)
+      .where(categories: { name: category_name })
+      .distinct
+  }
+
+  def self.attended_by_friends(current_user)
+    return none unless current_user&.respond_to?(:friends) && current_user.friends.present?
+
+    friend_ids = current_user.friends.pluck(:id)
+    joins(:participations).where(participations: { user_id: friend_ids }).distinct
+  end
+
+  def self.discover_filter(params, current_user)
+    events = Event.where(event_private: false)
+
+    if params[:filter] == 'top'
+      events = events.most_popular
+    elsif params[:filter] == 'friends'
+      events = events.attended_by_friends(current_user)
+    elsif params[:category].present?
+      events = events.by_category_name(params[:category])
+    end
+
+    events = events.by_location(params[:location]) if params[:location].present?
+
+    events = events.order(starts_on: :asc) unless params[:filter] == 'top'
+
+    events
+  end
+
+  def display_time_and_location
+    time = starts_on.strftime('%-I%P').downcase
+    date_prefix = starts_on.to_date == Date.current ? 'Today' : starts_on.strftime('%A')
+    "#{date_prefix} #{time} - #{location.upcase}"
+  end
 end

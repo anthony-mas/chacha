@@ -1,21 +1,17 @@
 <div class="homepage">
 
-  <!-- Event Preview Cards Section -->
   <div class="event-preview-container" id="event-preview-container">
 
-    <!-- Card 1 -->
     <div class="event-preview cover-style">
-      <%= image_tag "default_cards/card_1.png", alt: "Event preview 1" %>
+      <%= image_tag "hero_library/hero_1.png", alt: "Event preview 1" %>
     </div>
 
-    <!-- Card 2 (Center) -->
     <div class="event-preview cover-style" id="center-card">
       <%= image_tag "default_cards/card_2.png", alt: "Event preview 2" %>
     </div>
 
-    <!-- Card 3 -->
     <div class="event-preview cover-style">
-      <%= image_tag "default_cards/card_3.png", alt: "Event preview 3" %>
+      <%= image_tag "hero_library/hero_2.png", alt: "Event preview 3" %>
     </div>
 
   </div>
@@ -26,15 +22,12 @@
     const cards = container.querySelectorAll('.event-preview');
 
     if (container && window.innerWidth <= 480) {
-      // Center the middle card on load
       const centerCard = document.getElementById('center-card');
       const scrollPosition = centerCard.offsetLeft - (container.offsetWidth / 2) + (centerCard.offsetWidth / 2);
       container.scrollLeft = scrollPosition;
 
-      // Scale effect on scroll
       function updateCardScales() {
         const containerCenter = container.scrollLeft + container.offsetWidth / 2;
-
         cards.forEach(card => {
           const cardCenter = card.offsetLeft + card.offsetWidth / 2;
           const distance = Math.abs(containerCenter - cardCenter);
@@ -62,7 +55,7 @@
     <% unless user_signed_in? %>
       <%= link_to "Login", new_user_session_path, class: "login-btn" %>
     <% end %>
-    <%= link_to "Discover Events", events_path, class: "login-btn" %>
+    <%= link_to "Discover Events", discover_path, class: "login-btn" %>
   </div>
 
   <p class="intro-text">

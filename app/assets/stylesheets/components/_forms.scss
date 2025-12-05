@@ -33,7 +33,7 @@ textarea {
     min-height: 300px;
 }
 
-input:focus, 
+input:focus,
 textarea:focus {
     outline: none;
     border-color: var(--input-border-focus-color);
@@ -51,4 +51,34 @@ textarea:focus {
         border-bottom: none;
         margin-bottom: var(--spacing-xl);
     }
+}
+
+// Flash messages
+.notice, .alert {
+    padding: var(--spacing-sm);
+    border-radius: 4px;
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    color: var(--color-body-text);
+}
+
+.notice {
+    color: #4CAF50;
+}
+
+.alert {
+    color: #f44336;
+}
+
+.hidden-location-input {
+  display: none !important;
+}
+
+.mapbox-geocoder-container {
+  margin-top: 4px;
+}
+
+.tight-label {
+  margin-bottom: 4px !important; /* brings label closer to field */
+  display: block;
 }

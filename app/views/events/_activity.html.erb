@@ -1,0 +1,46 @@
+<%# Activity Section for Event Show Page %>
+<section class="activity-section" data-controller="activity">
+  <div class="activity-header">
+    <h2>Activity</h2>
+    <% if user_signed_in? %>
+      <button type="button" class="btn btn-activity-post" data-action="click->activity#togglePostForm">
+        <i class="fa-solid fa-pen"></i> Post
+      </button>
+    <% end %>
+  </div>
+
+  <%# New Post Form (hidden by default) %>
+  <% if user_signed_in? %>
+    <div class="activity-post-form is-hidden" data-activity-target="postForm">
+      <%= form_with model: [event, Post.new], local: true, class: "post-form" do |f| %>
+        <div class="post-form-input">
+          <%= f.text_area :content, placeholder: "Share something with the group...", rows: 2, required: true %>
+        </div>
+        <div class="post-form-actions">
+          <button type="button" class="btn btn-cancel" data-action="click->activity#togglePostForm">Cancel</button>
+          <%= f.submit "Post", class: "btn btn-submit" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# Posts List %>
+  <div class="activity-posts">
+    <% posts = event.posts.includes(:user, :reactions, comments: :user).order(created_at: :desc) %>
+    <% if posts.any? %>
+      <% posts.each_with_index do |post, index| %>
+        <div class="activity-post <%= index >= 2 ? 'activity-post-hidden' : '' %>" data-activity-target="<%= index >= 2 ? 'hiddenPost' : '' %>">
+          <%= render "events/post", post: post, event: event %>
+        </div>
+      <% end %>
+
+      <% if posts.size > 2 %>
+        <button type="button" class="btn btn-see-all" data-action="click->activity#showAll" data-activity-target="seeAllBtn">
+          See all activity (<%= posts.size - 2 %> more)
+        </button>
+      <% end %>
+    <% else %>
+      <p class="activity-empty">No activity yet. Be the first to post!</p>
+    <% end %>
+  </div>
+</section>

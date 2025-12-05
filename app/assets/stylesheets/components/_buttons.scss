@@ -60,17 +60,17 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
     &:hover {
-        background-color: #314481;
+      background-color: #314481;
     }
 }
 
 // CTA Buttons
 .cta-buttons {
-    display: flex;
-    gap: var(--spacing-md);
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: var(--spacing-md) 0;
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: var(--spacing-md) 0;
 }
 
 .cta-button {
@@ -105,9 +105,9 @@
     }
 
     &:hover {
-        background-color: #314481;
-        color: var(--color-card);
-        transform: scale(1.02);
+      background-color: #314481;
+      color: var(--color-card);
+      transform: scale(1.02);
     }
 
     &:hover::before {
@@ -177,6 +177,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    line-height: 1.2;
+}
+
+.btn-action-large i {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-title);
+}
+
+.btn-action-large:hover:not(:disabled) {
+    background-color: var(--light-gray);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s;

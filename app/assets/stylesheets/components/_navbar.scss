@@ -21,9 +21,23 @@
 }
 
 /* Logo */
+.navbar-brand a {
+  text-decoration: none; /* Ensure no underline on the link wrapping the logo */
+}
+
+/* New Logo Text Styles */
+.navbar-logo-text {
+  font-family: 'Rubik Doodle Shadow', sans-serif;
+  color: #F8E094; /* Requested color */
+  font-size: 2.2rem; /* Adjusted for a clear text logo */
+  line-height: 1;
+}
+
+/* Removing old image logo styles:
 .navbar-brand img {
   width: 40px;
 }
+*/
 
 /* Right side links */
 .navbar-links {
@@ -82,9 +96,16 @@
     gap: 12px;
   }
 
+  /* Adjust logo size for mobile */
+  .navbar-logo-text {
+    font-size: 1.8rem;
+  }
+
+  /* Removing old image logo mobile styles:
   .navbar-brand img {
     width: 32px;
   }
+  */
 
   .avatar {
     width: 28px;

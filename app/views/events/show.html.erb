@@ -2,8 +2,14 @@
 
   <div class="event-card-detail">
 
-    <div class="event-hero-image placeholder-box">
-      <span class="placeholder-icon">🖼️</span>
+    <div class="event-hero-wrapper">
+      <% if @event.hero_image.attached? %>
+        <%= image_tag @event.hero_image, class: "event-hero-image" %>
+      <% else %>
+        <div class="event-hero-placeholder">
+          <span class="placeholder-icon">🖼️</span>
+        </div>
+      <% end %>
     </div>
 
     <div class="event-content-wrapper">
@@ -44,8 +50,7 @@
               <i class="fa-solid fa-bullhorn"></i>
               Send a blast
             </button>
-            <%# CRITICAL FIX: Explicitly target share-modal ID %>
-            <button type="button" class="btn btn-action-large btn-invite-guests" data-action="click->modal#open" data-modal-id="share-modal">
+            <button type="button" class="btn btn-action-large btn-invite-guests share-modal-trigger">
               <i class="fa-solid fa-share-from-square"></i>
               Invite Guests
             </button>
@@ -76,11 +81,7 @@
         </div>
 
         <div class="event-activity-panel">
-          <h2>Activity</h2>
-          <p>
-            Activity feed (posts, comments, reactions) will appear here.
-This will be powered by posts/comments/reactions later.
-          </p>
+          <%= render "events/activity", event: @event %>
         </div>
       </section>
 
@@ -185,5 +186,111 @@ This will be powered by posts/comments/reactions later.
       tab.classList.add('active');
     });
   });
+
+  // ─────────────────────────────────────────────────────────────
+  // Share Modal
+  // ─────────────────────────────────────────────────────────────
+  const shareBackdrop = document.querySelector('.share-modal-backdrop');
+  const shareContent = shareBackdrop ? shareBackdrop.querySelector('.share-modal-content') : null;
+  const shareCloseBtn = shareBackdrop ? shareBackdrop.querySelector('.share-modal-close-btn') : null;
+  const shareTriggers = document.querySelectorAll('.share-modal-trigger');
+  const shareCopyBtns = document.querySelectorAll('.share-copy-btn, .share-link-copy-btn');
+  const shareNativeBtn = document.querySelector('.share-native-btn');
+  const shareCopiedFeedback = document.getElementById('share-copied-feedback');
+
+  function openShareModal() {
+    if (!shareBackdrop) return;
+    shareBackdrop.classList.add('share-modal-active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeShareModal() {
+    if (!shareBackdrop) return;
+    shareBackdrop.classList.remove('share-modal-active');
+    document.body.style.overflow = '';
+  }
+
+  function showCopiedFeedback() {
+    if (shareCopiedFeedback) {
+      shareCopiedFeedback.classList.add('visible');
+      setTimeout(() => {
+        shareCopiedFeedback.classList.remove('visible');
+      }, 2000);
+    }
+  }
+
+  // Open modal triggers
+  shareTriggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openShareModal();
+    });
+  });
+
+  // Close button
+  if (shareCloseBtn) {
+    shareCloseBtn.addEventListener('click', closeShareModal);
+  }
+
+  // Close on backdrop click (but not on content)
+  if (shareBackdrop) {
+    shareBackdrop.addEventListener('click', (e) => {
+      if (e.target === shareBackdrop) closeShareModal();
+    });
+  }
+
+  // Copy link buttons
+  shareCopyBtns.forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.shareUrl;
+      try {
+        await navigator.clipboard.writeText(url);
+        showCopiedFeedback();
+        // Update button text temporarily
+        const label = btn.querySelector('.share-option-label');
+        if (label) {
+          const originalText = label.textContent;
+          label.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            label.textContent = originalText;
+            btn.classList.remove('copied');
+          }, 2000);
+        }
+      } catch (err) {
+        console.error('Failed to copy:', err);
+        // Fallback: select the input
+        const input = document.getElementById('share-link-input');
+        if (input) {
+          input.select();
+          document.execCommand('copy');
+          showCopiedFeedback();
+        }
+      }
+    });
+  });
+
+  // Native Share API (if available)
+  if (shareNativeBtn) {
+    if (navigator.share) {
+      shareNativeBtn.style.display = 'flex';
+      shareNativeBtn.addEventListener('click', async () => {
+        try {
+          await navigator.share({
+            title: shareNativeBtn.dataset.shareTitle,
+            text: shareNativeBtn.dataset.shareText,
+            url: shareNativeBtn.dataset.shareUrl
+          });
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            console.error('Share failed:', err);
+          }
+        }
+      });
+    } else {
+      // Hide if not supported
+      shareNativeBtn.style.display = 'none';
+    }
+  }
 })();
 </script>

@@ -1,0 +1,97 @@
+// Event card styles (list view and detail view)
+.event-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.event-card {
+    background-color: var(--color-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-card-link {
+    display: block;
+}
+
+.event-card-details {
+    padding: var(--spacing-md);
+    // FIX: Remove default browser margins from all p tags within card details for tight spacing
+    & p {
+        margin: 0;
+    }
+}
+
+.event-card-title {
+    font-size: 1.6rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-title);
+    font-family: var(--font-title);
+}
+
+.event-card-date {
+    font-size: 0.9rem;
+    color: var(--color-secondary-text);
+}
+
+.event-card .placeholder-box {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+// Event detail card (show page)
+.event-card-detail {
+    background-color: var(--color-card);
+    border-radius: 18px;
+    padding: 0;
+    margin-bottom: var(--spacing-xl);
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.event-content-wrapper {
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.event-card-detail .placeholder-box {
+    width: 100%;
+    height: 180px;
+    margin-bottom: var(--spacing-lg);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 3px solid var(--color-title);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.event-card-detail .event-hero-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom: 3px solid var(--color-title);
+    display: block;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+}
