@@ -11,10 +11,16 @@
 
 // Base Event Card
 .event-card {
-    background-color: var(--color-card);
-    border-radius: 12px;
+    background: var(--card-background);
+    border-radius: var(--card-border-radius);
+    border: var(--card-border-width) solid var(--card-border-color);
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-box-shadow);
+    transition: var(--card-transition);
+    
+    &:hover {
+        background: var(--card-hover-background);
+    }
 }
 
 .event-card-link {
@@ -22,7 +28,7 @@
 }
 
 .event-card-details {
-    padding: var(--spacing-md);
+    padding: var(--card-padding);
     
     p { margin: 0; }
 }
