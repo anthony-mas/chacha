@@ -44,6 +44,7 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
 
     if @event.save
+      attach_hero_image_from_choice(@event)
       redirect_to @event, notice: "Event created successfully 🎉"
     else
       render :new, status: :unprocessable_entity
@@ -55,6 +56,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
+      attach_hero_image_from_choice(@event)
       redirect_to @event, notice: "Event updated."
     else
       render :edit, status: :unprocessable_entity
@@ -84,7 +86,19 @@ class EventsController < ApplicationController
       :starts_on,
       :ends_on,
       :event_private,
+      :hero_image_choice,
       category_ids: []
     )
+  end
+
+  def attach_hero_image_from_choice(event)
+    choice = params.dig(:event, :hero_image_choice)
+    return if choice.blank?
+
+    path = Rails.root.join("app/assets/images/hero_library", choice)
+    return unless File.exist?(path)
+
+    event.hero_image.purge if event.hero_image.attached?
+    event.hero_image.attach(io: File.open(path), filename: choice)
   end
 end

@@ -32,6 +32,35 @@
 }
 
 // ─────────────────────────────────────────────────────────────
+// Event Hero Image
+// ─────────────────────────────────────────────────────────────
+
+.event-hero-wrapper {
+    width: 100%;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    overflow: hidden;
+}
+
+.event-hero-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 3px solid var(--color-title);
+}
+
+.event-hero-placeholder {
+    width: 100%;
+    height: 240px;
+    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid var(--color-title);
+}
+
+// ─────────────────────────────────────────────────────────────
 // Guests List Section
 // ─────────────────────────────────────────────────────────────
 

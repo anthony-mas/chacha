@@ -82,6 +82,16 @@
     overflow: hidden;
 }
 
+.event-card-detail .event-hero-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom: 3px solid var(--color-title);
+    display: block;
+}
+
 .placeholder-icon {
     font-size: 4rem;
 }
