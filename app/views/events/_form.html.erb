@@ -35,17 +35,22 @@
 <div data-controller="mapbox-autocomplete"
      data-mapbox-autocomplete-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
 
-  <%= f.input :location,
-              input_html: {
-                data: { "mapbox-autocomplete-target": "input" },
-                autocomplete: "off",
-              },
-              label_html: {
-                class: "pb-1"
-              },
-              label: "Location" %>
-</div>
+  <%= f.label :location, "Location", class: "tight-label" %>
 
+  <%= f.input_field :location,
+        class: "hidden-location-input",
+        data: { "mapbox-autocomplete-target": "input" } %>
+
+  <div class="mapbox-geocoder-container"
+       data-mapbox-autocomplete-target="container"></div>
+
+
+
+  <!-- Mapbox search UI will appear here -->
+  <div class="mapbox-geocoder-container"
+       data-mapbox-autocomplete-target="container"></div>
+
+</div>
 
   <%= f.input :starts_on,
               as: :datetime,
