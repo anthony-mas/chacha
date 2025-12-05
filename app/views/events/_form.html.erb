@@ -1,9 +1,6 @@
 <%= simple_form_for(@event, data: { controller: "event-form" }) do |f| %>
   <%= f.error_notification %>
 
-  <!-- ============================= -->
-  <!-- HERO IMAGE UPLOAD + LIBRARY  -->
-  <!-- ============================= -->
   <div data-controller="hero-library">
 
     <div class="hero-preview-area" data-hero-library-target="preview">
@@ -25,28 +22,16 @@
   </div>
 
 
-  <!-- ============================= -->
-  <!-- TITLE -->
-  <!-- ============================= -->
   <%= f.input :title %>
 
-  <!-- ============================= -->
-  <!-- DESCRIPTION -->
-  <!-- ============================= -->
   <%= f.input :description, as: :text, input_html: { rows: 8 } %>
 
-  <!-- ============================= -->
-  <!-- CATEGORY -->
-  <!-- ============================= -->
   <%= f.input :category_ids,
               collection: @categories,
               as: :select,
               label: "Category",
               input_html: { multiple: false, class: "form-select" } %>
 
-  <!-- ============================= -->
-  <!-- LOCATION -->
-  <!-- ============================= -->
 <div data-controller="mapbox-autocomplete"
      data-mapbox-autocomplete-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
 
@@ -54,7 +39,6 @@
               input_html: {
                 data: { "mapbox-autocomplete-target": "input" },
                 autocomplete: "off",
-                class: "d-none"
               },
               label_html: {
                 class: "pb-1"
@@ -63,9 +47,6 @@
 </div>
 
 
-  <!-- ============================= -->
-  <!-- DATES -->
-  <!-- ============================= -->
   <%= f.input :starts_on,
               as: :datetime,
               html5: true,
@@ -90,14 +71,9 @@
               } %>
 
 
-
-  <!-- ===================================== -->
-  <!-- PRIVACY CARD                          -->
-  <!-- ===================================== -->
   <div class="settings-card">
     <h3>Privacy</h3>
     <div class="toggle-wrapper">
-      </label>
     </div>
     <div class="form-check form-switch">
       <%= f.input_field :event_private, as: :boolean, label: "Private event ?", class: "form-check-input", id: "switchCheckDefault" %>
@@ -105,9 +81,6 @@
     </div>
   </div>
 
-  <!-- ===================================== -->
-  <!-- DISCOVERABILITY CARD                  -->
-  <!-- ===================================== -->
 <div class="settings-card">
   <h3>Discoverability</h3>
 
@@ -129,9 +102,6 @@
 </div>
 
 
-  <!-- ===================================== -->
-  <!-- GUEST APPROVAL CARD                   -->
-  <!-- ===================================== -->
 <div class="settings-card">
   <h3>Guests</h3>
 
@@ -153,9 +123,6 @@
 </div>
 
 
-  <!-- ============================= -->
-  <!-- SUBMIT BUTTON -->
-  <!-- ============================= -->
   <div>
     <%= f.button :submit, "Create Event", class: "btn-primary" %>
   </div>
