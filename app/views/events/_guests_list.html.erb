@@ -1,35 +1,83 @@
-<%# Event Guest List Preview (Screenshot 1: Avatars, Count, View All button) %>
+<%# Event Guest List Preview with Avatars, Count, Mutuals, and View All button %>
 
-<% participants = event.participations.includes(:user).order("users.name ASC") %>
-<% total_guests = participants.sum(:extra_guests) + participants.count %>
-<% displayed_avatars = participants.first(6) %>
-<% remaining_guests_count = participants.count > 6 ? participants.count - 6 : 0 %>
+<%# Filter to only "going" participations for attendance display %>
+<% going_participations = event.participations.includes(:user).where(status: "going") %>
+<% going_count = going_participations.count %>
+<% extra_guests_total = going_participations.sum(:extra_guests) %>
+<% total_attending = going_count + extra_guests_total %>
+
+<%# Check if current user is going %>
+<% current_user_going = user_signed_in? && going_participations.exists?(user_id: current_user.id) %>
+<% others_going_count = current_user_going ? going_count - 1 : 0 %>
+
+<%# Avatar display: show first 5, then +X for remainder %>
+<% max_avatars = 5 %>
+<% displayed_participations = going_participations.order("users.name ASC").limit(max_avatars) %>
+<% overflow_count = going_count > max_avatars ? going_count - max_avatars : 0 %>
+
+<%# Helper to compute initials from name or email %>
+<%
+  def compute_initials(user)
+    if user.name.present?
+      parts = user.name.strip.split
+      if parts.length >= 2
+        "#{parts.first[0]}#{parts.last[0]}".upcase
+      else
+        parts.first[0..1].upcase
+      end
+    else
+      user.email.split("@").first[0..1].upcase
+    end
+  end
+%>
 
 <div class="guests-list-container">
   <div class="guests-header">
     <h2 class="title-md"><strong>Guest List</strong></h2>
-
     <button type="button" class="btn-view-all manage-guests-trigger">View all</button>
   </div>
 
-  <p class="guest-count"><%= total_guests %> Guests Attending</p>
+  <%# Attendance count %>
+  <div class="guests-attendance-info">
+    <% if total_attending > 0 %>
+      <p class="guests-total-count">
+        <i class="fa-solid fa-users"></i>
+        <%= total_attending %> <%= total_attending == 1 ? "person is" : "people are" %> going
+      </p>
 
-  <div class="guest-avatars-scroll">
-    <% displayed_avatars.each do |participation| %>
-      <div class="guest-card">
-        <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
-          <%= participation.user.name.first.upcase %>
-        </div>
-        <span class="guest-name"><%= participation.user.name.split.first %></span>
-      </div>
-    <% end %>
-
-    <% if remaining_guests_count > 0 %>
-      <div class="guest-card">
-        <div class="guest-avatar guest-overflow">
-          +<%= remaining_guests_count %>
-        </div>
-      </div>
+      <%# Mutual text for logged-in user who is going %>
+      <% if current_user_going %>
+        <p class="guests-mutual-text">
+          <% if others_going_count > 0 %>
+            You and <%= others_going_count %> <%= others_going_count == 1 ? "other" : "others" %> are going
+          <% else %>
+            You're the only one going so far
+          <% end %>
+        </p>
+      <% end %>
+    <% else %>
+      <p class="guests-empty-text">No one has RSVP'd yet. Be the first!</p>
     <% end %>
   </div>
+
+  <%# Avatar row %>
+  <% if going_count > 0 %>
+    <div class="guests-avatars-row">
+      <% displayed_participations.each do |participation| %>
+        <%
+          initials = compute_initials(participation.user)
+          color = "##{Digest::MD5.hexdigest(participation.user.email)[0..5]}"
+        %>
+        <div class="guests-avatar-bubble" style="background-color: <%= color %>;" title="<%= participation.user.name.presence || participation.user.email %>">
+          <%= initials %>
+        </div>
+      <% end %>
+
+      <% if overflow_count > 0 %>
+        <div class="guests-avatar-bubble guests-avatar-overflow">
+          +<%= overflow_count %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
