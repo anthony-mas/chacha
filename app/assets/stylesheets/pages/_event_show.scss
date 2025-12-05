@@ -175,6 +175,37 @@
     border: 2px solid var(--color-card);
 }
 
+// Invitee modal view additions
+.guests-modal-summary {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--color-secondary-text);
+}
+
+.guests-modal-subheading {
+    font-size: 0.95rem;
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    color: var(--color-secondary-text);
+}
+
+.guests-modal-empty {
+    text-align: center;
+    color: var(--color-secondary-text);
+    padding: var(--spacing-lg) 0;
+}
+
+.guest-status-badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+
+    &.status-going { background-color: #e8f5e9; color: #2e7d32; }
+    &.status-maybe { background-color: #fff8e1; color: #f57c00; }
+}
+
 // ─────────────────────────────────────────────────────────────
 // Activity Section
 // ─────────────────────────────────────────────────────────────
