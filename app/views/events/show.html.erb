@@ -2,8 +2,14 @@
 
   <div class="event-card-detail">
 
-    <div class="event-hero-image placeholder-box">
-      <span class="placeholder-icon">🖼️</span>
+    <div class="event-hero-wrapper">
+      <% if @event.hero_image.attached? %>
+        <%= image_tag @event.hero_image, class: "event-hero-image" %>
+      <% else %>
+        <div class="event-hero-placeholder">
+          <span class="placeholder-icon">🖼️</span>
+        </div>
+      <% end %>
     </div>
 
     <div class="event-content-wrapper">
