@@ -1,17 +1,22 @@
 <div class="hero-modal" data-hero-library-target="modal">
   <div class="hero-modal-content">
 
-    <!-- HEADER -->
     <div class="hero-modal-header">
       <h2>Add Background</h2>
       <button class="hero-close-btn" data-action="hero-library#close">✕</button>
     </div>
 
-    <!-- Image grid -->
-    <h3 class="hero-section-title">Choose a Banner</h3>
+    <h3 class="hero-section-title">Photorealistic gallery</h3>
 
     <div class="hero-grid">
-      <% ["hero_1.png", "hero_2.png", "hero_3.png", "hero_4.png"].each do |img| %>
+      <%
+        # Update this array to reflect all 10 images and their correct extensions (.jpg or .png)
+        images = [
+          "hero_1.jpg", "hero_2.jpg", "hero_3.jpg", "hero_4.jpg", "hero_5.jpg",
+          "hero_6.jpg", "hero_7.jpg", "hero_8.jpg", "hero_9.png", "hero_10.jpg"
+        ]
+        images.each do |img|
+      %>
         <div class="hero-thumb"
              data-action="click->hero-library#choose"
              data-image="<%= img %>">
