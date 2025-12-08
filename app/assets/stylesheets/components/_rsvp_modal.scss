@@ -1,4 +1,63 @@
 // RSVP Modal styles
+
+// ─────────────────────────────────────────────────────────────
+// Segmented Control (Apple-invites style)
+// ─────────────────────────────────────────────────────────────
+.rsvp-segmented-control {
+    display: flex;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    padding: 4px;
+    gap: 4px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.rsvp-segment {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--color-secondary-text);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover:not(.active) {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    &.active {
+        background-color: var(--color-card);
+        color: var(--color-title);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        font-weight: 600;
+    }
+}
+
+.rsvp-segment-label {
+    white-space: nowrap;
+}
+
+// Mobile-first: smaller text on very small screens
+@media (max-width: 360px) {
+    .rsvp-segment {
+        padding: 10px 4px;
+        font-size: 0.8rem;
+    }
+}
+
+// ─────────────────────────────────────────────────────────────
+// Legacy emoji trigger (kept for backwards compatibility)
+// ─────────────────────────────────────────────────────────────
 .rsvp-emoji-trigger {
     background: none;
     border: none;

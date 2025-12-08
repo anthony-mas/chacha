@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # resources :users, only: [:show] <-- REMOVED
 
   resources :events do
-    resources :participations, only: [:create, :destroy]
+    resources :participations, only: [:create, :update, :destroy]
     resources :posts, only: [:create, :destroy]
   end
 
