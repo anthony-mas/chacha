@@ -1,5 +1,6 @@
 // Link styles
 a {
+    /* Uses the now-dark --color-title variable for contrast */
     color: var(--color-title);
     text-decoration: none;
     transition: color 0.2s;

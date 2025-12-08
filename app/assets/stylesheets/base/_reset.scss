@@ -1,6 +1,7 @@
 // Base reset and layout
 body {
     background: var(--gradient-primary);
+    /* CRUCIAL FIX: Ensures ALL non-overridden text on the body is light/white */
     color: var(--color-text-primary);
     font-family: var(--font-body);
     margin: 0;

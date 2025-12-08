@@ -1,9 +1,25 @@
+// ===========================================
+// BASE - Typography & Font Imports (Consolidated)
+// ===========================================
+
+// --- 1. Font Imports (Moved from config/_fonts.scss) ---
+// Import all necessary Google fonts matching the --font-* CSS variables.
+
+// Fonts for the Premium Editorial Palette (Bebas Neue, Poppins)
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// Additional fonts used elsewhere (e.g., Nunito, Rubik Doodle Shadow)
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Rubik+Doodle+Shadow&display=swap');
+
+
+// --- 2. Typography Styles ---
 // Typography styles
 h1, h2, h3, h4, .title-lg, .title-md {
-    font-family: var(--font-title);
+    /* Uses the now-dark --color-title variable for contrast */
+    font-family: var(--font-headline);
     color: var(--color-title);
     margin-top: 0;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 h1 { font-size: 2.2rem; margin-bottom: var(--spacing-lg); }
@@ -13,6 +29,7 @@ h3 { font-size: 1.2rem; margin-bottom: var(--spacing-sm); }
 p {
     font-size: 1rem;
     line-height: 1.5;
+    /* Uses the now-dark --color-body-text variable for contrast */
     color: var(--color-body-text);
 }
 
