@@ -1,7 +1,7 @@
 .discover-page-container {
   min-height: 100vh;
-  // Background: Yellow/Cream from your variables
-  background-color: var(--color-background);
+  /* Ensure background is transparent to show body gradient */
+  background-color: transparent;
   padding-bottom: var(--spacing-md);
 
   .container {
@@ -10,17 +10,23 @@
 }
 
 .discover-title {
-  // Title: Deep Blue from your variables
-  font-family: var(--font-title);
+  font-family: var(--font-headline);
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--color-title);
+  /* FIX: Explicitly light for dark gradient */
+  color: var(--color-text-primary);
 }
 
 .trending-subtitle {
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--color-body-text);
+  /* FIX: Explicitly light for dark gradient */
+  color: var(--color-text-primary);
+}
+
+/* FIX: Target text-muted subtitle and no-events message on the dark background */
+.discover-page-container .text-muted {
+  color: var(--color-text-tertiary) !important;
 }
 
 // Filter Bar Styling
@@ -51,18 +57,19 @@
   flex-shrink: 0;
 
   // --- Default (Non-Active) Filter Tag Style: #40559D at 30% Opacity ---
+  /* FIX: Non-active tags text/icons must be light on dark page background. */
   background-color: rgba(64, 85, 157, 0.3);
-  color: var(--color-title) !important; // FIX: Ensure color applies over generic <a> tag
+  color: var(--color-text-primary) !important;
   border: 1px solid rgba(64, 85, 157, 0.5);
 
   &:hover {
-    color: var(--color-title) !important;
+    color: var(--color-white-primary) !important;
   }
 
   // --- Active Filter Tag Style: #40559D at 70% Opacity ---
   &.active {
     background-color: rgba(64, 85, 157, 0.7);
-    color: var(--color-card) !important; // FIX: Ensure white text applies over generic <a> tag
+    color: var(--color-card) !important;
     font-weight: 700;
     border-color: rgba(64, 85, 157, 0.9);
 
@@ -75,7 +82,7 @@
   &.location-tag {
     // Non-active location tag (inherits the default 30% opacity)
     background-color: rgba(64, 85, 157, 0.3);
-    color: var(--color-title) !important;
+    color: var(--color-text-primary) !important;
 
     // Active Location Tag (Full Opaque Blue)
     &.active {
@@ -87,8 +94,15 @@
 }
 
 // Event Card V2 Styling
+.event-cards-list {
+  /* FIX: Explicitly target the no-events message to be light tertiary text */
+  p.no-events-message {
+    color: var(--color-text-tertiary) !important;
+  }
+}
+
 .event-card-v2 {
-  // Card: White from your variables
+  // Card: White from your variables (text inside must be DARK)
   background-color: var(--color-card);
   border: none;
   border-radius: 15px;
@@ -145,7 +159,6 @@
 
       .star-icon {
         font-size: 1.1rem;
-        margin-right: 5px;
       }
       .save-text {
         font-weight: 500;
@@ -153,7 +166,7 @@
     }
 
     .interested-text {
-      color: var(--color-title); // Using title color for the active/saved state
+      color: var(--color-title);
       font-weight: 700;
     }
 

@@ -8,7 +8,7 @@
 .event-metadata p {
     margin: 4px 0;
     font-size: 1rem;
-    color: var(--color-secondary-text);
+    color: var(--color-body-text);
 }
 
 .event-actions {
@@ -29,6 +29,11 @@
     display: block;
     margin-bottom: var(--spacing-xs);
     color: var(--color-title);
+}
+
+/* FIX: Target the host tool links which are currently white-on-light-card and force them dark */
+.event-host-tools p a {
+    color: var(--color-title) !important;
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -79,6 +84,7 @@
 
     .title-md {
         margin: 0;
+        color: var(--color-title);
         font-size: 1.1rem;
     }
 }
@@ -209,8 +215,8 @@
     display: flex;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-    font-size: 0.9rem;
     color: var(--color-secondary-text);
+    font-size: 0.9rem;
 }
 
 .guests-modal-subheading {
@@ -254,6 +260,7 @@
     h2 {
         margin: 0;
         flex-shrink: 0;
+        color: var(--color-title);
     }
 }
 
@@ -334,10 +341,6 @@
         border-radius: 6px;
         cursor: pointer;
         color: var(--color-secondary-text);
-
-        &:hover {
-            background-color: #f5f5f5;
-        }
     }
 
     .btn-submit {
@@ -347,10 +350,6 @@
         padding: var(--spacing-xs) var(--spacing-md);
         border-radius: 6px;
         cursor: pointer;
-
-        &:hover {
-            background-color: darken(#40559D, 10%);
-        }
     }
 }
 
@@ -382,11 +381,6 @@
     font-size: 0.9rem;
     align-self: center;
     margin-top: var(--spacing-sm);
-
-    &:hover {
-        background-color: var(--color-title);
-        color: white;
-    }
 }
 
 // Post Card
@@ -446,14 +440,9 @@
     cursor: pointer;
     padding: var(--spacing-xs);
     opacity: 0.5;
-    transition: opacity 0.2s;
-
-    &:hover {
-        opacity: 1;
-        color: var(--color-accent-button);
-    }
 }
 
+// Post Content
 .post-content {
     margin-bottom: var(--spacing-sm);
 
@@ -487,14 +476,6 @@
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 20px;
     transition: background-color 0.2s;
-
-    &:hover {
-        background-color: #f5f5f5;
-    }
-
-    &.reacted {
-        background-color: #fff0f0;
-    }
 }
 
 .reaction-emoji {
@@ -518,11 +499,6 @@
     border-radius: 20px;
     font-size: 0.9rem;
     transition: background-color 0.2s;
-
-    &:hover {
-        background-color: #f5f5f5;
-        color: var(--color-title);
-    }
 }
 
 // Replies Section
@@ -546,9 +522,9 @@
 .comment-item {
     display: flex;
     gap: var(--spacing-sm);
-    padding: var(--spacing-sm);
     background-color: #f9f9f9;
     border-radius: 8px;
+    padding: var(--spacing-sm);
 }
 
 .comment-avatar {
@@ -601,12 +577,6 @@
     cursor: pointer;
     padding: 2px 6px;
     opacity: 0.4;
-    font-size: 0.8rem;
-
-    &:hover {
-        opacity: 1;
-        color: var(--color-accent-button);
-    }
 }
 
 // Reply Form
@@ -623,11 +593,6 @@
         padding: var(--spacing-xs) var(--spacing-md);
         font-family: var(--font-body);
         font-size: 0.9rem;
-
-        &:focus {
-            outline: none;
-            border-color: var(--color-title);
-        }
     }
 
     .btn-reply {
@@ -638,9 +603,5 @@
         border-radius: 20px;
         cursor: pointer;
         font-size: 0.85rem;
-
-        &:hover {
-            background-color: darken(#40559D, 10%);
-        }
     }
 }
