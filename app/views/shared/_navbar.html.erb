@@ -4,4 +4,19 @@
       <span class="navbar-logo-text">ChaCha</span>
     <% end %>
   </div>
+
+  <div class="navbar-actions">
+    <% if user_signed_in? %>
+      <%= link_to destroy_user_session_path,
+                  method: :delete,
+                  data: { turbo_method: :delete },
+                  class: "navbar-icon-button" do %>
+        <i class="fa-solid fa-right-from-bracket"></i>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, class: "navbar-icon-button" do %>
+        <i class="fa-solid fa-right-to-bracket"></i>
+      <% end %>
+    <% end %>
+  </div>
 </nav>

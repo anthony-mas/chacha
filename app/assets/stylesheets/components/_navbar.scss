@@ -130,3 +130,43 @@
     }
   }
 }
+
+/* TOP NAVBAR FIX */
+.upper-navbar .navbar-icon-button,
+.upper-navbar .navbar-icon-button i,
+.upper-navbar .navbar-link,
+.upper-navbar .navbar-link i {
+  color: #fff !important;
+}
+
+/* BOTTOM NAVBAR FIX */
+.bottom-navbar .bottom-nav-icon,
+.bottom-navbar .bottom-nav-icon i,
+.bottom-navbar .bottom-center,
+.bottom-navbar .bottom-center i {
+  color: #fff !important;
+}
+
+/* Special case: the center floating button should keep its primary color */
+.bottom-center {
+  background: #fff !important;      /* white circle */
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: -26px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.bottom-center i {
+  color: #000 !important;           /* <-- BLACK ICON */
+  font-size: 2rem;
+  line-height: 1;
+}
+.bottom-navbar .bottom-center i {
+  color: #000 !important;   /* FORCE BLACK */
+}
