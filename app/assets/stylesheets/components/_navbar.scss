@@ -137,3 +137,24 @@
     padding-top: 80px;
   }
 }
+
+/* Back arrow */
+.upper-navbar .navbar-left {
+  width: 40px; /* ensures spacing even when empty */
+  display: flex;
+  align-items: center;
+}
+
+.back-arrow {
+  color: var(--color-white-primary) !important;
+  font-size: 1.4rem;
+  text-decoration: none;
+
+  i {
+    color: var(--color-white-primary) !important;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
