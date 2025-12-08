@@ -1,10 +1,16 @@
+<%# app/assets/config/manifest.json.erb %>
 {
   "background_color": "#ffffff",
   "description": "Plan and share events easily with ChaCha.",
   "display": "fullscreen",
   "name": "ChaCha",
   "icons": [
-    <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f && f.start_with?('android-icon') && f.end_with?('.png') } %>
+    <% base_path = Rails.root.join("app/assets/images/icons/") %>
+    <% files = Dir.entries(base_path).select do |f| %>
+      <% full_path = base_path.join(f) %>
+      <% # The File.file? check now uses the full path, resolving the error %>
+      <% File.file?(full_path) && f.start_with?('android-icon') && f.end_with?('.png') %>
+    <% end %>
     <% files.each_with_index do |file, index| %>
       <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
       {
