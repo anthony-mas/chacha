@@ -1,4 +1,13 @@
 <nav class="navbar-lewagon upper-navbar">
+
+  <div class="navbar-left">
+    <% if request.referer.present? && request.referer != request.original_url %>
+      <%= link_to request.referer, class: "back-arrow" do %>
+        <i class="fa-solid fa-arrow-left"></i>
+      <% end %>
+    <% end %>
+  </div>
+
   <div class="navbar-brand">
     <%= link_to root_path do %>
       <span class="navbar-logo-text">ChaCha</span>
@@ -19,4 +28,5 @@
       <% end %>
     <% end %>
   </div>
+
 </nav>
