@@ -61,6 +61,13 @@ def attach_hero_image(event, filename)
   path = Rails.root.join("app/assets/images/hero_library", filename)
   return unless File.exist?(path)
 
+  # Infer content type from extension for correctness
+  content_type = case File.extname(filename).downcase
+                 when '.png' then 'image/png'
+                 when '.jpg', '.jpeg' then 'image/jpeg'
+                 else 'application/octet-stream'
+                 end
+
   # Skip if already attached with same filename
   return if event.hero_image.attached? && event.hero_image.filename.to_s == filename
 
@@ -68,7 +75,7 @@ def attach_hero_image(event, filename)
   event.hero_image.attach(
     io: File.open(path),
     filename: filename,
-    content_type: "image/png"
+    content_type: content_type
   )
 end
 
@@ -92,7 +99,7 @@ events_data = [
     starts_on: 3.days.from_now.change(hour: 18, min: 30),
     ends_on: 3.days.from_now.change(hour: 22, min: 0),
     event_private: false,
-    hero_image: "hero_1.png",
+    hero_image: "hero_1.jpg", # FIX: Changed from .png to .jpg
     category: social_cat
   },
   {
@@ -102,7 +109,7 @@ events_data = [
     starts_on: 5.days.from_now.change(hour: 9, min: 0),
     ends_on: 5.days.from_now.change(hour: 11, min: 0),
     event_private: false,
-    hero_image: "hero_2.png",
+    hero_image: "hero_2.jpg", # FIX: Changed from .png to .jpg
     category: sport_cat
   },
   {
@@ -112,7 +119,7 @@ events_data = [
     starts_on: 7.days.from_now.change(hour: 19, min: 0),
     ends_on: 7.days.from_now.change(hour: 22, min: 0),
     event_private: false,
-    hero_image: "hero_3.png",
+    hero_image: "hero_3.jpg", # FIX: Changed from .png to .jpg
     category: art_cat
   },
   {
@@ -122,7 +129,7 @@ events_data = [
     starts_on: 10.days.from_now.change(hour: 18, min: 0),
     ends_on: 10.days.from_now.change(hour: 21, min: 0),
     event_private: false,
-    hero_image: "hero_4.png",
+    hero_image: "hero_4.jpg", # FIX: Changed from .png to .jpg
     category: networking_cat
   },
   {
@@ -132,7 +139,7 @@ events_data = [
     starts_on: 12.days.from_now.change(hour: 14, min: 0),
     ends_on: 12.days.from_now.change(hour: 18, min: 0),
     event_private: false,
-    hero_image: "hero_1.png",
+    hero_image: "hero_5.jpg", # FIX: Changed from .png to .jpg (using hero_5 for unique image)
     category: hobbies_cat
   },
   {
@@ -142,7 +149,7 @@ events_data = [
     starts_on: 14.days.from_now.change(hour: 20, min: 0),
     ends_on: 14.days.from_now.change(hour: 23, min: 30),
     event_private: true,
-    hero_image: "hero_2.png",
+    hero_image: "hero_8.jpg", # FIX: Changed from .png to .jpg (using hero_8 for unique image)
     category: social_cat
   }
 ]
