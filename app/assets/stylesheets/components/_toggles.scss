@@ -12,7 +12,8 @@
 
 .toggle-label {
   font-size: 1rem;
-  color: var(--color-body-text);
+  /* FIX: Ensure label text is dark when on the light card background */
+  color: var(--color-title);
   flex: 1;
 }
 
@@ -66,7 +67,8 @@
 
 .settings-hint {
   font-size: 0.85em;
-  color: #666;
+  /* FIX: Ensure hint text is dark when on the light card background */
+  color: var(--color-secondary-text);
   margin-top: 6px;
 }
 

@@ -1,6 +1,6 @@
 // Link styles
 a {
-    /* Uses the now-dark --color-title variable for contrast */
+    /* FIX: Revert to dark color (var(--color-title)) for links on light cards (which is the majority) */
     color: var(--color-title);
     text-decoration: none;
     transition: color 0.2s;

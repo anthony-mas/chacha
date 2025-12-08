@@ -5,6 +5,11 @@
     align-items: center;
     padding-top: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
+
+    h1 {
+        /* FIX: Ensure "MY EVENTS" header is light */
+        color: var(--color-text-primary);
+    }
 }
 
 .upcoming-events-list, .recent-posts-list {
@@ -29,4 +34,9 @@
 .upcoming-events-list em {
     color: var(--color-secondary-text);
     font-style: normal;
+}
+
+/* FIX: Target link at the bottom of the page (on dark background) and set to light */
+.dashboard-header ~ p a {
+    color: var(--color-text-primary) !important;
 }

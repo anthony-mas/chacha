@@ -1,8 +1,8 @@
 // Base reset and layout
 body {
     background: var(--gradient-primary);
-    /* CRUCIAL FIX: Ensures ALL non-overridden text on the body is light/white */
-    color: var(--color-text-primary);
+    /* FIX: Ensures ALL non-overridden text on the body is light/white */
+    color: var(--color-white-primary);
     font-family: var(--font-body);
     margin: 0;
     padding: 0;
@@ -14,5 +14,5 @@ body {
     max-width: 500px;
     margin: 0 auto;
     padding: var(--spacing-md);
-    padding-top: 52px; /* MODIFIED: Adjusted for upper navbar height (approx 52px) */
+    padding-top: 70px; /* Adjusted for upper navbar height (approx 60px height + 10px spacing = 70px) */
 }
