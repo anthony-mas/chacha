@@ -69,7 +69,7 @@
 
 ---
 
-### 3️⃣ BLOC BANNIÈRE / BACKGROUND (STYLE CASSÉ) 🔴
+### 3️⃣ BLOC BANNIÈRE / BACKGROUND (STYLE CASSÉ) 🔴 PRIORITAIRE
 
 **État actuel (HTML figé):**
 ```html
@@ -185,7 +185,9 @@
   border-width: 3px;
   box-shadow: 0 0 0 4px rgba(238, 233, 223, 0.3);
 }
-```---
+```
+
+---
 
 ### 4️⃣ BLOC FORMULAIRE (Title/Description/Category/Location) (STYLE CASSÉ)
 
@@ -303,7 +305,7 @@ select {
 }
 ```---
 
-### 5️⃣ BLOC SCHEDULE (Starts on / Ends on) (STYLE CASSÉ)
+### 6️⃣ BLOC SCHEDULE (Starts on / Ends on) (STYLE CASSÉ)
 
 **État actuel (HTML figé):**
 ```html
@@ -374,7 +376,7 @@ input[type="datetime-local"] {
 }
 ```---
 
-### 6️⃣ BLOC PRIVACY / DISCOVERABILITY (STYLE CASSÉ)
+### 7️⃣ BLOC PRIVACY / DISCOVERABILITY (STYLE CASSÉ)
 
 **État actuel (HTML figé):**
 ```html
@@ -519,25 +521,7 @@ input[type="checkbox"] {
 
 ---
 
-### ÉTAPE 2: REFONDRE LE TITRE PRINCIPAL ⭐
-**Fichiers à modifier:** `app/views/events/new.html.erb`
-
-**Objectifs:**
-
-- Créer une **section "Page Header"** structurée
-- Titre principal "Create a new event" + sous-texte guidant
-- Microcopy: "Design your next event from scratch"
-- Layout: titre + sous-texte centrés ou left-aligned (à décider)
-
-**Composants:**
-- `<h1>` "Create a new event"
-- `<p class="subtitle">` description
-- Utiliser hierarchy: --font-size-4xl ou 5xl pour titre
-- Espacing: --spacing-3xl avant la section suivante
-
----
-
-### ÉTAPE 3: REFONDRE LE BLOC BANNIÈRE/BACKGROUND 🔴 PRIORITAIRE
+### ÉTAPE 2: REFONDRE LE BLOC BANNIÈRE/BACKGROUND 🔴 PRIORITAIRE
 **Fichiers à modifier:** `app/views/events/new.html.erb` (section background)
 
 **Objectifs:**
@@ -560,6 +544,24 @@ input[type="checkbox"] {
   - Border subtle par défaut (--color-border)
   - Border prominent (--color-white-primary) au hover
   - Border filled (--color-white-primary avec background) si selected
+
+---
+
+### ÉTAPE 3: REFONDRE LE TITRE PRINCIPAL ⭐
+**Fichiers à modifier:** `app/views/events/new.html.erb`
+
+**Objectifs:**
+
+- Créer une **section "Page Header"** structurée
+- Titre principal "Create a new event" + sous-texte guidant
+- Microcopy: "Design your next event from scratch"
+- Layout: titre + sous-texte centrés ou left-aligned (à décider)
+
+**Composants:**
+- `<h1>` "Create a new event"
+- `<p class="subtitle">` description
+- Utiliser hierarchy: --font-size-4xl ou 5xl pour titre
+- Espacing: --spacing-3xl avant la section suivante
 
 ---
 
