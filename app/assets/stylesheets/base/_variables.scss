@@ -5,14 +5,6 @@
 // Structure: Colors → Typography → Spacing → Layout → Components → Effects → Accessibility
 
 :root {
-    // Colors
-    --color-background: #F8E094;
-    --color-card: #ffffff;
-    --color-title: #40559D;
-    --color-body-text: #1E1E1E;
-    --color-secondary-text: #666666;
-    --color-accent-button: #FF6B6B;
-
   // ==========================================
   // 1. COLOR SYSTEM - Gradient + Whites
   // ==========================================
@@ -20,6 +12,7 @@
   /* Gradient Background (Premium Teal-Blue) */
   --gradient-start:           #0E2B3A;
   --gradient-end:             #0f4c3d;
+  /* FIX: Corrected variable name from --color-gradient-end to --gradient-end */
   --gradient-primary:         linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
 
   /* Whites System - Editorial Palette */
@@ -33,8 +26,23 @@
   --color-text-secondary:     #F5F1E8;
   --color-text-tertiary:      #E5DCCF;
   --color-border:             #7D7564;
-  --color-primary:            #111111;   /* Black accent */
+  --color-primary:            #111111;   /* Black accent (Used for dark text/icons on light elements) */
   --color-overlay-dark:       rgba(0, 0, 0, 0.65);
+
+
+  // ==========================================
+  // 1b. APPLICATION COLOR MAP (Pointing old names to new functional colors)
+  // ==========================================
+
+  /* FIX: Text/Titles/Body text for light-colored components (Forms/Cards) MUST be Dark */
+  --color-title: var(--color-primary);
+  --color-body-text: var(--color-primary);
+  --color-secondary-text: #666666; /* Using a fixed dark gray for sufficient contrast on light cards */
+
+  /* Backgrounds & Accent colors */
+  --color-background: var(--color-white-subtle);
+  --color-card: var(--color-white-secondary);
+  --color-accent-button: #FF6B6B;               /* Kept original accent button color (red) */
 
 
   // ==========================================

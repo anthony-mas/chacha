@@ -45,7 +45,7 @@
   i {
     font-size: 24px;
     line-height: 1;
-    color: var(--color-secondary-text);
+    color: var(--color-primary); // FIXED: Default icon color is dark
 
     // Crisp rendering
     -webkit-font-smoothing: antialiased;
@@ -74,7 +74,7 @@
   &.active,
   &[aria-current="page"] {
     i {
-      color: var(--color-title);
+      color: var(--color-primary); // FIXED: Active icon color is dark
     }
 
     // Subtle bottom accent line
@@ -85,7 +85,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: var(--color-title);
+      background: var(--color-primary); // FIXED: Accent line is dark
     }
   }
 }
@@ -97,7 +97,7 @@
   i {
     font-size: 28px;
     font-weight: 300;
-    color: var(--color-secondary-text);
+    color: var(--color-primary); // FIXED: Center icon color is dark
   }
 
   &:hover {
