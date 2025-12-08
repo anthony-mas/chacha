@@ -13,19 +13,22 @@
     font-size: 3rem;
     margin-bottom: var(--spacing-sm);
     line-height: 1.1;
+    color: #F2F1ED;
 }
 
 .homepage-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
-    color: var(--color-title);
+    color: #F2F1ED;
     margin-bottom: var(--spacing-md);
 }
 
 .homepage-description {
     max-width: 300px;
     margin: 0 auto var(--spacing-xl) auto;
-    color: var(--color-secondary-text);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #F2F1ED;
 }
 
 .homepage {
@@ -33,6 +36,17 @@
     padding: var(--spacing-xl) var(--spacing-md);
     max-width: 700px;
     margin: 0 auto;
+    color: #F2F1ED;
+}
+
+// Force white on all text elements in homepage section
+.homepage h1,
+.homepage h2,
+.homepage h3,
+.homepage h4,
+.homepage p,
+.homepage a {
+    color: #F2F1ED !important;
 }
 
 // Event preview cards (carousel)
