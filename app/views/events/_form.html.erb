@@ -63,7 +63,30 @@
     </div>
   </div>
 
+  <%= f.input :starts_on,
+              as: :datetime,
+              html5: true,
+              input_html: {
+                value: f.object.starts_on || Time.now.change(min: 0, sec: 0) + 1.hour,
+                data: {
+                  "event-form-target": "startsOn",
+                  action: "change->event-form#updateEndsOn"
+                }
+              },
 
+              wrapper_html: {
+                class: "my-3"
+              } %>
+
+
+  <%= f.input :ends_on,
+              as: :datetime,
+              html5: true,
+              input_html: {
+
+                value: f.object.ends_on || Time.now.change(min: 0, sec: 0) + 2.hours,
+                data: { "event-form-target": "EndsOn" }
+              } %>
 
   <div class="settings-card">
     <div class="form-check form-switch">
