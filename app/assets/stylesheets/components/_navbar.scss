@@ -1,8 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
-// NAVBAR - PREMIUM EDITORIAL STYLE
+// NAVBAR - Premium Editorial Gradient Integration
 // ═══════════════════════════════════════════════════════════════
 
-// Base navbar container - BLEND WITH PAGE
 .navbar-lewagon, .navbar {
   position: fixed;
   top: 0;
@@ -19,7 +18,6 @@
   gap: var(--spacing-2xl);
 }
 
-// Logo brand section
 .navbar-brand {
   flex: 0 0 auto;
 
@@ -40,7 +38,6 @@
   }
 }
 
-// Right side links container
 .navbar-links {
   display: flex;
   align-items: center;
@@ -48,7 +45,6 @@
   flex: 0 0 auto;
 }
 
-// Navigation links styling - contrast on gradient
 .navbar-link {
   color: var(--color-white-primary);
   text-decoration: none;
@@ -63,10 +59,8 @@
   }
 }
 
-// Hide "Create Event" link (page title, not navbar)
 .navbar-link:first-of-type { display: none; }
 
-// Log out button - premium premium on gradient background
 .logout-btn {
   padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
   font-size: var(--btn-font-size);
@@ -90,7 +84,6 @@
   &:active { opacity: var(--opacity-active); }
 }
 
-// Avatar - premium treatment on gradient
 .avatar {
   width: 40px;
   height: 40px;
@@ -106,13 +99,9 @@
   }
 }
 
-// Push main content below navbar
 .container-app { padding-top: 90px; }
 
-// ─────────────────────────────────────────────────────────────
-// MOBILE RESPONSIVE (< 768px)
-// ─────────────────────────────────────────────────────────────
-
+// Mobile Responsive
 @media (max-width: 768px) {
   .navbar-lewagon, .navbar {
     padding: var(--spacing-md) var(--spacing-lg);
