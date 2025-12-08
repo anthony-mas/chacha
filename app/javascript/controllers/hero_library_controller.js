@@ -10,7 +10,8 @@ export default class extends Controller {
   }
 
   // Hide modal
-  close() {
+  close(event) {
+    event.preventDefault();
     this.modalTarget.classList.remove("open")
   }
 

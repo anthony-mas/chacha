@@ -2,73 +2,100 @@
 // Forms
 // ===========================================
 
-.form-group {
-    margin-bottom: var(--spacing-md);
+.page-title {
+  padding-top: 20px;   // adjust to taste (40–60px works well)
+  margin-bottom: var(--spacing-lg);
 }
 
+/* spacing under "Choose from library" button */
+.btn-primary,
+.btn-secondary {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Shared rounded field styling */
 input[type="text"],
 input[type="date"],
+input[type="search"],
+select,
 textarea {
-    width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
-    background-color: var(--color-card);
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    color: var(--color-body-text);
-    font-family: var(--font-body);
-    box-sizing: border-box;
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-card);
+  border: 1px solid #ccc;
+  border-radius: 12px; /* increased from 8px → more modern, matches your UI */
+  color: var(--color-body-text);
+  font-family: var(--font-body);
+  box-sizing: border-box;
 }
 
+/* Rounded category dropdown */
+select.form-select {
+  border-radius: 12px;
+  background-color: var(--color-card);
+}
+
+/* Description field */
 textarea {
-    min-height: 300px;
+  min-height: 300px;
+  border-radius: 12px !important;
 }
 
 input:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--color-title);
-    box-shadow: 0 0 0 2px rgba(64, 85, 157, 0.3);
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-title);
+  box-shadow: 0 0 0 2px rgba(64, 85, 157, 0.3);
 }
 
+/* Toggle switch row spacing */
 .toggle-switch-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-sm) 0;
-    border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid #e0e0e0;
 
-    &:last-child {
-        border-bottom: none;
-        margin-bottom: var(--spacing-xl);
-    }
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: var(--spacing-xl);
+  }
 }
 
 // Flash messages
 .notice, .alert {
-    padding: var(--spacing-sm);
-    border-radius: 4px;
-    margin-bottom: var(--spacing-md);
-    text-align: center;
-    color: var(--color-body-text);
+  padding: var(--spacing-sm);
+  border-radius: 4px;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  color: var(--color-body-text);
 }
 
-.notice {
-    color: #4CAF50;
-}
+.notice { color: #4CAF50; }
+.alert { color: #f44336; }
 
-.alert {
-    color: #f44336;
-}
-
+/* Hide location hidden input */
 .hidden-location-input {
   display: none !important;
 }
 
+/* Space around Mapbox autocomplete */
 .mapbox-geocoder-container {
   margin-top: 4px;
 }
 
+/* Rounded Mapbox search field */
+.mapbox-geocoder-container input {
+  border-radius: 12px !important;
+}
+
+/* Used previously for spacing; keeping for compatibility */
 .tight-label {
-  margin-bottom: 4px !important; /* brings label closer to field */
+  margin-bottom: 4px !important;
   display: block;
 }
