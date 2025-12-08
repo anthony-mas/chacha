@@ -60,10 +60,18 @@
 
       <section class="event-rsvp">
         <h2>Are you going?</h2>
-        <div class="rsvp-emoji-row">
-          <button type="button" class="rsvp-emoji-trigger" data-rsvp-status="going">👍</button>
-          <button type="button" class="rsvp-emoji-trigger" data-rsvp-status="maybe">🤔</button>
-          <button type="button" class="rsvp-emoji-trigger" data-rsvp-status="not_going">👎</button>
+        <% current_participation = user_signed_in? ? @event.participations.find_by(user: current_user) : nil %>
+        <% current_status = current_participation&.status %>
+        <div class="rsvp-segmented-control">
+          <button type="button" class="rsvp-segment <%= 'active' if current_status == 'going' %>" data-rsvp-status="going">
+            <span class="rsvp-segment-label">Going</span>
+          </button>
+          <button type="button" class="rsvp-segment <%= 'active' if current_status == 'maybe' %>" data-rsvp-status="maybe">
+            <span class="rsvp-segment-label">Maybe</span>
+          </button>
+          <button type="button" class="rsvp-segment <%= 'active' if current_status == 'not_going' %>" data-rsvp-status="not_going">
+            <span class="rsvp-segment-label">Not Going</span>
+          </button>
         </div>
       </section>
 
@@ -103,7 +111,7 @@
   // ─────────────────────────────────────────────────────────────
   const rsvpOverlay = document.querySelector('.rsvp-modal-overlay:not(.manage-guests-overlay)');
   const rsvpCloseBtn = rsvpOverlay ? rsvpOverlay.querySelector('.rsvp-modal-close') : null;
-  const rsvpTriggers = document.querySelectorAll('.rsvp-emoji-trigger');
+  const rsvpSegments = document.querySelectorAll('.rsvp-segment');
   const rsvpModalEmojis = rsvpOverlay ? rsvpOverlay.querySelectorAll('.rsvp-emoji-choice') : [];
 
   function openRsvpModal(status) {
@@ -121,8 +129,17 @@
     document.body.style.overflow = '';
   }
 
-  rsvpTriggers.forEach(btn => {
-    btn.addEventListener('click', () => openRsvpModal(btn.dataset.rsvpStatus));
+  function setActiveSegment(status) {
+    rsvpSegments.forEach(seg => {
+      seg.classList.toggle('active', seg.dataset.rsvpStatus === status);
+    });
+  }
+
+  rsvpSegments.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setActiveSegment(btn.dataset.rsvpStatus);
+      openRsvpModal(btn.dataset.rsvpStatus);
+    });
   });
 
   if (rsvpCloseBtn) {
@@ -139,6 +156,7 @@
     btn.addEventListener('click', () => {
       rsvpModalEmojis.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
+      setActiveSegment(btn.dataset.rsvpStatus);
     });
   });
 

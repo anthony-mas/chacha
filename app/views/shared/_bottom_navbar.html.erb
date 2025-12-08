@@ -1,0 +1,19 @@
+<nav class="navbar-lewagon bottom-navbar">
+
+  <!-- Discover -->
+  <%= link_to discover_path, class: "bottom-nav-icon" do %>
+    <i class="fa-solid fa-magnifying-glass"></i>
+  <% end %>
+
+  <!-- Create (center floating button) -->
+  <%= link_to new_event_path, class: "bottom-nav-icon bottom-center" do %>
+  <i class="fa-solid fa-plus"></i>
+  <% end %>
+
+
+  <!-- My Events -->
+  <%= link_to events_path, class: "bottom-nav-icon" do %>
+    <i class="fa-solid fa-calendar-days"></i>
+  <% end %>
+
+</nav>

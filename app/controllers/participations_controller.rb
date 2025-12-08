@@ -1,11 +1,21 @@
 class ParticipationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_event, only: [:create, :destroy]
+  before_action :set_event, only: [:create, :update, :destroy]
 
   def create
     @participation = @event.participations.new(participation_params.merge(user: current_user))
 
     if @participation.save
+      head :ok
+    else
+      head :unprocessable_entity
+    end
+  end
+
+  def update
+    @participation = @event.participations.find_by!(user: current_user)
+
+    if @participation.update(participation_params)
       head :ok
     else
       head :unprocessable_entity
