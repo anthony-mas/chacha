@@ -1,7 +1,6 @@
 <%= simple_form_for(@event, data: { controller: "event-form" }) do |f| %>
   <%= f.error_notification %>
 
-  <!-- HERO IMAGE PICKER -->
   <div data-controller="hero-library">
     <div class="hero-preview-area" data-hero-library-target="preview">
       <% if @event.hero_image.attached? %>
@@ -12,7 +11,6 @@
     <%= f.hidden_field :hero_image_choice,
                        data: { "hero-library-target": "input" } %>
 
-    <!-- Make this button look like the Create Event button -->
     <button type="button"
             class="btn-primary"
             data-action="hero-library#open">
@@ -23,14 +21,12 @@
   </div>
 
 
-  <!-- TITLE (placeholder instead of label) -->
   <%= f.input :title,
               label: false,
               placeholder: "Your event title",
               input_html: { class: "rounded-input" } %>
 
 
-  <!-- DESCRIPTION (placeholder instead of label) -->
   <%= f.input :description,
               as: :text,
               label: false,
@@ -41,7 +37,6 @@
               } %>
 
 
-  <!-- CATEGORY (placeholder instead of label) -->
   <%= f.input :category_ids,
               collection: @categories,
               as: :select,
@@ -53,14 +48,12 @@
               } %>
 
 
-  <!-- LOCATION (Mapbox Autocomplete) -->
   <div class="form-group"
        data-controller="mapbox-autocomplete"
        data-mapbox-autocomplete-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
 
-    <!-- Remove label, use placeholder in the injected Mapbox field -->
     <%= f.hidden_field :location,
-          data: {
+            data: {
             "mapbox-autocomplete-target": "input",
             placeholder: "Event location"
           } %>
@@ -72,12 +65,6 @@
 
 
 
-  <!-- REMOVED STARTS_ON + ENDS_ON -->
-
-
-  <!-- SETTINGS -->
-
-  <!-- PRIVACY -->
   <div class="settings-card">
     <div class="form-check form-switch">
       <%= f.input_field :event_private,
@@ -86,12 +73,10 @@
             id: "switchPrivate" %>
 
       <label class="form-check-label" for="switchPrivate">
-        Private event?
-      </label>
+        Private event? </label>
     </div>
   </div>
 
-  <!-- DISCOVERABILITY -->
   <div class="settings-card">
     <div class="form-check form-switch">
       <%= check_box_tag :discoverable,
@@ -106,7 +91,6 @@
     </div>
   </div>
 
-  <!-- GUEST APPROVAL -->
   <div class="settings-card">
     <div class="form-check form-switch">
       <%= check_box_tag :require_guest_approval,
@@ -122,7 +106,6 @@
   </div>
 
 
-  <!-- SUBMIT -->
   <div>
     <%= f.button :submit, "Create Event", class: "btn-primary" %>
   </div>
