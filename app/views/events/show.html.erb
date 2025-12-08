@@ -20,25 +20,28 @@
 
         <div class="event-metadata">
           <p>
-            <strong>Date:</strong>
-            <%= @event.starts_on %>
-            <% if @event.ends_on.present? && @event.ends_on != @event.starts_on %>
-              – <%= @event.ends_on %>
+            🗓️ <%= @event.starts_on.strftime("%A %d %B, %H:%M") %>
+            <% if @event.ends_on.present? %>
+              – <%= @event.ends_on.strftime("%A %d %B, %H:%M") %>
             <% end %>
           </p>
           <p>
-            <strong>Location:</strong> <%= @event.location %>
+            📍 <%= @event.location %>
           </p>
           <p>
-            <strong>Private:</strong> <%= @event.event_private ? "Yes" : "No" %>
+            🔒 <%= @event.event_private ? "Yes" : "No" %>
           </p>
         </div>
       </header>
 
+      <section class="event-description">
+        <br>
+        <p><%= @event.description.presence ||
+      "No description yet." %></p>
+      </section>
+
       <% if user_signed_in? && @event.user == current_user %>
         <section class="event-host-tools">
-          <h2>Host tools</h2>
-
           <p>
             <%= link_to "Edit event", edit_event_path(@event) %> |
 <%= link_to "Delete", @event, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"
@@ -59,7 +62,7 @@
       <% end %>
 
       <section class="event-rsvp">
-        <h2>Are you going?</h2>
+        <h2>Attending?</h2>
         <% current_participation = user_signed_in? ? @event.participations.find_by(user: current_user) : nil %>
         <% current_status = current_participation&.status %>
         <div class="rsvp-segmented-control">
@@ -76,12 +79,6 @@
       </section>
 
       <%= render "rsvp_modal" %>
-
-      <section class="event-description">
-        <h2>About this event</h2>
-        <p><%= @event.description.presence ||
-"No description yet." %></p>
-      </section>
 
       <section class="event-main-layout">
         <div class="event-guests-panel">
