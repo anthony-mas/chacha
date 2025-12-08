@@ -1,6 +1,6 @@
 # 📝 RÉCAPITULATIF DE SESSION - 5 Décembre 2025
-**Projet:** ChaCha - Event Management App  
-**Branch:** `css_new_design`  
+**Projet:** ChaCha - Event Management App
+**Branch:** `css_new_design`
 **Durée:** Session longue de refactorisation CSS + features
 
 ---
@@ -142,7 +142,7 @@ Les conflits identifiés mais non résolus:
 // Ces valeurs CONFLICTENT avec le design system:
 
 $body-bg: $light-gray;        // ❌ Devrait être: #A0967F
-$body-color: $gray;           // ❌ Devrait être: #F2F1ED  
+$body-color: $gray;           // ❌ Devrait être: #F2F1ED
 $primary: $blue;              // ❌ Devrait être: #111111
 $font-family-sans-serif: "Work Sans"; // ❌ Devrait être: "Bebas Neue"
 ```
@@ -215,6 +215,92 @@ app/assets/stylesheets/
 | Stimulus controllers | 3 (activity, post, mapbox_autocomplete) |
 | Views/Partials créés | ~10 |
 | Conflits Git résolus | 3 |
+
+---
+
+## 🎯 TODO - GRADIENT BACKGROUND (8 Décembre 2025)
+
+**Nouvelle mission:** Ajouter un dégradé de couleur au background du body
+
+### Fichiers à modifier:
+
+#### 1. 📝 `/app/assets/stylesheets/base/_variables.scss`
+Ajouter ces variables dans la section `:root { ... }`:
+
+```scss
+// Gradient Background
+--color-gradient-start: #0E2B3A;
+--color-gradient-end: #0f4c3d;
+--gradient-primary: linear-gradient(90deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+```
+
+#### 2. 🎨 `/app/assets/stylesheets/base/_reset.scss`
+Modifier la règle `body` pour utiliser le gradient:
+
+```scss
+body {
+    background: var(--gradient-primary);  // ← Remplacer background-color
+    color: var(--color-body-text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+```
+
+### Couleurs à utiliser:
+- **Gradient Start:** `#0E2B3A` (bleu-gris foncé)
+- **Gradient End:** `#0f4c3d` (vert-teal foncé)
+- **Direction:** 90deg (left to right)
+
+### Status:
+- [ ] Ajouter variables dans `_variables.scss`
+- [ ] Modifier body dans `_reset.scss`
+- [ ] Tester visuellement
+- [ ] Commit et push
+
+---
+
+## 🎯 TODO - GRADIENT BACKGROUND (8 Décembre 2025)
+
+**Nouvelle mission:** Ajouter un dégradé de couleur au background du body
+
+### Fichiers à modifier:
+
+#### 1. 📝 `/app/assets/stylesheets/base/_variables.scss`
+Ajouter ces variables dans la section `:root { ... }`:
+
+```scss
+// Gradient Background
+--color-gradient-start: #0E2B3A;
+--color-gradient-end: #0f4c3d;
+--gradient-primary: linear-gradient(90deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+```
+
+#### 2. 🎨 `/app/assets/stylesheets/base/_reset.scss`
+Modifier la règle `body` pour utiliser le gradient:
+
+```scss
+body {
+    background: var(--gradient-primary);  // ← Remplacer background-color
+    color: var(--color-body-text);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+```
+
+### Couleurs à utiliser:
+- **Gradient Start:** `#0E2B3A` (bleu-gris foncé)
+- **Gradient End:** `#0f4c3d` (vert-teal foncé)
+- **Direction:** 90deg (left to right)
+
+### Status:
+- [ ] Ajouter variables dans `_variables.scss`
+- [ ] Modifier body dans `_reset.scss`
+- [ ] Tester visuellement
+- [ ] Commit et push
 
 ---
 
