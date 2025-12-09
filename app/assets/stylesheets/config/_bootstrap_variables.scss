@@ -1,18 +1,21 @@
 // General style
 // Aligning font stacks with the new design system's CSS variables.
-$font-family-sans-serif: 'Bebas Neue', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-family-sans-serif: 'Poppins', 'Bebas Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 $headings-font-family:   'Bebas Neue', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-$body-bg:                $light-gray;
+$body-bg:                #FBF9F4; // Soft backgrounds from design system
 $font-size-base:         1rem;
 
-// Colors
-$body-color: $gray;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
+// Colors - Aligned with _variables.scss design system
+$body-color:             #FFFFFF; // Dark text (var(--color-primary))
+$primary:                #FFFFFF; // Dark primary (var(--color-primary))
+$secondary:              #FFFFFF; // White for muted text on gradients
+$success:                #1EDD88; // Green from design system
+$info:                   #FFC65A; // Yellow from design system
+$danger:                 #FD1015; // Red from design system
+$warning:                #E67E22; // Orange from design system
+$light:                  #EEE9DF; // Light white-primary from design system
+$gray:                   #ffffff; // Gray mapped to dark primary
 
 // Buttons & inputs' radius
 $border-radius-sm:            .0625rem;

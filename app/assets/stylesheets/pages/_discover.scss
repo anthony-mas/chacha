@@ -14,14 +14,14 @@
   font-size: 2.5rem;
   font-weight: 800;
   /* FIX: Explicitly light for dark gradient */
-  color: var(--color-text-primary);
+  color: var(--color-text-primary) !important;
 }
 
 .trending-subtitle {
   font-size: 1.2rem;
   font-weight: 600;
   /* FIX: Explicitly light for dark gradient */
-  color: var(--color-text-primary);
+  color: var(--color-text-primary) !important;
 }
 
 /* FIX: Target text-muted subtitle and no-events message on the dark background */
