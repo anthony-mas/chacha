@@ -65,17 +65,7 @@
         <h2>Attending?</h2>
         <% current_participation = user_signed_in? ? @event.participations.find_by(user: current_user) : nil %>
         <% current_status = current_participation&.status %>
-        <div class="rsvp-segmented-control">
-          <button type="button" class="rsvp-segment <%= 'active' if current_status == 'going' %>" data-rsvp-status="going">
-            <span class="rsvp-segment-label">Going</span>
-          </button>
-          <button type="button" class="rsvp-segment <%= 'active' if current_status == 'maybe' %>" data-rsvp-status="maybe">
-            <span class="rsvp-segment-label">Maybe</span>
-          </button>
-          <button type="button" class="rsvp-segment <%= 'active' if current_status == 'not_going' %>" data-rsvp-status="not_going">
-            <span class="rsvp-segment-label">Not Going</span>
-          </button>
-        </div>
+        <%= render "shared/rsvp_segmented_control", current_status: current_status, context: "page" %>
       </section>
 
       <%= render "rsvp_modal" %>
@@ -108,16 +98,34 @@
   // ─────────────────────────────────────────────────────────────
   const rsvpOverlay = document.querySelector('.rsvp-modal-overlay:not(.manage-guests-overlay)');
   const rsvpCloseBtn = rsvpOverlay ? rsvpOverlay.querySelector('.rsvp-modal-close') : null;
-  const rsvpSegments = document.querySelectorAll('.rsvp-segment');
-  const rsvpModalEmojis = rsvpOverlay ? rsvpOverlay.querySelectorAll('.rsvp-emoji-choice') : [];
+  const rsvpForm = document.getElementById('rsvp-form');
+  const rsvpStatusField = document.getElementById('rsvp-status-field');
+
+  // Page segmented control (outside modal)
+  function getPageSegments() {
+    return document.querySelectorAll('[data-rsvp-context="page"] .rsvp-segment');
+  }
+
+  // Modal segmented control (inside modal)
+  function getModalSegments() {
+    return rsvpOverlay ? rsvpOverlay.querySelectorAll('[data-rsvp-context="modal"] .rsvp-segment') : [];
+  }
 
   function openRsvpModal(status) {
     if (!rsvpOverlay) return;
     rsvpOverlay.classList.remove('is-hidden');
     document.body.style.overflow = 'hidden';
-    rsvpModalEmojis.forEach(btn => {
-      btn.classList.toggle('selected', btn.dataset.rsvpStatus === status);
+
+    // Set the modal segmented control to match the clicked status
+    const modalSegments = getModalSegments();
+    modalSegments.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.rsvpStatus === status);
     });
+
+    // Update hidden field
+    if (rsvpStatusField) {
+      rsvpStatusField.value = status;
+    }
   }
 
   function closeRsvpModal() {
@@ -127,16 +135,41 @@
   }
 
   function setActiveSegment(status) {
-    rsvpSegments.forEach(seg => {
+    // Update page segments
+    getPageSegments().forEach(seg => {
       seg.classList.toggle('active', seg.dataset.rsvpStatus === status);
     });
   }
 
-  rsvpSegments.forEach(btn => {
-    btn.addEventListener('click', () => {
-      setActiveSegment(btn.dataset.rsvpStatus);
-      openRsvpModal(btn.dataset.rsvpStatus);
-    });
+  // Page segmented control: click opens modal
+  document.addEventListener('click', (e) => {
+    const pageSegment = e.target.closest('[data-rsvp-context="page"] .rsvp-segment');
+    if (pageSegment) {
+      const status = pageSegment.dataset.rsvpStatus;
+      setActiveSegment(status);
+      openRsvpModal(status);
+    }
+  });
+
+  // Modal segmented control: click updates hidden field and visual state
+  document.addEventListener('click', (e) => {
+    const modalSegment = e.target.closest('[data-rsvp-context="modal"] .rsvp-segment');
+    if (modalSegment) {
+      const status = modalSegment.dataset.rsvpStatus;
+
+      // Update modal segments visual state
+      getModalSegments().forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.rsvpStatus === status);
+      });
+
+      // Update hidden field
+      if (rsvpStatusField) {
+        rsvpStatusField.value = status;
+      }
+
+      // Also update page segments to stay in sync
+      setActiveSegment(status);
+    }
   });
 
   if (rsvpCloseBtn) {
@@ -149,21 +182,20 @@
     });
   }
 
-  rsvpModalEmojis.forEach(btn => {
-    btn.addEventListener('click', () => {
-      rsvpModalEmojis.forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      setActiveSegment(btn.dataset.rsvpStatus);
+  // Form submission handler
+  if (rsvpForm) {
+    rsvpForm.addEventListener('turbo:submit-end', (event) => {
+      if (event.detail.success) {
+        closeRsvpModal();
+      }
     });
-  });
+  }
 
   // ─────────────────────────────────────────────────────────────
   // Manage Guests Modal
   // ─────────────────────────────────────────────────────────────
   const guestsOverlay = document.querySelector('.manage-guests-overlay');
   const guestsCloseBtn = guestsOverlay ? guestsOverlay.querySelector('.manage-guests-close') : null;
-  const guestsTriggers = document.querySelectorAll('.manage-guests-trigger');
-  const statusTabs = guestsOverlay ? guestsOverlay.querySelectorAll('.status-tab') : [];
 
   function openGuestsModal() {
     if (!guestsOverlay) return;
@@ -177,11 +209,13 @@
     document.body.style.overflow = '';
   }
 
-  guestsTriggers.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Use event delegation for manage-guests-trigger (works after Turbo updates)
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.manage-guests-trigger');
+    if (trigger) {
       e.preventDefault();
       openGuestsModal();
-    });
+    }
   });
 
   if (guestsCloseBtn) {
@@ -194,12 +228,13 @@
     });
   }
 
-  // Status tab selection (visual only for now)
-  statusTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      statusTabs.forEach(t => t.classList.remove('active'));
+  // Status tab selection (visual only for now) - use event delegation
+  document.addEventListener('click', (e) => {
+    const tab = e.target.closest('.status-tab');
+    if (tab && guestsOverlay && guestsOverlay.contains(tab)) {
+      guestsOverlay.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-    });
+    }
   });
 
   // ─────────────────────────────────────────────────────────────
