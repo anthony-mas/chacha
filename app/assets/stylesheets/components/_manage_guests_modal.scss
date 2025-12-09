@@ -32,7 +32,7 @@
 
 .manage-guests-modal-content {
     background-color: #1E1E1E;
-    color: white;
+    color: #F5F1E8; /* Updated from white */
     width: 100%;
     max-width: 500px;
     height: 100%;
@@ -82,7 +82,7 @@
 .modal-separator {
     border: none;
     height: 1px;
-    background-color: #e0e0e0;
+    background-color: #F5F1E8; /* Updated from #e0e0e0 */
     margin: var(--spacing-xl) 0;
 }
 
@@ -124,10 +124,10 @@
     margin-bottom: var(--spacing-xs);
 }
 
-.icon-messages { background-color: #25d366; color: white; }
-.icon-mail { background-color: #007aff; color: white; }
-.icon-share { background-color: #f0f0f0; color: #1E1E1E; }
-.icon-copy { background-color: #f0f0f0; color: #1E1E1E; }
+.icon-messages { background-color: #25d366; color: #F5F1E8; } /* Updated from white */
+.icon-mail { background-color: #007aff; color: #F5F1E8; } /* Updated from white */
+.icon-share { background-color: #F5F1E8; color: #1E1E1E; } /* Updated from #f0f0f0 */
+.icon-copy { background-color: #F5F1E8; color: #1E1E1E; } /* Updated from #f0f0f0 */
 
 .invite-individual-section .form-group {
     display: flex;
@@ -246,7 +246,7 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-sm) 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #F5F1E8; /* Updated from #eee */
 }
 
 .manage-guests-item:last-child {
@@ -276,12 +276,12 @@
 
 .guest-management-tools .search-box input {
     background-color: #333;
-    color: white;
+    color: #F5F1E8; /* Updated from white */
 }
 
 .guest-management-tools .status-filter {
     background-color: #333;
-    color: white;
+    color: #F5F1E8; /* Updated from white */
     flex-shrink: 0;
 }
 
