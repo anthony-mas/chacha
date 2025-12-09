@@ -6,7 +6,7 @@
       <div class="filter-scroll-container">
 
         <%# FIX: Changed discover_events_path to discover_path %>
-        <%= link_to discover_path(location: @current_location, filter: @current_filter, category: params[:category]), class: "filter-tag location-tag active", style: "color: #F2F1ED !important;" do %>
+        <%= link_to discover_path(location: @current_location, filter: @current_filter, category: params[:category]), class: "filter-tag location-tag active", style: "color: #000 !important;" do %>
           <i class="fa-solid fa-location-dot me-1"></i> <%= @current_location %>
         <% end %>
 

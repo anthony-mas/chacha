@@ -168,10 +168,12 @@
     padding-top: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 
-    .rsvp-segmented-control {
-        max-width: 100%;
-    }
+
+
+
 }
+
+
 
 // Legacy emoji styles (kept for backwards compatibility)
 .rsvp-modal .rsvp-emoji-row {
@@ -251,4 +253,12 @@
 
 .rsvp-submit-button:hover {
     background-color: #314481;
+}
+
+
+.rsvp-segmented-control {
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+  max-width: 100%;
 }
