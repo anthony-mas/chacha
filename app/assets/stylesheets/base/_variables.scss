@@ -12,21 +12,24 @@
   /* Gradient Background (Premium Teal-Blue) */
   --gradient-start:           #0E2B3A;
   --gradient-end:             #0f4c3d;
-  /* FIX: Corrected variable name from --color-gradient-end to --gradient-end */
   --gradient-primary:         linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
 
   /* Whites System - Editorial Palette */
   --color-white-primary:      #EEE9DF;   /* MAIN TEXT on gradient */
-  --color-white-secondary:    #F5F1E8;   /* Cards & containers */
-  --color-white-tertiary:     #E5DCCF;   /* Secondary text */
+  --color-white-secondary:    #F5F1E8;   /* Secondary text/Subtle links on dark BG */
+  --color-white-tertiary:     #E5DCCF;   /* Low contrast text/border */
   --color-white-subtle:       #FBF9F4;   /* Soft backgrounds */
 
+  /* Blacks/Dark Accents (Used for solid buttons/cards for contrast) */
+  --color-dark-primary:       #111111;   /* Primary Dark (Used as background for buttons/cards) */
+  --color-dark-secondary:     #444444;   /* Darker low-contrast elements */
+
   /* Semantic aliases */
-  --color-text-primary:       #EEE9DF;
-  --color-text-secondary:     #F5F1E8;
-  --color-text-tertiary:      #E5DCCF;
+  --color-text-primary:       var(--color-white-primary);   /* Global Text Default: LIGHT */
+  --color-text-secondary:     var(--color-white-tertiary);  /* Global Secondary Text: LIGHT */
+  --color-text-tertiary:      #7D7564;                      /* Low contrast text/border */
   --color-border:             #7D7564;
-  --color-primary:            #111111;   /* Black accent (Used for dark text/icons on light elements) */
+  --color-primary:            var(--color-white-primary);   /* Primary accent is now light */
   --color-overlay-dark:       rgba(0, 0, 0, 0.65);
 
 
@@ -34,16 +37,14 @@
   // 1b. APPLICATION COLOR MAP (Pointing old names to new functional colors)
   // ==========================================
 
-  /* FIX: Text/Titles/Body text for light-colored components (Forms/Cards) MUST be Dark */
-  --color-title: var(--color-primary);
-  --color-title2: var(--color-primary)
-  --color-body-text: var(--color-primary);
-  --color-secondary-text: #666666; /* Using a fixed dark gray for sufficient contrast on light cards */
+  /* OPTIMIZED: High-Contrast Elements use Dark Primary for FILL */
+  --color-title: var(--color-white-primary);     /* Titles are WHITE */
+  --color-body-text: var(--color-white-secondary); /* Body text is light */
+  --color-secondary-text: var(--color-text-tertiary); /* Low contrast text for dates/hints */
 
   /* Backgrounds & Accent colors */
-  --color-background: var(--color-white-subtle);
-  --color-card: var(--color-white-secondary);
-  --color-accent-button: #FF6B6B;               /* Kept original accent button color (red) */
+  --color-background: var(--gradient-primary);
+  --color-card: var(--color-dark-primary);        /* OPTIMIZED: Cards/Buttons use DARK solid BG for contrast */
 
 
   // ==========================================
@@ -151,11 +152,11 @@
   --btn-text-transform: uppercase;
   --btn-border-radius: 0;
   --btn-border-width: 1px;
-  --btn-border-color: var(--color-text-primary);
-  --btn-background: transparent;
-  --btn-color: var(--color-text-primary);
-  --btn-hover-background: var(--color-text-primary);
-  --btn-hover-color: var(--color-primary);
+  --btn-border-color: var(--color-white-primary); /* Button border is LIGHT */
+  --btn-background: var(--color-dark-primary); /* Button background is DARK */
+  --btn-color: var(--color-white-primary); /* Button text is LIGHT */
+  --btn-hover-background: var(--color-dark-secondary);
+  --btn-hover-color: var(--color-white-primary);
   --btn-transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Card */
@@ -164,9 +165,9 @@
   --card-border-radius: 0;
   --card-border-width: 0;
   --card-border-color: transparent;
-  --card-box-shadow: none;
-  --card-background: transparent;
-  --card-hover-background: rgba(0, 0, 0, 0.02);
+  --card-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Added subtle dark shadow */
+  --card-background: var(--color-dark-primary); /* Card background is DARK */
+  --card-hover-background: var(--color-dark-secondary);
   --card-transition: background 500ms ease;
   --card-separator: 1px solid var(--color-border);
 
