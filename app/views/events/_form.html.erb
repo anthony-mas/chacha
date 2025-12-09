@@ -12,11 +12,14 @@
     <%= f.hidden_field :hero_image_choice,
                        data: { "hero-library-target": "input" } %>
 
-    <button type="button"
-            class="btn-primary hero-btn"
-            data-action="hero-library#open">
-      Choose from library
-    </button>
+    <!-- Centered Choose-from-Library button -->
+    <div class="button-wrapper">
+      <button type="button"
+              class="btn-primary hero-picker-btn"
+              data-action="hero-library#open">
+        Choose from library
+      </button>
+    </div>
 
     <%= render "events/hero_library_modal" %>
   </div>
@@ -50,18 +53,18 @@
 
 
   <!-- ░░░ LOCATION (MAPBOX) ░░░ -->
-<div class="form-group"
-     data-controller="mapbox-autocomplete"  
-     data-mapbox-autocomplete-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+  <div class="form-group"
+       data-controller="mapbox-autocomplete"
+       data-mapbox-autocomplete-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
 
-  <%= f.hidden_field :location,
-        class: "hidden-location-input",
-        data: { "mapbox-autocomplete-target": "input" } %>
+    <%= f.hidden_field :location,
+          class: "hidden-location-input",
+          data: { "mapbox-autocomplete-target": "input" } %>
 
-  <div data-mapbox-autocomplete-target="container">
-    <div id="mapbox-geocoder-placeholder"></div>
+    <div data-mapbox-autocomplete-target="container">
+      <div id="mapbox-geocoder-placeholder"></div>
+    </div>
   </div>
-</div>
 
 
   <!-- ░░░ STARTS ON ░░░ -->
@@ -92,7 +95,6 @@
 
 
   <!-- ░░░ SETTINGS CARDS ░░░ -->
-
   <div class="settings-card">
     <div class="form-check form-switch">
       <%= f.input_field :event_private,
@@ -110,9 +112,7 @@
             false,
             class: "form-check-input",
             id: "switchDiscoverable" %>
-      <label class="form-check-label" for="switchDiscoverable">
-        Make this event discoverable
-      </label>
+      <label class="form-check-label" for="switchDiscoverable">Make this event discoverable</label>
     </div>
   </div>
 
@@ -123,15 +123,12 @@
             false,
             class: "form-check-input",
             id: "switchGuestApproval" %>
-      <label class="form-check-label" for="switchGuestApproval">
-        Require host approval for new guests
-      </label>
+      <label class="form-check-label" for="switchGuestApproval">Require host approval for new guests</label>
     </div>
   </div>
 
-
-  <!-- ░░░ SUBMIT ░░░ -->
-  <div>
+  <!-- ░░░ SUBMIT BUTTON ░░░ -->
+  <div class="button-wrapper">
     <%= f.button :submit, "Create Event", class: "btn-primary submit-btn" %>
   </div>
 
