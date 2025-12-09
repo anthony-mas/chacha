@@ -6,8 +6,6 @@
       <button class="hero-close-btn" data-action="hero-library#close">✕</button>
     </div>
 
-    <h3 class="hero-section-title">Photorealistic gallery</h3>
-
     <div class="hero-grid">
       <%
         # Update this array to reflect all 10 images and their correct extensions (.jpg or .png)
@@ -19,7 +17,7 @@
       %>
         <div class="hero-thumb"
              data-action="click->hero-library#choose"
-             data-image="<%= img %>">
+             data-image="<%= asset_path("hero_library/#{img}") %>">
           <%= image_tag "hero_library/#{img}" %>
         </div>
       <% end %>

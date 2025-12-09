@@ -11,19 +11,26 @@ export default class extends Controller {
 
   // Hide modal
   close(event) {
+
+    if (event) {
+      event.preventDefault();
+    }
+
     this.modalTarget.classList.remove("open")
   }
 
   // User clicks on a hero image
   choose(event) {
     const selectedImage = event.currentTarget.dataset.image
+    console.log(event.currentTarget.dataset.image);
+
 
     // Update hidden field
     this.inputTarget.value = selectedImage
 
     // Update live preview on the form
     this.previewTarget.innerHTML = `
-      <img src="/assets/hero_library/${selectedImage}" class="hero-image-preview">
+      <img src="${selectedImage}" class="hero-image-preview">
     `
 
     // Close the modal

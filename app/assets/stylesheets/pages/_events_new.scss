@@ -1,13 +1,13 @@
-/* Create Event Page – Title + Back Link overrides */
-
 .page-title {
-  text-align: center;
-  width: 100%;
-  display: block;
-  padding-top: 20px;
-  margin-bottom: var(--spacing-lg);
-  color: white !important; /* your page title is white */
+  text-align: left !important;
+  color: var(--color-white-primary) !important; /* same as CHACHA logo */
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 var(--spacing-xl) 0; /* spacing below title */
+  padding-left: var(--spacing-md); /* aligns with form fields */
 }
+
 
 
 /* Style wrapper <p> and the link inside */
