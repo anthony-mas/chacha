@@ -1,69 +1,22 @@
-// Event show page styles - Glass Design
-
-// Event page wrapper
-.event-page {
-    // Text colors for glass card (light text on translucent bg)
-    .event-card-detail {
-        color: var(--color-white-primary);
-    }
-
-    // RSVP section
-    .event-rsvp {
-        h2 {
-            color: var(--color-white-primary);
-            margin-bottom: var(--spacing-md);
-        }
-    }
-
-    // Back link
-    > p a,
-    .event-content-wrapper > p a {
-        color: var(--color-white-secondary);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        transition: color 0.2s;
-
-        &:hover {
-            color: var(--color-white-primary);
-        }
-    }
-}
-
-// Title - white on glass
-.centered-title {
-    color: var(--color-white-primary) !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-}
-
+// Event show page styles
 .event-title-detail {
     font-size: 2.8rem;
     margin-top: var(--spacing-lg);
-    color: var(--color-white-primary);
+    color: var(--color-title);
 }
 
-// Metadata - light text on glass
 .event-metadata p {
     margin: 4px 0;
     font-size: 1rem;
-    color: var(--color-white-secondary);
-}
-
-// Description section
-.event-description {
-    color: var(--color-white-tertiary);
-
-    p {
-        color: var(--color-white-secondary);
-        line-height: 1.6;
-    }
+    color: var(--color-body-text);
 }
 
 .event-actions {
     display: flex;
     justify-content: space-around;
     padding: var(--spacing-md) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
     margin: var(--spacing-lg) 0;
 }
 
@@ -75,18 +28,12 @@
     font-size: 1.5rem;
     display: block;
     margin-bottom: var(--spacing-xs);
-    color: var(--color-white-primary);
+    color: var(--color-title);
 }
 
-// Host tools - light text
+/* FIX: Target the host tool links which are currently white-on-light-card and force them dark */
 .event-host-tools p a {
-    color: var(--color-white-secondary) !important;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-
-    &:hover {
-        color: var(--color-white-primary) !important;
-    }
+    color: var(--color-title) !important;
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -95,8 +42,8 @@
 
 .event-hero-wrapper {
     width: 100%;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
     overflow: hidden;
     position: relative; /* ADDED: Necessary for absolute positioning of children */
 }
@@ -106,21 +53,17 @@
     height: 240px;
     object-fit: cover;
     display: block;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 3px solid var(--color-title);
 }
 
 .event-hero-placeholder {
     width: 100%;
     height: 240px;
-    background: rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
-
-    .placeholder-icon {
-        opacity: 0.5;
-    }
+    border-bottom: 3px solid var(--color-title);
 }
 
 /* ADDED: Calendar Download Link Styling */
@@ -140,7 +83,7 @@
 
     i {
         font-size: 1.5rem;
-        color: white; /* Icon color is white */
+        color: #F5F1E8; /* Updated from white */
         /* Ensure Material Symbols icon settings are applied */
         font-variation-settings:
           'FILL' 0,
@@ -156,17 +99,14 @@
 }
 
 // ─────────────────────────────────────────────────────────────
-// Guests List Section - Glass Design
+// Guests List Section
 // ─────────────────────────────────────────────────────────────
 
 .guests-list-container {
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 18px;
-    padding: var(--spacing-lg);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    background-color: var(--color-card);
+    border-radius: 12px;
+    padding: var(--spacing-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .guests-header {
@@ -177,25 +117,24 @@
 
     .title-md {
         margin: 0;
-        color: var(--color-white-primary);
+        color: var(--color-title);
         font-size: 1.1rem;
-        font-weight: 600;
     }
 }
 
 .btn-view-all {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: var(--color-white-primary);
+    background: none;
+    border: 1px solid var(--color-title);
+    color: var(--color-title);
     padding: 4px 12px;
     border-radius: 14px;
     font-size: 0.8rem;
     cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.20);
-        border-color: rgba(255, 255, 255, 0.35);
+        background-color: var(--color-title);
+        color: #F5F1E8; /* Updated from white */
     }
 }
 
@@ -206,13 +145,13 @@
 .guests-total-count {
     margin: 0 0 4px 0;
     font-size: 0.95rem;
-    color: var(--color-white-secondary);
+    color: var(--color-body-text);
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
 
     i {
-        color: var(--color-white-primary);
+        color: var(--color-title);
         font-size: 0.9rem;
     }
 }
@@ -220,14 +159,14 @@
 .guests-mutual-text {
     margin: 0;
     font-size: 0.85rem;
-    color: var(--color-white-tertiary);
+    color: var(--color-secondary-text);
     font-style: italic;
 }
 
 .guests-empty-text {
     margin: 0;
     font-size: 0.9rem;
-    color: var(--color-white-tertiary);
+    color: var(--color-secondary-text);
     text-align: center;
     padding: var(--spacing-md) 0;
 }
@@ -257,24 +196,21 @@
     justify-content: center;
     font-size: 0.8rem;
     font-weight: 700;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.20);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    color: #F5F1E8; /* Updated from white */
+    border: 2px solid var(--color-card);
+    background-color: var(--color-title);
     flex-shrink: 0;
     cursor: default;
-    transition: transform 0.15s, background 0.15s;
+    transition: transform 0.15s;
 
     &:hover {
         transform: scale(1.1);
         z-index: 1;
-        background: rgba(255, 255, 255, 0.30);
     }
 }
 
 .guests-avatar-overflow {
-    background: rgba(255, 255, 255, 0.12);
+    background-color: var(--color-secondary-text);
     font-size: 0.75rem;
 }
 
@@ -339,7 +275,7 @@
 }
 
 // ─────────────────────────────────────────────────────────────
-// Activity Section - Glass Design
+// Activity Section
 // ─────────────────────────────────────────────────────────────
 
 .activity-section {
@@ -357,14 +293,14 @@
     h2 {
         margin: 0;
         flex-shrink: 0;
-        color: var(--color-white-primary);
+        color: var(--color-title);
     }
 }
 
 .btn-activity-post {
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--color-white-primary);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: var(--color-title);
+    color: #F5F1E8; /* Updated from white */
+    border: none;
     padding: 6px 14px;
     height: 36px;
     border-radius: 18px;
@@ -375,13 +311,12 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    transition: background 0.2s, transform 0.1s, border-color 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
     white-space: nowrap;
     flex-shrink: 0;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.25);
-        border-color: rgba(255, 255, 255, 0.35);
+        background-color: darken(#40559D, 10%);
     }
 
     &:active {
@@ -393,16 +328,13 @@
     }
 }
 
-// Post Form - Glass Design
+// Post Form
 .activity-post-form {
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 16px;
+    background-color: var(--color-card);
+    border-radius: 12px;
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
     &.is-hidden {
         display: none;
@@ -415,23 +347,16 @@
 
         textarea {
             width: 100%;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.20);
-            border-radius: 12px;
-            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: var(--spacing-sm);
             font-family: var(--font-body);
             font-size: 1rem;
             resize: none;
-            color: var(--color-white-primary);
-
-            &::placeholder {
-                color: var(--color-white-tertiary);
-            }
 
             &:focus {
                 outline: none;
-                border-color: rgba(255, 255, 255, 0.40);
-                background: rgba(255, 255, 255, 0.12);
+                border-color: var(--color-title);
             }
         }
     }
@@ -443,33 +368,21 @@
     }
 
     .btn-cancel {
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.20);
+        background: none;
+        border: 1px solid #ccc;
         padding: var(--spacing-xs) var(--spacing-md);
         border-radius: 6px;
         cursor: pointer;
-        color: var(--color-white-secondary);
-        transition: background 0.2s, border-color 0.2s;
-
-        &:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.30);
-        }
+        color: var(--color-secondary-text);
     }
 
     .btn-submit {
-        background: rgba(255, 255, 255, 0.20);
-        color: var(--color-white-primary);
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        background-color: var(--color-title);
+        color: #F5F1E8; /* Updated from white */
+        border: none;
         padding: var(--spacing-xs) var(--spacing-md);
         border-radius: 6px;
         cursor: pointer;
-        transition: background 0.2s, border-color 0.2s;
-
-        &:hover {
-            background: rgba(255, 255, 255, 0.30);
-            border-color: rgba(255, 255, 255, 0.35);
-        }
     }
 }
 
@@ -486,38 +399,29 @@
 
 .activity-empty {
     text-align: center;
-    color: var(--color-white-tertiary);
+    color: var(--color-secondary-text);
     padding: var(--spacing-xl) 0;
     font-style: italic;
 }
 
 .btn-see-all {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: var(--color-white-primary);
+    background: none;
+    border: 1px solid var(--color-title);
+    color: var(--color-title);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.9rem;
     align-self: center;
     margin-top: var(--spacing-sm);
-    transition: background 0.2s, border-color 0.2s;
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.20);
-        border-color: rgba(255, 255, 255, 0.35);
-    }
 }
 
-// Post Card - Glass Design
+// Post Card
 .post-card {
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 18px;
-    padding: var(--spacing-lg);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    background-color: var(--color-card);
+    border-radius: 12px;
+    padding: var(--spacing-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .post-header {
@@ -536,15 +440,14 @@
 .post-avatar {
     width: 36px;
     height: 36px;
-    background: rgba(255, 255, 255, 0.20);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: var(--color-title);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
     font-weight: 700;
-    color: var(--color-white-primary);
+    color: #F5F1E8; /* Updated from white */
 }
 
 .post-meta {
@@ -554,28 +457,22 @@
 
 .post-author-name {
     font-weight: 600;
-    color: var(--color-white-primary);
+    color: var(--color-body-text);
     font-size: 0.95rem;
 }
 
 .post-time {
     font-size: 0.8rem;
-    color: var(--color-white-tertiary);
+    color: var(--color-secondary-text);
 }
 
 .post-delete-btn {
     background: none;
     border: none;
-    color: var(--color-white-tertiary);
+    color: var(--color-secondary-text);
     cursor: pointer;
     padding: var(--spacing-xs);
     opacity: 0.5;
-    transition: opacity 0.2s ease, color 0.2s ease;
-
-    &:hover {
-        opacity: 1;
-        color: #e74c3c;
-    }
 }
 
 // Post Content
@@ -585,7 +482,6 @@
     p {
         margin: 0;
         line-height: 1.5;
-        color: var(--color-white-secondary);
     }
 }
 
@@ -595,7 +491,7 @@
     align-items: center;
     gap: var(--spacing-md);
     padding-top: var(--spacing-sm);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid #f0f0f0;
 }
 
 .reaction-form {
@@ -604,7 +500,7 @@
 
 .reaction-btn,
 .reaction-display {
-    background: rgba(255, 255, 255, 0.08);
+    background: none;
     border: none;
     cursor: pointer;
     display: flex;
@@ -612,11 +508,7 @@
     gap: 4px;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 20px;
-    transition: background 0.2s;
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.15);
-    }
+    transition: background-color 0.2s;
 }
 
 .reaction-emoji {
@@ -625,13 +517,13 @@
 
 .reaction-count {
     font-size: 0.85rem;
-    color: var(--color-white-tertiary);
+    color: var(--color-secondary-text);
 }
 
 .reply-toggle-btn {
-    background: rgba(255, 255, 255, 0.08);
+    background: none;
     border: none;
-    color: var(--color-white-secondary);
+    color: var(--color-secondary-text);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -639,18 +531,14 @@
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 20px;
     font-size: 0.9rem;
-    transition: background 0.2s;
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.15);
-    }
+    transition: background-color 0.2s;
 }
 
 // Replies Section
 .post-replies {
     margin-top: var(--spacing-md);
     padding-top: var(--spacing-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid #f0f0f0;
 
     &.is-hidden {
         display: none;
@@ -667,24 +555,22 @@
 .comment-item {
     display: flex;
     gap: var(--spacing-sm);
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 12px;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    background-color: #F5F1E8; /* Updated from #f9f9f9 */
+    border-radius: 8px;
+    padding: var(--spacing-sm);
 }
 
 .comment-avatar {
     width: 28px;
     height: 28px;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.20);
+    background-color: var(--color-secondary-text);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--color-white-primary);
+    color: #F5F1E8; /* Updated from white */
     flex-shrink: 0;
 }
 
@@ -703,86 +589,52 @@
 .comment-author {
     font-weight: 600;
     font-size: 0.85rem;
-    color: var(--color-white-primary);
+    color: var(--color-body-text);
 }
 
 .comment-time {
     font-size: 0.75rem;
-    color: var(--color-white-tertiary);
+    color: var(--color-secondary-text);
 }
 
 .comment-content {
     margin: 0;
     font-size: 0.9rem;
     line-height: 1.4;
-    color: var(--color-white-secondary);
 }
 
 .comment-delete-btn {
     background: none;
     border: none;
-    color: var(--color-white-tertiary);
+    color: var(--color-secondary-text);
     cursor: pointer;
     padding: 2px 6px;
     opacity: 0.4;
-    transition: opacity 0.2s ease, color 0.2s ease;
-    flex-shrink: 0;
-
-    &:hover {
-        opacity: 1;
-        color: #e74c3c;
-    }
 }
 
 // Reply Form
 .reply-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-
-    .reply-input {
-        width: 100%;
-        min-height: 60px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 12px;
-        padding: var(--spacing-sm) var(--spacing-md);
-        font-family: var(--font-body);
-        font-size: 0.9rem;
-        resize: vertical;
-        box-sizing: border-box;
-        color: var(--color-white-primary);
-
-        &::placeholder {
-            color: var(--color-white-tertiary);
-        }
-
-        &:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.35);
-            background: rgba(255, 255, 255, 0.12);
-        }
+    .reply-input-row {
+        display: flex;
+        gap: var(--spacing-sm);
     }
 
-    .reply-actions {
-        display: flex;
-        justify-content: flex-end;
+    .reply-input {
+        flex: 1;
+        border: 1px solid #e0e0e0;
+        border-radius: 20px;
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-family: var(--font-body);
+        font-size: 0.9rem;
     }
 
     .btn-reply {
-        background: rgba(255, 255, 255, 0.18);
-        color: var(--color-white-primary);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        padding: 6px 16px;
-        border-radius: 16px;
+        background-color: var(--color-title);
+        color: #F5F1E8; /* Updated from white */
+        border: none;
+        padding: var(--spacing-xs) var(--spacing-md);
+        border-radius: 20px;
         cursor: pointer;
         font-size: 0.85rem;
-        font-weight: 500;
-        transition: background 0.2s ease, border-color 0.2s ease;
-
-        &:hover {
-            background: rgba(255, 255, 255, 0.28);
-            border-color: rgba(255, 255, 255, 0.35);
-        }
     }
 }

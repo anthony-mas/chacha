@@ -13,13 +13,13 @@
     font-size: 3rem;
     margin-bottom: var(--spacing-sm);
     line-height: 1.1;
-    color: #F2F1ED;
+    color: #F5F1E8;
 }
 
 .homepage-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
-    color: #F2F1ED;
+    color: #F5F1E8;
     margin-bottom: var(--spacing-md);
 }
 
@@ -28,7 +28,7 @@
     margin: 0 auto var(--spacing-xl) auto;
     font-size: 1rem;
     line-height: 1.5;
-    color: #F2F1ED;
+    color: #F5F1E8;
 }
 
 .homepage {
@@ -36,7 +36,7 @@
     padding: var(--spacing-xl) var(--spacing-md);
     max-width: 700px;
     margin: 0 auto;
-    color: #F2F1ED;
+    color: #F5F1E8;
 }
 
 // Force white on all text elements in homepage section
@@ -46,7 +46,7 @@
 .homepage h4,
 .homepage p,
 .homepage a {
-    color: #F2F1ED !important;
+    color: #F5F1E8 !important;
 }
 
 // Event preview cards (carousel)
@@ -61,7 +61,7 @@
 .event-preview {
     width: 180px;
     height: 250px;
-    background: linear-gradient(145deg, #ffffff 0%, #f5f5f7 50%, #e8e8ed 100%);
+    background: linear-gradient(145deg, #F5F1E8 0%, #F5F1E8 50%, #F5F1E8 100%);
     border-radius: 20px;
     box-shadow:
         0 10px 40px rgba(0, 0, 0, 0.12),

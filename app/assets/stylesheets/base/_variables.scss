@@ -15,10 +15,10 @@
   --gradient-primary:         linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
 
   /* Whites System - Editorial Palette */
-  --color-white-primary:      #EEE9DF;   /* MAIN TEXT on gradient */
-  --color-white-secondary:    #F5F1E8;   /* Secondary text/Subtle links on dark BG */
-  --color-white-tertiary:     #E5DCCF;   /* Low contrast text/border */
-  --color-white-subtle:       #FBF9F4;   /* Soft backgrounds */
+  --color-white-primary:      #F5F1E8;   /* MAIN TEXT on gradient (Updated from #EEE9DF) */
+  --color-white-secondary:    #F5F1E8;   /* Secondary text/Subtle links on dark BG (Target color) */
+  --color-white-tertiary:     #F5F1E8;   /* Low contrast text/border (Updated from #E5DCCF) */
+  --color-white-subtle:       #F5F1E8;   /* Soft backgrounds (Updated from #FBF9F4) */
 
   /* Blacks/Dark Accents (Used for solid buttons/cards for contrast) */
   --color-dark-primary:       #111111;   /* Primary Dark (Used as background for buttons/cards) */
@@ -38,7 +38,7 @@
   // ==========================================
 
   /* OPTIMIZED: High-Contrast Elements use Dark Primary for FILL */
-  --color-title: var(--color-white-primary);     /* Titles are WHITE */
+  --color-title: var(--color-dark-primary);     /* Titles are DARK for light background events, but overridden to light on dark pages. This seems right based on the old logic */
   --color-body-text: var(--color-white-secondary); /* Body text is light */
   --color-secondary-text: var(--color-text-tertiary); /* Low contrast text for dates/hints */
 

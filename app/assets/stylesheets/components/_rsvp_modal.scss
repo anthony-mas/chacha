@@ -1,56 +1,11 @@
 // RSVP Modal styles
 
 // ─────────────────────────────────────────────────────────────
-// Segmented Control (Apple-invites style) - Page Context (Glass)
+// Segmented Control (Apple-invites style)
 // ─────────────────────────────────────────────────────────────
-[data-rsvp-context="page"] .rsvp-segmented-control {
+.rsvp-segmented-control {
     display: flex;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 14px;
-    padding: 4px;
-    gap: 4px;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-}
-
-[data-rsvp-context="page"] .rsvp-segment {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 12px 8px;
-    border: none;
-    border-radius: 10px;
-    background: transparent;
-    color: var(--color-white-tertiary);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-
-    &:hover:not(.active) {
-        background: rgba(255, 255, 255, 0.08);
-    }
-
-    &.active {
-        background: rgba(255, 255, 255, 0.18);
-        color: var(--color-white-primary);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        font-weight: 600;
-    }
-}
-
-// ─────────────────────────────────────────────────────────────
-// Segmented Control - Modal Context (Original style)
-// ─────────────────────────────────────────────────────────────
-[data-rsvp-context="modal"] .rsvp-segmented-control,
-.rsvp-modal .rsvp-segmented-control {
-    display: flex;
-    background-color: #f0f0f0;
+    background-color: #F5F1E8; /* Updated from #f0f0f0 */
     border-radius: 12px;
     padding: 4px;
     gap: 4px;
@@ -59,8 +14,7 @@
     margin: 0 auto;
 }
 
-[data-rsvp-context="modal"] .rsvp-segment,
-.rsvp-modal .rsvp-segment {
+.rsvp-segment {
     flex: 1;
     display: flex;
     align-items: center;
@@ -168,12 +122,10 @@
     padding-top: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 
-
-
-
+    .rsvp-segmented-control {
+        max-width: 100%;
+    }
 }
-
-
 
 // Legacy emoji styles (kept for backwards compatibility)
 .rsvp-modal .rsvp-emoji-row {
@@ -253,12 +205,4 @@
 
 .rsvp-submit-button:hover {
     background-color: #314481;
-}
-
-
-.rsvp-segmented-control {
-  display: flex;
-  margin-bottom: 2rem;
-  justify-content: space-between;
-  max-width: 100%;
 }
