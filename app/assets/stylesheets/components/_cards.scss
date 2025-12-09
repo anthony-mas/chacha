@@ -2,6 +2,26 @@
 // Cards - Event Cards & Preview Cards
 // ===========================================
 
+// ===========================================
+// Glass Card - Reusable frosted glass effect
+// ===========================================
+.glass-card {
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+}
+
+.glass-card-light {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
 // Event Card Container
 .event-card-container {
     display: flex;
@@ -9,12 +29,15 @@
     gap: var(--spacing-md);
 }
 
-// Base Event Card
+// Base Event Card - Glass Style
 .event-card {
-    background-color: var(--color-card);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 .event-card-link {
@@ -23,26 +46,26 @@
 
 .event-card-details {
     padding: var(--spacing-md);
-    
+
     p { margin: 0; }
 }
 
 .event-card-title {
     font-size: 1.6rem;
     margin-bottom: var(--spacing-xs);
-    color: var(--color-title);
+    color: var(--color-white-primary);
     font-family: var(--font-title);
 }
 
 .event-card-date {
     font-size: 0.9rem;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
 }
 
 .event-card .placeholder-box {
     width: 100%;
     height: 180px;
-    background-color: #f0f0f0;
+    background: rgba(255, 255, 255, 0.06);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,23 +136,26 @@
 }
 
 // ===========================================
-// Event Card Detail (Show page)
+// Event Card Detail (Show page) - Glass Style
 // ===========================================
 .event-card-detail {
-    background-color: var(--color-card);
-    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 20px;
     padding: 0;
     margin-bottom: var(--spacing-xl);
     text-align: left;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 
     .placeholder-box {
         width: 100%;
         height: 180px;
         margin-bottom: var(--spacing-lg);
-        border-radius: 18px 18px 0 0;
-        border-bottom: 3px solid var(--color-title);
-        background-color: #f0f0f0;
+        border-radius: 20px 20px 0 0;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.08);
         display: flex;
         align-items: center;
         justify-content: center;
