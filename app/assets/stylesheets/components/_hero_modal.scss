@@ -17,7 +17,7 @@
 
 /* ===== Modal Card ===== */
 .hero-modal-content {
-  background: #fff;
+  background-color: #000;
   width: 90%;
   max-width: 380px;
   max-height: 85vh;
@@ -63,6 +63,8 @@
 /* ===== Thumbnail ===== */
 .hero-thumb img {
   width: 100%;
+  height: 240px;        /* MOBILE-FRIENDLY HEIGHT */
+  object-fit: cover;    /* keeps the image nicely cropped */
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;

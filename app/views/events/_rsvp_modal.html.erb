@@ -18,20 +18,20 @@
       <input type="hidden" name="participation[status]" id="rsvp-status-field" value="<%= current_status || 'going' %>">
 
       <div class="rsvp-field">
-        <label for="rsvp_name">Name</label>
+        <label class="d-none" for="rsvp_name">Name</label>
         <input type="text" id="rsvp_name" name="user[name]"
                placeholder="Your name" class="rsvp-input"
                value="">
       </div>
 
-      <div class="rsvp-field">
-        <label for="rsvp_mobile">Mobile number</label>
+      <div class="rsvp-field my-2">
+        <label class="d-none" for="rsvp_mobile">Mobile number</label>
         <input type="tel" id="rsvp_mobile" name="rsvp[mobile]"
                placeholder="Your mobile number" class="rsvp-input">
       </div>
 
       <div class="rsvp-field">
-        <label for="rsvp_plus_one">+1 Guest</label>
+        <label class="d-none" for="rsvp_plus_one">+1 Guest</label>
         <input type="text" id="rsvp_plus_one" name="participation[extra_guests]"
                placeholder="Number of extra guests (optional)" class="rsvp-input"
                value="<%= current_participation&.extra_guests if current_participation&.extra_guests.to_i > 0 %>">

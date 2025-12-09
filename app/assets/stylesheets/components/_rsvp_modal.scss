@@ -50,7 +50,7 @@
 [data-rsvp-context="modal"] .rsvp-segmented-control,
 .rsvp-modal .rsvp-segmented-control {
     display: flex;
-    background-color: #f0f0f0;
+    background-color: var(--color-title);
     border-radius: 12px;
     padding: 4px;
     gap: 4px;
@@ -82,7 +82,7 @@
     }
 
     &.active {
-        background-color: var(--color-card);
+        background-color: var(--color-dark-secondary);
         color: var(--color-title);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         font-weight: 600;
@@ -261,4 +261,10 @@
   margin-bottom: 2rem;
   justify-content: space-between;
   max-width: 100%;
+}
+
+
+#rsvp_mobile {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
