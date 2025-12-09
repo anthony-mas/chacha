@@ -42,7 +42,7 @@
     padding: 14px 28px !important;
 
     background: #000 !important;
-    color: #fff !important;
+    color: #F5F1E8 !important; /* Updated from #fff */
 
     border: none !important;
     border-radius: 16px !important;
@@ -58,7 +58,7 @@
     &:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        color: #fff !important;
+        color: #F5F1E8 !important; /* Updated from #fff */
     }
 
     &:active {
@@ -85,7 +85,7 @@
 // ===========================================
 
 .glass-event-card {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(245, 241, 232, 0.10); /* Updated rgba(255, 255, 255, 0.10) */
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 
@@ -95,7 +95,7 @@
 
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        inset 0 1px 0 rgba(245, 241, 232, 0.15); /* Updated rgba(255, 255, 255, 0.15) */
 
     transition:
         transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -106,8 +106,8 @@
         transform: translateY(-6px) scale(1.01);
         box-shadow:
             0 20px 50px rgba(0, 0, 0, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.35);
+            inset 0 1px 0 rgba(245, 241, 232, 0.2); /* Updated rgba(255, 255, 255, 0.2) */
+        border-color: rgba(245, 241, 232, 0.35); /* Updated rgba(255, 255, 255, 0.35) */
     }
 
     &:active {
@@ -158,11 +158,11 @@
 // ===========================================
 
 .no-events-glass {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(245, 241, 232, 0.08); /* Updated rgba(255, 255, 255, 0.08) */
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(245, 241, 232, 0.18); /* Updated rgba(255, 255, 255, 0.18) */
     border-radius: 20px;
 
     padding: var(--spacing-3xl) var(--spacing-xl);
@@ -170,7 +170,7 @@
 
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 0 rgba(245, 241, 232, 0.1); /* Updated rgba(255, 255, 255, 0.1) */
 
     p {
         color: var(--color-text-primary);
@@ -198,22 +198,22 @@
 }
 
 .upcoming-events-list li, .recent-posts-list li {
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(245, 241, 232, 0.10); /* Updated rgba(255, 255, 255, 0.10) */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(245, 241, 232, 0.18); /* Updated rgba(255, 255, 255, 0.18) */
     padding: var(--spacing-md);
-    border-radius: 12px;
+    border-radius: 16px;
     margin-bottom: var(--spacing-sm);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .upcoming-events-list strong a {
-    color: var(--color-white-primary);
+    color: var(--color-text-primary);
     font-weight: 700;
 }
 
 .upcoming-events-list em {
-    color: var(--color-white-tertiary);
+    color: var(--color-text-tertiary);
     font-style: normal;
 }

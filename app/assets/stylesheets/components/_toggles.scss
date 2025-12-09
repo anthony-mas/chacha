@@ -12,7 +12,7 @@
 
 .toggle-label {
   font-size: 1rem;
-  color: white !important;
+  color: #F5F1E8 !important; /* Updated from white */
   flex: 1;
 }
 
@@ -23,7 +23,7 @@
 .toggle-switch {
   width: 48px;
   height: 26px;
-  background: rgba(255, 255, 255, 0.25) !important;
+  background: rgba(245, 241, 232, 0.25) !important; /* Updated rgba(255, 255, 255, 0.25) */
   border-radius: 15px;
   position: relative;
   cursor: pointer;
@@ -34,7 +34,7 @@
   content: "";
   width: 22px;
   height: 22px;
-  background: white;
+  background: #F5F1E8; /* Updated from white */
   border-radius: 50%;
   position: absolute;
   top: 2px;
@@ -57,19 +57,19 @@
 /* ========================================= */
 
 .settings-card {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(245, 241, 232, 0.08) !important; /* Updated rgba(255, 255, 255, 0.08) */
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
 
   border-radius: 18px !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border: 1px solid rgba(245, 241, 232, 0.18) !important; /* Updated rgba(255, 255, 255, 0.18) */
 
   padding: 16px 20px;
   margin-bottom: 16px;
 }
 
 .settings-card label {
-  color: white !important;
+  color: #F5F1E8 !important; /* Updated from white */
   font-size: 1rem;
   font-weight: 500;
 }
@@ -85,8 +85,8 @@
   height: 26px !important;
   appearance: none !important;
 
-  background-color: rgba(255, 255, 255, 0.25) !important;
-  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  background-color: rgba(245, 241, 232, 0.25) !important; /* Updated rgba(255, 255, 255, 0.25) */
+  border: 1px solid rgba(245, 241, 232, 0.45) !important; /* Updated rgba(255, 255, 255, 0.45) */
 
   border-radius: 30px !important;
   position: relative;
@@ -105,7 +105,7 @@
   top: 2px;
   left: 2px;
   border-radius: 50%;
-  background: white !important;
+  background: #F5F1E8 !important; /* Updated from white */
 
   transition: transform 0.25s ease;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
