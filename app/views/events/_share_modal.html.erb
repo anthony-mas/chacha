@@ -16,9 +16,13 @@
 
     <%# Event Preview Card %>
     <div class="share-event-preview">
-      <div class="share-preview-image placeholder-box">
-        <span class="placeholder-icon">🖼️</span>
-      </div>
+      <% if @event.hero_image.attached? %>
+        <%= image_tag @event.hero_image, class: "share-preview-image" %>
+      <% else %>
+        <div class="share-preview-image placeholder-box">
+          <span class="placeholder-icon">🖼️</span>
+        </div>
+      <% end %>
       <div class="share-preview-info">
         <h3 class="share-event-title"><%= share_title %></h3>
         <p class="share-event-date"><%= @event.starts_on&.strftime("%a, %b %d at %l:%M %p") %></p>
