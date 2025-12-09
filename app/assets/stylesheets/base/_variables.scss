@@ -36,6 +36,7 @@
 
   /* FIX: Text/Titles/Body text for light-colored components (Forms/Cards) MUST be Dark */
   --color-title: var(--color-primary);
+  --color-title2: var(--color-primary)
   --color-body-text: var(--color-primary);
   --color-secondary-text: #666666; /* Using a fixed dark gray for sufficient contrast on light cards */
 
