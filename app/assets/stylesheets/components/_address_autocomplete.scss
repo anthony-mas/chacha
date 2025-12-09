@@ -1,8 +1,8 @@
 .mapboxgl-ctrl-geocoder {
   width: 100% !important;
   max-width: none !important;
-  border: 1px solid #ccc !important;
-  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 16px !important;
 
   &:focus {
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
@@ -13,14 +13,19 @@
   border: none !important;
   padding-left: 2rem !important;
   height: 2.5rem !important;
+  height: 55px !important;
 
   &:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.65) !important;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15) !important;
     outline: none !important;
-
   }
 }
 
 .event_location {
   margin-bottom: 0px !important;
+}
+
+.mapboxgl-ctrl-geocoder {
+  background-color: transparent !important;
 }

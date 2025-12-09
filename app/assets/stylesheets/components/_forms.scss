@@ -108,3 +108,88 @@ select:focus {
   margin-bottom: 4px !important;
   display: block;
 }
+
+/* ========================================= */
+/* FROSTED GLASS INPUT FIELDS (Apple-style)  */
+/* ========================================= */
+
+.frosted-input {
+  width: 100%;
+  padding: 14px 18px;
+
+  background: rgba(255, 255, 255, 0.12) !important; /* semi-transparent */
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 16px !important;
+
+  color: white !important;             /* text */
+  font-size: 1.05rem;
+  font-weight: 500;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+/* Placeholder styling */
+.frosted-input::placeholder {
+  color: rgba(255,255,255,0.75) !important;
+  font-weight: 400;
+}
+
+/* Focus state */
+.frosted-input:focus {
+  border-color: rgba(255,255,255,0.65) !important;
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.15);
+}
+
+//* =============================================== */
+/* FORCE MAPBOX INPUT TO USE FROSTED GLASS STYLE   */
+/* =============================================== */
+
+#mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: none !important;
+
+  padding: 0 !important;
+}
+
+/* Override Mapbox’s internal white background wrapper */
+#mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder > div {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* The actual input field */
+#mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder--input {
+  background: transparent !important;
+  color: #fff !important;
+  border: none !important;
+
+  padding: 14px 18px !important;
+  font-size: 1.05rem !important;
+
+  border-radius: 16px !important;
+}
+
+/* Placeholder */
+#mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder--input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Remove Mapbox outline / blue focus */
+#mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder--input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

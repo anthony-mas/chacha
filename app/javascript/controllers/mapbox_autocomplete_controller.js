@@ -25,8 +25,12 @@ export default class extends Controller {
       mapboxgl: mapboxgl
     });
 
+
+
     // Inject geocoder UI inside the location input
     this.geocoder.addTo(this.element);
+
+    this.geocoder.container.childNodes[1].classList.add("frosted-input");
 
     // Sync selection to your Rails input
     this.geocoder.on("result", (event) => {

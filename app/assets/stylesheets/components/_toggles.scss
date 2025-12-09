@@ -1,5 +1,5 @@
 /* ========================================= */
-/* CLEAN TOGGLE                             */
+/* CLEAN CUSTOM TOGGLE (if used elsewhere)   */
 /* ========================================= */
 
 .toggle-wrapper {
@@ -7,33 +7,29 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-md) 0;
-  margin-top: 0px !important;
+  margin-top: 0 !important;
 }
 
 .toggle-label {
   font-size: 1rem;
-  /* FIX: Ensure label text is dark when on the light card background */
-  color: var(--color-title);
+  color: white !important;
   flex: 1;
 }
 
-/* hide checkbox */
 .toggle-checkbox {
-  display: none;
+  display: none !important;
 }
 
-/* toggle track */
 .toggle-switch {
   width: 48px;
   height: 26px;
-  background: rgba(64, 85, 157, 0.25); /* CTA tint */
+  background: rgba(255, 255, 255, 0.25) !important;
   border-radius: 15px;
   position: relative;
   cursor: pointer;
   transition: background 0.2s ease-out;
 }
 
-/* toggle knob */
 .toggle-switch::after {
   content: "";
   width: 22px;
@@ -43,37 +39,127 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s ease-out;
 }
 
-/* ON state */
 .toggle-checkbox:checked + .toggle-switch {
-  background: #40559D; /* CTA color */
+  background: var(--color-primary) !important;
 }
 
 .toggle-checkbox:checked + .toggle-switch::after {
   transform: translateX(22px);
 }
 
-/* settings card */
+
+/* ========================================= */
+/* SETTINGS CARD (actual toggles you use)    */
+/* ========================================= */
+
 .settings-card {
-  background: var(--color-card);
-  padding: var(--spacing-md);
-  border-radius: 16px;
-  margin: var(--spacing-md) 0;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+
+  border-radius: 18px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+
+  padding: 16px 20px;
+  margin-bottom: 16px;
 }
 
-.settings-hint {
-  font-size: 0.85em;
-  /* FIX: Ensure hint text is dark when on the light card background */
-  color: var(--color-secondary-text);
-  margin-top: 6px;
+.settings-card label {
+  color: white !important;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-.toggle input[type="checkbox"] {
+
+/* ========================================= */
+/* BOOTSTRAP SWITCH OVERRIDE — REAL FIX      */
+/* ========================================= */
+
+/* Track (off state) */
+.settings-card .form-check-input {
+  width: 48px !important;
+  height: 26px !important;
+  appearance: none !important;
+
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+
+  border-radius: 30px !important;
+  position: relative;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+/* Knob */
+.settings-card .form-check-input::after {
+  content: "";
   position: absolute;
-  opacity: 0;
-  pointer-events: none;
+  width: 20px;
+  height: 20px;
+
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  background: white !important;
+
+  transition: transform 0.25s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* ON STATE — THEME COLOR */
+.settings-card .form-check-input:checked {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.settings-card .form-check-input:checked::after {
+  transform: translateX(22px);
+}
+
+/* Remove Bootstrap’s white/blue checkmark layer */
+.settings-card .form-check-input:checked[type=checkbox] {
+  background-image: none !important;
+}
+
+/* Add spacing between toggle switch and label */
+.settings-card .form-check {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important; /* ← spacing between switch and text */
+}
+
+.settings-card .form-check-input {
+  margin: 0 !important; /* Remove Bootstrap default margin */
+}
+
+.settings-card .form-check-label {
+  margin: 0 !important;
+  padding-left: 0 !important; /* Remove Bootstrap’s left padding */
+}
+
+/* Left-align toggle rows to match other fields */
+.settings-card .form-check {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important; /* ← forces left alignment */
+  gap: 14px !important; /* spacing between switch and label */
+  width: 100%;
+  padding-left: 4px; /* aligns visually with frosted inputs */
+}
+
+/* Remove Bootstrap's weird margin */
+.settings-card .form-check-input {
+  margin: 0 !important;
+}
+
+/* Remove label shifting */
+.settings-card .form-check-label {
+  margin: 0 !important;
+  padding: 0 !important;
 }

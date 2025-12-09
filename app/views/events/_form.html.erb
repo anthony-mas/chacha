@@ -1,6 +1,7 @@
 <%= simple_form_for(@event, data: { controller: "event-form" }) do |f| %>
   <%= f.error_notification %>
 
+  <!-- ░░░ HERO IMAGE PICKER ░░░ -->
   <div data-controller="hero-library">
     <div class="hero-preview-area" data-hero-library-target="preview">
       <% if @event.hero_image.attached? %>
@@ -12,7 +13,7 @@
                        data: { "hero-library-target": "input" } %>
 
     <button type="button"
-            class="btn-primary"
+            class="btn-primary hero-btn"
             data-action="hero-library#open">
       Choose from library
     </button>
@@ -21,22 +22,22 @@
   </div>
 
 
+  <!-- ░░░ TITLE ░░░ -->
   <%= f.input :title,
               label: false,
               placeholder: "Your event title",
-              input_html: { class: "rounded-input" } %>
+              input_html: { class: "frosted-input" } %>
 
 
+  <!-- ░░░ DESCRIPTION ░░░ -->
   <%= f.input :description,
               as: :text,
               label: false,
               placeholder: "Your event description",
-              input_html: {
-                rows: 8,
-                class: "rounded-input"
-              } %>
+              input_html: { rows: 7, class: "frosted-input" } %>
 
 
+  <!-- ░░░ CATEGORY ░░░ -->
   <%= f.input :category_ids,
               collection: @categories,
               as: :select,
@@ -44,49 +45,53 @@
               prompt: "Event category",
               input_html: {
                 multiple: false,
-                class: "form-select rounded-input"
+                class: "frosted-input"
               } %>
 
 
-  <div class="form-group"
-       data-controller="mapbox-autocomplete"
-       data-mapbox-autocomplete-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+  <!-- ░░░ LOCATION (MAPBOX) ░░░ -->
+<div class="form-group"
+     data-controller="mapbox-autocomplete"  
+     data-mapbox-autocomplete-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
 
-    <%= f.hidden_field :location,
-            data: {
-            "mapbox-autocomplete-target": "input",
-            placeholder: "Event location"
-          } %>
+  <%= f.hidden_field :location,
+        class: "hidden-location-input",
+        data: { "mapbox-autocomplete-target": "input" } %>
 
-    <div data-mapbox-autocomplete-target="container">
-      <div id="mapbox-geocoder-placeholder"></div>
-    </div>
+  <div data-mapbox-autocomplete-target="container">
+    <div id="mapbox-geocoder-placeholder"></div>
   </div>
+</div>
 
+
+  <!-- ░░░ STARTS ON ░░░ -->
   <%= f.input :starts_on,
               as: :datetime,
+              label: false,
               html5: true,
               input_html: {
+                class: "frosted-input",
                 value: f.object.starts_on || Time.now.change(min: 0, sec: 0) + 1.hour,
                 data: {
                   "event-form-target": "startsOn",
                   action: "change->event-form#updateEndsOn"
                 }
-              },
-
-              wrapper_html: {
-                class: "my-3"
               } %>
 
 
+  <!-- ░░░ ENDS ON ░░░ -->
   <%= f.input :ends_on,
               as: :datetime,
+              label: false,
               html5: true,
               input_html: {
-
+                class: "frosted-input",
                 value: f.object.ends_on || Time.now.change(min: 0, sec: 0) + 2.hours,
                 data: { "event-form-target": "EndsOn" }
               } %>
+
+
+  <!-- ░░░ SETTINGS CARDS ░░░ -->
 
   <div class="settings-card">
     <div class="form-check form-switch">
@@ -94,9 +99,7 @@
             as: :boolean,
             class: "form-check-input",
             id: "switchPrivate" %>
-
-      <label class="form-check-label" for="switchPrivate">
-        Private event? </label>
+      <label class="form-check-label" for="switchPrivate">Private event?</label>
     </div>
   </div>
 
@@ -107,7 +110,6 @@
             false,
             class: "form-check-input",
             id: "switchDiscoverable" %>
-
       <label class="form-check-label" for="switchDiscoverable">
         Make this event discoverable
       </label>
@@ -121,7 +123,6 @@
             false,
             class: "form-check-input",
             id: "switchGuestApproval" %>
-
       <label class="form-check-label" for="switchGuestApproval">
         Require host approval for new guests
       </label>
@@ -129,8 +130,9 @@
   </div>
 
 
+  <!-- ░░░ SUBMIT ░░░ -->
   <div>
-    <%= f.button :submit, "Create Event", class: "btn-primary" %>
+    <%= f.button :submit, "Create Event", class: "btn-primary submit-btn" %>
   </div>
 
 <% end %>
