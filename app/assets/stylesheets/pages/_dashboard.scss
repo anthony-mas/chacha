@@ -1,4 +1,14 @@
-// Dashboard page styles
+// ===========================================
+// Dashboard / My Events Page - Glass Effect
+// ===========================================
+// Replicates the frosted glass effect from /events/new
+
+// Page wrapper
+.my-events-page {
+  padding-bottom: var(--spacing-3xl);
+}
+
+// Header
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -7,10 +17,180 @@
     margin-bottom: var(--spacing-lg);
 
     h1 {
-        /* FIX: Ensure "MY EVENTS" header is light */
         color: var(--color-text-primary);
+        font-family: var(--font-headline);
+        font-size: 2.2rem;
+        font-weight: 700;
     }
 }
+
+// ===========================================
+// Create Event Button - Glass Style
+// ===========================================
+
+.create-event-link-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.create-event-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: auto !important;
+    padding: 14px 28px !important;
+
+    background: #000 !important;
+    color: #fff !important;
+
+    border: none !important;
+    border-radius: 16px !important;
+
+    font-size: 1.05rem !important;
+    font-weight: 600;
+    text-decoration: none;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        color: #fff !important;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    i {
+        font-size: 0.95rem;
+    }
+}
+
+// ===========================================
+// Event Cards Container
+// ===========================================
+
+.event-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+// ===========================================
+// Glass Event Card Wrapper
+// ===========================================
+
+.glass-event-card {
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    transition:
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease;
+
+    &:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    &:active {
+        transform: translateY(-3px) scale(1.005);
+        transition-duration: 0.1s;
+    }
+
+    // Override inner event-card styles for glass context
+    .event-card {
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .event-card-details {
+        padding: var(--spacing-lg);
+    }
+
+    .event-card-title {
+        color: var(--color-text-primary);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .event-card-date {
+        color: var(--color-text-tertiary);
+        font-size: 0.95rem;
+    }
+
+    .event-card-link {
+        display: block;
+        text-decoration: none;
+    }
+
+    // Image styling within glass card
+    .placeholder-box,
+    .event-hero-image {
+        border-radius: 0;
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+}
+
+// ===========================================
+// No Events State - Glass Style
+// ===========================================
+
+.no-events-glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+
+    padding: var(--spacing-3xl) var(--spacing-xl);
+    text-align: center;
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    p {
+        color: var(--color-text-primary);
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .no-events-emoji {
+        display: block;
+        font-size: 3rem;
+        margin-top: var(--spacing-lg);
+        opacity: 0.8;
+    }
+}
+
+// ===========================================
+// Legacy styles (kept for compatibility)
+// ===========================================
 
 .upcoming-events-list, .recent-posts-list {
     list-style: none;
@@ -19,24 +199,22 @@
 }
 
 .upcoming-events-list li, .recent-posts-list li {
-    background-color: var(--color-card);
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     padding: var(--spacing-md);
-    border-radius: 8px;
+    border-radius: 16px;
     margin-bottom: var(--spacing-sm);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .upcoming-events-list strong a {
-    color: var(--color-title);
+    color: var(--color-text-primary);
     font-weight: 700;
 }
 
 .upcoming-events-list em {
-    color: var(--color-secondary-text);
+    color: var(--color-text-tertiary);
     font-style: normal;
-}
-
-/* FIX: Target link at the bottom of the page (on dark background) and set to light */
-.dashboard-header ~ p a {
-    color: var(--color-text-primary) !important;
 }
