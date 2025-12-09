@@ -49,6 +49,20 @@
     color: #F5F1E8 !important;
 }
 
+// ADDED: Styling for intro and sub text to make them lighter
+.intro-text {
+    font-size: 1.25rem; /* Slightly bigger, subtle distinction */
+    font-weight: 300;
+    margin-bottom: var(--spacing-md);
+}
+
+.sub-text {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+}
+
 // Event preview cards (carousel)
 .event-preview-container {
     display: flex;
