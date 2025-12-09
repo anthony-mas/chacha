@@ -1,117 +1,114 @@
-// ═══════════════════════════════════════════════════════════════
-// NAVBAR - Premium Editorial Gradient Integration
-// ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════
+   TOP NAVBAR — FIXED BEHAVIOR, DOES NOT AFFECT BOTTOM NAVBAR
+   ═══════════════════════════════════════════════════════════════ */
 
-.navbar-lewagon, .navbar {
+.upper-navbar {
   position: fixed;
+  top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: transparent;
-  border-bottom: none;
+
+  background: var(--gradient-primary); /* Retaining opaque background */
   padding: var(--spacing-lg) var(--spacing-2xl);
-  height: 70px;
+  height: 70px; /* OPTIMIZED: Increased height (was 60px) */
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--spacing-2xl);
 }
 
-.navbar-brand {
-  flex: 0 0 auto;
-
-  a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
-
-  a span {
-    font-family: var(--font-headline);
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-white-primary);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    margin: 0;
-  }
+/* Brand (Logo) */
+.upper-navbar .navbar-brand a span {
+  font-family: var(--font-headline);
+  font-size: var(--font-size-6xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white-primary);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  margin: 0;
 }
 
-.navbar-links {
+/* Top navbar actions container */
+.upper-navbar .navbar-actions,
+.upper-navbar .navbar-links {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: var(--spacing-lg);
-  flex: 0 0 auto;
 }
 
-.navbar-link {
-  color: var(--color-white-primary);
+.upper-navbar .navbar-link,
+.upper-navbar .navbar-icon-button {
+  color: var(--color-white-primary) !important;
   text-decoration: none;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);
   transition: var(--transition-base);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+
+  i {
+    font-family: 'Material Symbols Outlined';
+    color: var(--color-white-primary) !important;
+    font-size: 1.8rem; /* Retaining optimized size */
+
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
 
   &:hover {
-    color: #FFFFFF;
-    text-decoration: underline;
+    opacity: 0.85;
   }
 }
 
-.navbar-link:first-of-type { display: none; }
-
-.logout-btn {
-  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
-  font-size: var(--btn-font-size);
-  font-weight: var(--btn-font-weight);
-  letter-spacing: var(--btn-letter-spacing);
-  text-transform: var(--btn-text-transform);
-  border: 2px solid rgba(238, 233, 223, 0.8);
-  border-radius: var(--btn-border-radius);
-  background: transparent;
-  color: var(--color-white-primary);
-  cursor: pointer;
-  transition: var(--btn-transition);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    background: rgba(238, 233, 223, 0.15);
-    border-color: var(--color-white-primary);
-    color: #FFFFFF;
-  }
-
-  &:active { opacity: var(--opacity-active); }
+/* Push content below top navbar */
+.container-app {
+  padding-top: 80px; /* OPTIMIZED: Increased content push-down (was 70px) */
 }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(238, 233, 223, 0.6);
-  transition: var(--transition-base);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
-  &:hover {
-    border-color: var(--color-white-primary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-}
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE (top navbar only)
+   ═══════════════════════════════════════════════════════════════ */
 
-.container-app { padding-top: 90px; }
-
-// Mobile Responsive
 @media (max-width: 768px) {
-  .navbar-lewagon, .navbar {
+  .upper-navbar {
     padding: var(--spacing-md) var(--spacing-lg);
-    height: 60px;
+    height: 65px; /* OPTIMIZED: Increased mobile height (was 52px) */
     gap: var(--spacing-md);
   }
 
-  .navbar-brand a span { font-size: var(--font-size-xl); }
-  .navbar-links { gap: var(--spacing-sm); }
-  .logout-btn { padding: 8px 12px; font-size: var(--font-size-xs); }
-  .avatar { width: 36px; height: 36px; }
-  .container-app { padding-top: 80px; }
+  /* Logo override removed for constant large size */
+
+  .upper-navbar .navbar-actions {
+    gap: var(--spacing-sm);
+  }
+
+  .container-app {
+    padding-top: 75px; /* OPTIMIZED: Increased mobile content push-down (was 60px) */
+  }
+}
+
+/* Back arrow */
+.upper-navbar .navbar-left {
+  width: 40px; /* ensures spacing even when empty */
+  display: flex;
+  align-items: center;
+}
+
+.back-arrow {
+  color: var(--color-white-primary) !important;
+  font-size: 1.4rem;
+  text-decoration: none;
+
+  i {
+    color: var(--color-white-primary) !important;
+    font-size: 1.8rem; /* Retaining optimized size */
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
 }

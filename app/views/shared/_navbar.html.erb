@@ -3,7 +3,8 @@
   <div class="navbar-left">
     <% if request.referer.present? && request.referer != request.original_url %>
       <%= link_to request.referer, class: "back-arrow" do %>
-        <i class="fa-solid fa-arrow-left"></i>
+        <%# FIXED: Use correct class name for Material Symbols font %>
+        <i class="material-symbols-outlined">arrow_back</i>
       <% end %>
     <% end %>
   </div>
@@ -20,11 +21,14 @@
                   method: :delete,
                   data: { turbo_method: :delete },
                   class: "navbar-icon-button" do %>
-        <i class="fa-solid fa-right-from-bracket"></i>
+        <%# FIXED: Use correct class name for Material Symbols font %>
+        <i class="material-symbols-outlined">logout</i>
       <% end %>
     <% else %>
+
       <%= link_to new_user_session_path, class: "navbar-icon-button" do %>
-        <i class="fa-solid fa-right-to-bracket"></i>
+        <%# FIXED: Use correct class name for Material Symbols font %>
+        <i class="material-symbols-outlined">logout</i>
       <% end %>
     <% end %>
   </div>
