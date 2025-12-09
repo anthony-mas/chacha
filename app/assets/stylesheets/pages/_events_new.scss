@@ -1,0 +1,22 @@
+/* Create Event Page – Title + Back Link overrides */
+
+.page-title {
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding-top: 20px;
+  margin-bottom: var(--spacing-lg);
+  color: white !important; /* your page title is white */
+}
+
+
+/* Style wrapper <p> and the link inside */
+.back-to-events-link,
+.back-to-events-link a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.back-to-events-link a:hover {
+  text-decoration: underline;
+}

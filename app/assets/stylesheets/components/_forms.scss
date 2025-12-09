@@ -27,7 +27,7 @@ textarea {
   padding: var(--spacing-sm) var(--spacing-md);
   background-color: var(--color-card);
   border: 1px solid #ccc;
-  border-radius: 12px; /* increased from 8px → more modern, matches your UI */
+  border-radius: 12px;
   color: var(--color-body-text);
   font-family: var(--font-body);
   box-sizing: border-box;
@@ -53,7 +53,7 @@ select:focus {
   box-shadow: 0 0 0 2px rgba(64, 85, 157, 0.3);
 }
 
-/* Toggle switch row spacing */
+/* Toggle row spacing */
 .toggle-switch-group {
   display: flex;
   justify-content: space-between;
@@ -67,15 +67,15 @@ select:focus {
   }
 }
 
-// Flash messages
-.notice, .alert {
+/* Flash messages */
+.notice,
+.alert {
   padding: var(--spacing-sm);
   border-radius: 4px;
   margin-bottom: var(--spacing-md);
   text-align: center;
-  /* FIX: Added background and box-shadow for visibility on dark page background */
   background-color: var(--color-card);
-  color: var(--color-primary); /* Ensures text is dark on the light card */
+  color: var(--color-primary);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -83,6 +83,7 @@ select:focus {
   color: $green;
   border: 1px solid $green;
 }
+
 .alert {
   color: $red;
   border: 1px solid $red;
@@ -93,61 +94,58 @@ select:focus {
   display: none !important;
 }
 
-/* Space around Mapbox autocomplete */
+/* Mapbox spacing */
 .mapbox-geocoder-container {
   margin-top: 4px;
 }
 
-/* Rounded Mapbox search field */
+/* Round Mapbox search field */
 .mapbox-geocoder-container input {
   border-radius: 12px !important;
 }
 
-/* Used previously for spacing; keeping for compatibility */
+/* Label spacing */
 .tight-label {
   margin-bottom: 4px !important;
   display: block;
 }
 
-/* ========================================= */
-/* FROSTED GLASS INPUT FIELDS (Apple-style)  */
-/* ========================================= */
+// =========================================
+// FROSTED GLASS INPUT FIELDS (Apple-style)
+// =========================================
 
 .frosted-input {
   width: 100%;
   padding: 14px 18px;
 
-  background: rgba(255, 255, 255, 0.12) !important; /* semi-transparent */
+  background: rgba(255, 255, 255, 0.12) !important;
   backdrop-filter: blur(18px) !important;
   -webkit-backdrop-filter: blur(18px) !important;
 
   border: 1px solid rgba(255, 255, 255, 0.28) !important;
   border-radius: 16px !important;
 
-  color: white !important;             /* text */
-  font-size: 1.05rem;
+  color: white !important;
+  font-size: 1.05rem !important;
   font-weight: 500;
 
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   outline: none;
   transition: all 0.25s ease;
 }
 
-/* Placeholder styling */
 .frosted-input::placeholder {
-  color: rgba(255,255,255,0.75) !important;
-  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75) !important;
 }
 
-/* Focus state */
 .frosted-input:focus {
-  border-color: rgba(255,255,255,0.65) !important;
-  box-shadow: 0 0 0 4px rgba(255,255,255,0.15);
+  border-color: rgba(255, 255, 255, 0.65) !important;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
 }
 
-//* =============================================== */
-/* FORCE MAPBOX INPUT TO USE FROSTED GLASS STYLE   */
-/* =============================================== */
+// =========================================
+// MAPBOX OVERRIDES
+// =========================================
 
 #mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder {
   width: 100% !important;
@@ -159,37 +157,74 @@ select:focus {
 
   border-radius: 16px !important;
   border: 1px solid rgba(255, 255, 255, 0.28) !important;
-  box-shadow: none !important;
-
   padding: 0 !important;
+  box-shadow: none !important;
 }
 
-/* Override Mapbox’s internal white background wrapper */
 #mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder > div {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
 
-/* The actual input field */
 #mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder--input {
   background: transparent !important;
   color: #fff !important;
-  border: none !important;
-
-  padding: 14px 18px !important;
   font-size: 1.05rem !important;
-
+  padding: 14px 18px !important;
   border-radius: 16px !important;
 }
 
-/* Placeholder */
 #mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder--input::placeholder {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-/* Remove Mapbox outline / blue focus */
 #mapbox-geocoder-placeholder .mapboxgl-ctrl-geocoder--input:focus {
   outline: none !important;
   box-shadow: none !important;
+}
+
+// =========================================
+// CENTERED, AUTO-WIDTH BUTTONS
+// =========================================
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.btn-primary {
+  display: inline-block;
+  width: auto !important;
+  padding: 14px 26px;
+
+  background: #000 !important;
+  color: #fff !important;
+
+  border: none !important;
+  border-radius: 16px !important;
+
+  font-size: 1.05rem !important;
+  font-weight: 600;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+.hero-picker-btn {
+  margin-bottom: 12px;
 }
