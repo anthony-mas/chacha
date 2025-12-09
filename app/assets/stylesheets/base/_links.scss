@@ -1,10 +1,10 @@
 // Link styles
 a {
-    color: var(--color-title);
+    color: var(--color-card);
     text-decoration: none;
     transition: color 0.2s;
 }
 
 a:hover {
-    color: #5d6ea7;
+    color: var(--color-card);
 }

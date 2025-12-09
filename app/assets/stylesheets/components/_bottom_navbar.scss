@@ -1,0 +1,204 @@
+// ===========================================
+// Bottom Navbar - Premium Editorial
+// ===========================================
+
+.bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+
+  // Structure solide et ancrée
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-lg);
+
+  // Dimensions fixes
+  height: 70px;
+  padding: var(--spacing-md) var(--spacing-2xl);
+
+  // Fond solide, mat, premium (pas transparent)
+  background: #FAFAF8;
+  background: linear-gradient(to bottom, #FAFAF8 0%, #F5F3F0 100%);
+
+  // Border-top clean, éditorial (Apple style)
+  border-top: 1px solid #E5DDD2;
+
+  // Shadow subtile, assumée
+  box-shadow:
+    0 -2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  // Ajuste le padding pour le contenu
+  main, .container, body {
+    padding-bottom: 90px;
+  }
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-lg);
+  width: 100%;
+  max-width: 400px;
+}
+
+.bottom-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Dimensions fixes pour l'icône
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  // Icône par défaut
+  a, button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: inherit;
+
+    i {
+      font-size: 24px;
+      color: #888888;
+      transition: color inherit;
+    }
+  }
+
+  // État actif: underline premium
+  &.active {
+    a i, button i {
+      color: #1A1A1A;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 2px;
+      background: #1A1A1A;
+      border-radius: 1px;
+    }
+  }
+
+  // Hover: subtle background + color change
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+
+    a i, button i {
+      color: #1A1A1A;
+    }
+  }
+
+  // Active + Hover
+  &.active:hover {
+    background: rgba(0, 0, 0, 0.08);
+  }
+}
+
+// Center button (spécial, si besoin)
+.bottom-nav-center {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #FF6B6B, #FF4B4B);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+
+  a, button {
+    i {
+      color: #FFFFFF;
+      font-size: 28px;
+    }
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, #FF7B7B, #FF5B5B);
+    box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+  }
+}
+
+// Mobile: ajuste les dimensions
+@media (max-width: 768px) {
+  .bottom-navbar {
+    height: 65px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    gap: var(--spacing-md);
+  }
+
+  .bottom-nav-item {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+
+    a i, button i {
+      font-size: 20px;
+    }
+  }
+
+  .bottom-nav-center {
+    width: 50px;
+    height: 50px;
+
+    a i, button i {
+      font-size: 24px;
+    }
+  }
+
+  main, .container, body {
+    padding-bottom: 85px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-navbar {
+    height: 60px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .bottom-nav-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+
+    a i, button i {
+      font-size: 18px;
+    }
+
+    &::after {
+      width: 20px;
+      height: 2px;
+    }
+  }
+
+  .bottom-nav-center {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+
+    a i, button i {
+      font-size: 20px;
+    }
+  }
+
+  main, .container, body {
+    padding-bottom: 80px;
+  }
+}

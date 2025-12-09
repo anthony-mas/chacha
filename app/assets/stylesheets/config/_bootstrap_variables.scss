@@ -17,6 +17,7 @@ $success:    $green;
 $info:       $yellow;
 $danger:     $red;
 $warning:    $orange;
+$secondary:  #FFFFFF; // Override Bootstrap's muted text color to white
 
 // Buttons & inputs' radius
 $border-radius-sm:            .0625rem;
