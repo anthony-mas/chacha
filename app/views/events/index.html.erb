@@ -1,21 +1,32 @@
-<header class="dashboard-header">
-  <h1>My events</h1>
-</header>
+<div class="my-events-page">
+  <header class="dashboard-header">
+    <h1>My events</h1>
+  </header>
 
-<% if user_signed_in? %>
-  <p>
-    <%= link_to "Create a new event", new_event_path %>
-  </p>
-
-  <% if @events.any? %>
-    <div class="event-card-container">
-      <% @events.each do |event| %>
-        <%= render "event_card", event: event %>
+  <% if user_signed_in? %>
+    <div class="create-event-link-wrapper">
+      <%= link_to new_event_path, class: "btn-primary create-event-btn" do %>
+        <i class="fa-solid fa-plus me-2"></i> Create a new event
       <% end %>
     </div>
+
+    <% if @events.any? %>
+      <div class="event-card-container">
+        <% @events.each do |event| %>
+          <div class="glass-event-card">
+            <%= render "event_card", event: event %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="no-events-glass">
+        <p>You don't have any events yet.</p>
+        <span class="no-events-emoji">🎉</span>
+      </div>
+    <% end %>
   <% else %>
-    <p>You don't have any events yet.</p>
+    <div class="no-events-glass">
+      <p>You need to log in to see your events.</p>
+    </div>
   <% end %>
-<% else %>
-  <p>You need to log in to see your events.</p>
-<% end %>
+</div>
