@@ -47,23 +47,20 @@
   });
 </script>
 
-  <h1>Plan events in seconds.</h1>
-
   <div class="cta-buttons">
     <% unless user_signed_in? %>
-      <%= link_to "Login", new_user_session_path, class: "btn btn-primary submit-btn" %>
+      <%= link_to "Login", new_user_session_path, class: "login-btn" %>
     <% end %>
-    <%= link_to "Discover Events", discover_path, class: "btn btn-primary submit-btn w-50" %>
+    <%= link_to "Discover Events", discover_path, class: "login-btn" %>
   </div>
 
-  <p class="intro-text">
-    The easiest way to get your guests on the same page.
-  </p>
+  <h1>Plan events in seconds.</h1>
 
   <p class="sub-text">
-    Share with anyone, anywhere.<br>
+    The easiest way to get your guests on the same page.<br>
+    Share with anyone, anywhere. See who's going.<br>
     Click, RSVP, done.<br>
-    See who's going.
   </p>
+
 
 </div>
