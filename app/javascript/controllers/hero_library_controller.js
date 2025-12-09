@@ -24,7 +24,7 @@ export default class extends Controller {
 
     // Update live preview on the form
     this.previewTarget.innerHTML = `
-      <img src="/assets/hero_library/${selectedImage}" class="hero-image-preview">
+      <img src="/assets/hero_library/${selectedImage}.jpg" class="hero-image-preview">
     `
 
     // Close the modal

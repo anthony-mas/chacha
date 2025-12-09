@@ -12,13 +12,17 @@
   width: 100%;
   z-index: 999;
 
-  // Premium editorial backdrop
-  background: var(--color-white-subtle);
-  border-top: 1px solid var(--color-border);
+  /* OPTIMIZED: Opaque Background, NO border, and higher height */
+  background: var(--gradient-primary);
+  border-top: none; /* REMOVED unnecessary border */
+  border-bottom: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* END OPTIMIZED */
 
   // Perfect alignment & spacing
   padding: var(--spacing-lg) var(--spacing-2xl);
-  height: 70px;
+  height: 80px; /* OPTIMIZED: Increased height (was 70px) */
 
   // Layout
   display: flex;
@@ -43,9 +47,17 @@
 
   // Icon sizing - exact pixel values for sharpness
   i {
+    font-family: 'Material Symbols Outlined';
     font-size: 24px;
     line-height: 1;
-    color: var(--color-primary); // FIXED: Default icon color is dark
+    color: var(--color-white-tertiary); /* OPTIMIZED: Use tertiary light color for standard icons */
+
+    /* FIXED: Force Material Symbols to use the requested FILLED style (FILL 1) */
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
 
     // Crisp rendering
     -webkit-font-smoothing: antialiased;
@@ -66,7 +78,7 @@
   // Hover state - premium interaction
   &:hover {
     i {
-      color: var(--color-title);
+      color: var(--color-white-primary); /* Use primary white on hover */
     }
   }
 
@@ -74,7 +86,7 @@
   &.active,
   &[aria-current="page"] {
     i {
-      color: var(--color-primary); // FIXED: Active icon color is dark
+      color: var(--color-white-primary); /* OPTIMIZED: Active icon color is white */
     }
 
     // Subtle bottom accent line
@@ -85,7 +97,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: var(--color-primary); // FIXED: Accent line is dark
+      background: var(--color-white-primary); /* OPTIMIZED: Accent line is white */
     }
   }
 }
@@ -97,7 +109,7 @@
   i {
     font-size: 28px;
     font-weight: 300;
-    color: var(--color-primary); // FIXED: Center icon color is dark
+    color: var(--color-white-primary); /* OPTIMIZED: Center icon color is white */
   }
 
   &:hover {
@@ -120,7 +132,7 @@
 @media (max-width: 1024px) {
   .bottom-navbar {
     padding: var(--spacing-md) var(--spacing-xl);
-    height: 65px;
+    height: 70px; /* OPTIMIZED: Increased height (was 65px) */
     gap: var(--spacing-2xl);
   }
 
@@ -145,10 +157,10 @@
 @media (max-width: 768px) {
   .bottom-navbar {
     padding: var(--spacing-sm) var(--spacing-md);
-    height: 60px;
+    height: 65px; /* OPTIMIZED: Increased height (was 60px) */
+    background: var(--gradient-primary);
+    border-top: none; /* REMOVED unnecessary border */
     gap: var(--spacing-2xl);
-    background: var(--color-white-subtle);
-    border-top: 1px solid var(--color-border);
   }
 
   .bottom-nav-icon {

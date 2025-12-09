@@ -1,11 +1,11 @@
 // Link styles
 a {
-    /* FIX: Revert to dark color (var(--color-title)) for links on light cards (which is the majority) */
+    /* OPTIMIZED: Use light color (var(--color-title)) as default link color */
     color: var(--color-title);
     text-decoration: none;
     transition: color 0.2s;
 }
 
 a:hover {
-    color: #5d6ea7;
+    color: var(--color-white-primary);
 }

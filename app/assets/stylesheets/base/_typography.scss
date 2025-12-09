@@ -12,7 +12,7 @@
 // --- 2. Typography Styles ---
 // Typography styles
 h1, h2, h3, h4, .title-lg, .title-md {
-    /* FIX: Revert to dark color (var(--color-title)) for readability on light elements */
+    /* OPTIMIZED: Use light color (var(--color-title)) as default text color */
     font-family: var(--font-headline);
     color: var(--color-title);
     margin-top: 0;
@@ -26,7 +26,7 @@ h3 { font-size: 1.2rem; margin-bottom: var(--spacing-sm); }
 p {
     font-size: 1rem;
     line-height: 1.5;
-    /* FIX: Revert to dark color (var(--color-body-text)) for readability on light elements */
+    /* OPTIMIZED: Use light color (var(--color-body-text)) as default text color */
     color: var(--color-body-text);
     font-family: var(--font-body);
 }
