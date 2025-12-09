@@ -12,7 +12,7 @@
   </div>
   <% if user_signed_in? && (comment.user == current_user || event.user == current_user) %>
     <%= button_to comment_path(comment), method: :delete, class: "comment-delete-btn", data: { turbo_confirm: "Delete this reply?" } do %>
-      <i class="fa-solid fa-times"></i>
+      <i class="fa-solid fa-trash"></i>
     <% end %>
   <% end %>
 </div>

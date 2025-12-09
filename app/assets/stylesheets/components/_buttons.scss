@@ -85,7 +85,7 @@
     }
 }
 
-// Host Actions
+// Host Actions - Glass Design
 .host-actions-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -94,10 +94,13 @@
 }
 
 .btn-action-large {
-    background: transparent;
-    color: var(--color-title);
-    border: 1px solid var(--color-border);
-    box-shadow: none;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--color-white-primary);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
     height: 100px;
     font-size: 1rem;
     font-weight: 600;
@@ -106,22 +109,23 @@
     align-items: center;
     justify-content: center;
     line-height: 1.2;
-    border-radius: 16px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
 
-    i {
-        font-size: 1.8rem;
-        margin-bottom: var(--spacing-sm);
-        color: var(--color-title);
-    }
+.btn-action-large i {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-white-primary);
+}
 
-    &:hover:not(:disabled) {
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        cursor: pointer;
-        transition: all 0.2s;
+.btn-action-large:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
 
-        &:hover {
-            box-shadow: none;
-        }
-    }
+.btn-action-large:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

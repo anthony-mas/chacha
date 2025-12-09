@@ -200,21 +200,21 @@
 
 .upcoming-events-list li, .recent-posts-list li {
     background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: var(--spacing-md);
-    border-radius: 16px;
+    border-radius: 12px;
     margin-bottom: var(--spacing-sm);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
 }
 
 .upcoming-events-list strong a {
-    color: var(--color-text-primary);
+    color: var(--color-white-primary);
     font-weight: 700;
 }
 
 .upcoming-events-list em {
-    color: var(--color-text-tertiary);
+    color: var(--color-white-tertiary);
     font-style: normal;
 }

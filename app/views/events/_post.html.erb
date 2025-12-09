@@ -58,8 +58,8 @@
 
     <% if user_signed_in? %>
       <%= form_with url: post_comments_path(post), method: :post, local: true, class: "reply-form", scope: :comment do |f| %>
-        <div class="reply-input-row">
-          <%= f.text_field :content, placeholder: "Write a reply...", required: true, class: "reply-input" %>
+        <%= f.text_area :content, placeholder: "Write a reply...", required: true, class: "reply-input", rows: 2 %>
+        <div class="reply-actions">
           <%= f.submit "Reply", class: "btn btn-reply" %>
         </div>
       <% end %>
