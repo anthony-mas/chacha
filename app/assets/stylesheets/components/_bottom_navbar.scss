@@ -42,13 +42,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 50px; /* MODIFIED: Increased touch target */
+  height: 50px; /* MODIFIED: Increased touch target */
 
   // Icon sizing - exact pixel values for sharpness
   i {
     font-family: 'Material Symbols Outlined';
-    font-size: 24px;
+    font-size: 1.8rem; /* MODIFIED: Increased from 24px to match upper navbar icon size (1.8rem) */
     line-height: 1;
     color: var(--color-white-tertiary); /* OPTIMIZED: Use tertiary light color for standard icons */
 
@@ -107,7 +107,7 @@
   position: relative;
 
   i {
-    font-size: 28px;
+    font-size: 2.2rem; /* MODIFIED: Increased from 28px to maintain center button distinction */
     font-weight: 300;
     color: var(--color-white-primary); /* OPTIMIZED: Center icon color is white */
   }
@@ -141,12 +141,12 @@
     height: 44px;
 
     i {
-      font-size: 22px;
+      font-size: 1.6rem; /* MODIFIED: Slightly reduced for tablet viewport */
     }
   }
 
   .bottom-nav-icon.bottom-center i {
-    font-size: 26px;
+    font-size: 2rem; /* MODIFIED: Slightly reduced for tablet viewport */
   }
 }
 
@@ -170,13 +170,13 @@
     max-width: 100px;
 
     i {
-      font-size: 22px;
+      font-size: 1.5rem; /* MODIFIED: Base mobile size */
     }
   }
 
   .bottom-nav-icon.bottom-center {
     i {
-      font-size: 26px;
+      font-size: 1.9rem; /* MODIFIED: Center mobile size */
     }
   }
 }
