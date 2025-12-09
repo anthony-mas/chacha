@@ -14,14 +14,14 @@
   font-size: 2.5rem;
   font-weight: 800;
   /* FIX: Explicitly light for dark gradient */
-  color: var(--color-text-primary) !important;
+  color: #FFFFFF !important;
 }
 
 .trending-subtitle {
   font-size: 1.2rem;
   font-weight: 600;
   /* FIX: Explicitly light for dark gradient */
-  color: var(--color-text-primary) !important;
+  color: #FFFFFF !important;
 }
 
 /* FIX: Target text-muted subtitle and no-events message on the dark background */
@@ -59,7 +59,7 @@
   // --- Default (Non-Active) Filter Tag Style: #40559D at 30% Opacity ---
   /* FIX: Non-active tags text/icons must be light on dark page background. */
   background-color: rgba(64, 85, 157, 0.3);
-  color: var(--color-text-primary) !important;
+  color: #FFFFFF !important;
   border: 1px solid rgba(64, 85, 157, 0.5);
 
   &:hover {
