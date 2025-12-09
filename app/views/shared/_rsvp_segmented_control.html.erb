@@ -1,0 +1,28 @@
+<%# Shared RSVP Segmented Control %>
+<%# Usage: render "shared/rsvp_segmented_control", current_status: "going", context: "page" %>
+<%# context: "page" = buttons that open modal (wrapped in turbo frame), "modal" = buttons that update hidden field %>
+
+<% current_status ||= nil %>
+<% context ||= "page" %>
+
+<% content = capture do %>
+  <div class="rsvp-segmented-control" data-rsvp-context="<%= context %>">
+    <button type="button" class="rsvp-segment <%= 'active' if current_status == 'going' %>" data-rsvp-status="going">
+      <span class="rsvp-segment-label">Going</span>
+    </button>
+    <button type="button" class="rsvp-segment <%= 'active' if current_status == 'maybe' %>" data-rsvp-status="maybe">
+      <span class="rsvp-segment-label">Maybe</span>
+    </button>
+    <button type="button" class="rsvp-segment <%= 'active' if current_status == 'not_going' %>" data-rsvp-status="not_going">
+      <span class="rsvp-segment-label">Not Going</span>
+    </button>
+  </div>
+<% end %>
+
+<% if context == "page" %>
+  <%= turbo_frame_tag "rsvp-segmented-control" do %>
+    <%= content %>
+  <% end %>
+<% else %>
+  <%= content %>
+<% end %>

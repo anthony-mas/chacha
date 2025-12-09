@@ -117,6 +117,17 @@
     color: var(--color-body-text);
 }
 
+// Segmented control wrapper inside modal
+.rsvp-modal-segmented-wrapper {
+    padding-top: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+
+    .rsvp-segmented-control {
+        max-width: 100%;
+    }
+}
+
+// Legacy emoji styles (kept for backwards compatibility)
 .rsvp-modal .rsvp-emoji-row {
     display: flex;
     justify-content: center;
