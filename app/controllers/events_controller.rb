@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  # Allow non-logged-in users to see the show page and the new discover page
-  before_action :authenticate_user!, except: [:show, :discover]
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  # Allow non-logged-in users to see the show page, discover, and the calendar download
+  before_action :authenticate_user!, except: [:show, :discover, :calendar]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :calendar]
   before_action :set_categories, only: [:new, :edit]
 
   # --- NEW ACTION ---
@@ -34,6 +34,20 @@ class EventsController < ApplicationController
 
   # Public event page (host + guests see this)
   def show
+  end
+
+  # ADDED: Action to export event as iCalendar (.ics) file
+  def calendar
+    respond_to do |format|
+      format.ics do
+        # Set headers to download a file named after the event title
+        headers['Content-Type'] = 'text/calendar; charset=UTF-8'
+        headers['Content-Disposition'] = "attachment; filename=\"#{@event.title.parameterize}.ics\""
+        render 'events/calendar', formats: [:ics] # Render the template at app/views/events/calendar.ics.erb
+      end
+      # Fallback for non-ics requests
+      format.html { redirect_to @event }
+    end
   end
 
   def new

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   get "/discover", to: "events#discover"
 
+  # ADDED: Custom route for iCalendar download (generates event_ics_path)
+  get 'events/:id/ics', to: 'events#calendar', defaults: { format: :ics }, as: :event_ics
+
   # resources :users, only: [:show] <-- REMOVED
 
   resources :events do

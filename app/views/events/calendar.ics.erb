@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ChaCha//Event Calendar v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART:<%= @event.starts_on.utc.strftime('%Y%m%dT%H%M%SZ') %>
+<% if @event.ends_on.present? %>
+DTEND:<%= @event.ends_on.utc.strftime('%Y%m%dT%H%M%SZ') %>
+<% else %>
+# Fallback to 1-hour event if end time is missing
+DTEND:<%= (@event.starts_on.utc + 1.hour).strftime('%Y%m%dT%H%M%SZ') %>
+<% end %>
+DTSTAMP:<%= Time.current.utc.strftime('%Y%m%dT%H%M%SZ') %>
+UID:<%= @event.id %>@chacha
+LOCATION:<%= @event.location.to_s.delete("\r\n").strip %>
+DESCRIPTION:<%= @event.description.to_s.delete("\r\n").strip.gsub(/,/, '\,') %>
+SUMMARY:<%= @event.title.to_s.delete("\r\n").strip.gsub(/,/, '\,') %>
+URL: <%= event_url(@event) %>
+END:VEVENT
+END:VCALENDAR

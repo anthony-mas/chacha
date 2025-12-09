@@ -10,13 +10,16 @@
           <span class="placeholder-icon">🖼️</span>
         </div>
       <% end %>
+
+      <%= link_to event_ics_path(@event), class: "calendar-download-link", target: "_blank", data: { turbo: false } do %>
+        <i class="material-symbols-outlined">calendar_add_on</i>
+      <% end %>
     </div>
 
     <div class="event-content-wrapper">
 
       <header class="event-header">
-        <h1 class="centered-title"><%= @event.title.presence ||
-"Event" %></h1>
+        <h1 class="centered-title"><%= @event.title.presence || "Event" %></h1>
 
         <div class="event-metadata">
           <p>
@@ -36,16 +39,14 @@
 
       <section class="event-description">
         <br>
-        <p><%= @event.description.presence ||
-      "No description yet." %></p>
+        <p><%= @event.description.presence || "No description yet." %></p>
       </section>
 
       <% if user_signed_in? && @event.user == current_user %>
         <section class="event-host-tools">
           <p>
             <%= link_to "Edit event", edit_event_path(@event) %> |
-<%= link_to "Delete", @event, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"
-} %>
+            <%= link_to "Delete", @event, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           </p>
 
           <div class="host-actions-buttons">
@@ -100,7 +101,6 @@
   const rsvpCloseBtn = rsvpOverlay ? rsvpOverlay.querySelector('.rsvp-modal-close') : null;
   const rsvpForm = document.getElementById('rsvp-form');
   const rsvpStatusField = document.getElementById('rsvp-status-field');
-
   // Page segmented control (outside modal)
   function getPageSegments() {
     return document.querySelectorAll('[data-rsvp-context="page"] .rsvp-segment');
@@ -115,13 +115,11 @@
     if (!rsvpOverlay) return;
     rsvpOverlay.classList.remove('is-hidden');
     document.body.style.overflow = 'hidden';
-
     // Set the modal segmented control to match the clicked status
     const modalSegments = getModalSegments();
     modalSegments.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.rsvpStatus === status);
     });
-
     // Update hidden field
     if (rsvpStatusField) {
       rsvpStatusField.value = status;
@@ -150,7 +148,6 @@
       openRsvpModal(status);
     }
   });
-
   // Modal segmented control: click updates hidden field and visual state
   document.addEventListener('click', (e) => {
     const modalSegment = e.target.closest('[data-rsvp-context="modal"] .rsvp-segment');
@@ -171,7 +168,6 @@
       setActiveSegment(status);
     }
   });
-
   if (rsvpCloseBtn) {
     rsvpCloseBtn.addEventListener('click', closeRsvpModal);
   }
@@ -217,7 +213,6 @@
       openGuestsModal();
     }
   });
-
   if (guestsCloseBtn) {
     guestsCloseBtn.addEventListener('click', closeGuestsModal);
   }
@@ -236,7 +231,6 @@
       tab.classList.add('active');
     }
   });
-
   // ─────────────────────────────────────────────────────────────
   // Share Modal
   // ─────────────────────────────────────────────────────────────
@@ -276,7 +270,6 @@
       openShareModal();
     });
   });
-
   // Close button
   if (shareCloseBtn) {
     shareCloseBtn.addEventListener('click', closeShareModal);
@@ -319,7 +312,6 @@
       }
     });
   });
-
   // Native Share API (if available)
   if (shareNativeBtn) {
     if (navigator.share) {

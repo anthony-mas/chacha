@@ -45,6 +45,7 @@
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
     overflow: hidden;
+    position: relative; /* ADDED: Necessary for absolute positioning of children */
 }
 
 .event-hero-image {
@@ -63,6 +64,38 @@
     align-items: center;
     justify-content: center;
     border-bottom: 3px solid var(--color-title);
+}
+
+/* ADDED: Calendar Download Link Styling */
+.calendar-download-link {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 50; /* Above the image/placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.4); /* Subtle dark background for contrast */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+
+    i {
+        font-size: 1.5rem;
+        color: white; /* Icon color is white */
+        /* Ensure Material Symbols icon settings are applied */
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+        transform: scale(1.05);
+    }
 }
 
 // ─────────────────────────────────────────────────────────────
