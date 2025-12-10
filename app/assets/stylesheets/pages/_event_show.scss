@@ -1,22 +1,88 @@
-// Event show page styles
+// Event show page styles - Glass Design
+
+// Event page wrapper
+.event-page {
+    // Text colors for glass card (light text on translucent bg)
+    .event-card-detail {
+        color: #F5F1E8;
+    }
+
+    // Title hierarchy
+    .centered-title {
+        color: #F5F1E8 !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    // RSVP section
+    .event-rsvp {
+        h2 {
+            color: #F5F1E8;
+            margin-bottom: var(--spacing-md);
+        }
+    }
+
+    // Metadata - slightly dimmed
+    .event-metadata p {
+        color: rgba(245, 241, 232, 0.85);
+    }
+
+    // Description - secondary text
+    .event-description p {
+        color: rgba(245, 241, 232, 0.75);
+    }
+
+    // Back link
+    > p a,
+    .event-content-wrapper > p a {
+        color: rgba(245, 241, 232, 0.8);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.2s;
+
+        &:hover {
+            color: #F5F1E8;
+        }
+    }
+
+    // Host tools links
+    .event-host-tools p a {
+        color: rgba(245, 241, 232, 0.8) !important;
+
+        &:hover {
+            color: #F5F1E8 !important;
+        }
+    }
+}
+
 .event-title-detail {
     font-size: 2.8rem;
     margin-top: var(--spacing-lg);
-    color: var(--color-title);
+    color: var(--color-white-primary);
 }
 
+// Metadata - light text on glass
 .event-metadata p {
     margin: 4px 0;
     font-size: 1rem;
-    color: var(--color-body-text);
+    color: var(--color-white-secondary);
+}
+
+// Description section
+.event-description {
+    color: var(--color-white-tertiary);
+
+    p {
+        color: var(--color-white-secondary);
+        line-height: 1.6;
+    }
 }
 
 .event-actions {
     display: flex;
     justify-content: space-around;
     padding: var(--spacing-md) 0;
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     margin: var(--spacing-lg) 0;
 }
 
@@ -28,12 +94,18 @@
     font-size: 1.5rem;
     display: block;
     margin-bottom: var(--spacing-xs);
-    color: var(--color-title);
+    color: var(--color-white-primary);
 }
 
-/* FIX: Target the host tool links which are currently white-on-light-card and force them dark */
+// Host tools - light text
 .event-host-tools p a {
-    color: var(--color-title) !important;
+    color: var(--color-white-secondary) !important;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+        color: var(--color-white-primary) !important;
+    }
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -42,8 +114,8 @@
 
 .event-hero-wrapper {
     width: 100%;
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     overflow: hidden;
     position: relative; /* ADDED: Necessary for absolute positioning of children */
 }
@@ -53,17 +125,21 @@
     height: 240px;
     object-fit: cover;
     display: block;
-    border-bottom: 3px solid var(--color-title);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
 }
 
 .event-hero-placeholder {
     width: 100%;
     height: 240px;
-    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+    background: rgba(255, 255, 255, 0.06);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 3px solid var(--color-title);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+
+    .placeholder-icon {
+        opacity: 0.5;
+    }
 }
 
 /* ADDED: Calendar Download Link Styling */
@@ -83,7 +159,7 @@
 
     i {
         font-size: 1.5rem;
-        color: #F5F1E8; /* Updated from white */
+        color: white; /* Icon color is white */
         /* Ensure Material Symbols icon settings are applied */
         font-variation-settings:
           'FILL' 0,
@@ -99,14 +175,17 @@
 }
 
 // ─────────────────────────────────────────────────────────────
-// Guests List Section
+// Guests List Section - Glass Design
 // ─────────────────────────────────────────────────────────────
 
 .guests-list-container {
-    background-color: var(--color-card);
-    border-radius: 12px;
-    padding: var(--spacing-md);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    padding: var(--spacing-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 .guests-header {
@@ -117,24 +196,25 @@
 
     .title-md {
         margin: 0;
-        color: var(--color-title);
+        color: var(--color-white-primary);
         font-size: 1.1rem;
+        font-weight: 600;
     }
 }
 
 .btn-view-all {
-    background: none;
-    border: 1px solid var(--color-title);
-    color: var(--color-title);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--color-white-primary);
     padding: 4px 12px;
     border-radius: 14px;
     font-size: 0.8rem;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s;
 
     &:hover {
-        background-color: var(--color-title);
-        color: #F5F1E8; /* Updated from white */
+        background: rgba(255, 255, 255, 0.20);
+        border-color: rgba(255, 255, 255, 0.35);
     }
 }
 
@@ -145,13 +225,13 @@
 .guests-total-count {
     margin: 0 0 4px 0;
     font-size: 0.95rem;
-    color: var(--color-body-text);
+    color: var(--color-white-secondary);
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
 
     i {
-        color: var(--color-title);
+        color: var(--color-white-primary);
         font-size: 0.9rem;
     }
 }
@@ -159,14 +239,14 @@
 .guests-mutual-text {
     margin: 0;
     font-size: 0.85rem;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
     font-style: italic;
 }
 
 .guests-empty-text {
     margin: 0;
     font-size: 0.9rem;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
     text-align: center;
     padding: var(--spacing-md) 0;
 }
@@ -196,21 +276,24 @@
     justify-content: center;
     font-size: 0.8rem;
     font-weight: 700;
-    color: #F5F1E8; /* Updated from white */
-    border: 2px solid var(--color-card);
-    background-color: var(--color-title);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     flex-shrink: 0;
     cursor: default;
-    transition: transform 0.15s;
+    transition: transform 0.15s, background 0.15s;
 
     &:hover {
         transform: scale(1.1);
         z-index: 1;
+        background: rgba(255, 255, 255, 0.30);
     }
 }
 
 .guests-avatar-overflow {
-    background-color: var(--color-secondary-text);
+    background: rgba(255, 255, 255, 0.12);
     font-size: 0.75rem;
 }
 
@@ -275,7 +358,7 @@
 }
 
 // ─────────────────────────────────────────────────────────────
-// Activity Section
+// Activity Section - Glass Design
 // ─────────────────────────────────────────────────────────────
 
 .activity-section {
@@ -293,14 +376,14 @@
     h2 {
         margin: 0;
         flex-shrink: 0;
-        color: var(--color-title);
+        color: var(--color-white-primary);
     }
 }
 
 .btn-activity-post {
-    background-color: var(--color-title);
-    color: #F5F1E8; /* Updated from white */
-    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--color-white-primary);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 6px 14px;
     height: 36px;
     border-radius: 18px;
@@ -311,12 +394,13 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background 0.2s, transform 0.1s, border-color 0.2s;
     white-space: nowrap;
     flex-shrink: 0;
 
     &:hover {
-        background-color: darken(#40559D, 10%);
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.35);
     }
 
     &:active {
@@ -328,13 +412,16 @@
     }
 }
 
-// Post Form
+// Post Form - Glass Design
 .activity-post-form {
-    background-color: var(--color-card);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-md);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 
     &.is-hidden {
         display: none;
@@ -347,16 +434,23 @@
 
         textarea {
             width: 100%;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            border-radius: 12px;
+            padding: var(--spacing-sm) var(--spacing-md);
             font-family: var(--font-body);
             font-size: 1rem;
             resize: none;
+            color: var(--color-white-primary);
+
+            &::placeholder {
+                color: var(--color-white-tertiary);
+            }
 
             &:focus {
                 outline: none;
-                border-color: var(--color-title);
+                border-color: rgba(255, 255, 255, 0.40);
+                background: rgba(255, 255, 255, 0.12);
             }
         }
     }
@@ -368,21 +462,33 @@
     }
 
     .btn-cancel {
-        background: none;
-        border: 1px solid #ccc;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.20);
         padding: var(--spacing-xs) var(--spacing-md);
         border-radius: 6px;
         cursor: pointer;
-        color: var(--color-secondary-text);
+        color: var(--color-white-secondary);
+        transition: background 0.2s, border-color 0.2s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.30);
+        }
     }
 
     .btn-submit {
-        background-color: var(--color-title);
-        color: #F5F1E8; /* Updated from white */
-        border: none;
+        background: rgba(255, 255, 255, 0.20);
+        color: var(--color-white-primary);
+        border: 1px solid rgba(255, 255, 255, 0.25);
         padding: var(--spacing-xs) var(--spacing-md);
         border-radius: 6px;
         cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.30);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
     }
 }
 
@@ -399,29 +505,38 @@
 
 .activity-empty {
     text-align: center;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
     padding: var(--spacing-xl) 0;
     font-style: italic;
 }
 
 .btn-see-all {
-    background: none;
-    border: 1px solid var(--color-title);
-    color: var(--color-title);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--color-white-primary);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.9rem;
     align-self: center;
     margin-top: var(--spacing-sm);
+    transition: background 0.2s, border-color 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.20);
+        border-color: rgba(255, 255, 255, 0.35);
+    }
 }
 
-// Post Card
+// Post Card - Glass Design
 .post-card {
-    background-color: var(--color-card);
-    border-radius: 12px;
-    padding: var(--spacing-md);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    padding: var(--spacing-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 .post-header {
@@ -440,14 +555,15 @@
 .post-avatar {
     width: 36px;
     height: 36px;
-    background-color: var(--color-title);
+    background: rgba(255, 255, 255, 0.20);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
     font-weight: 700;
-    color: #F5F1E8; /* Updated from white */
+    color: var(--color-white-primary);
 }
 
 .post-meta {
@@ -457,22 +573,28 @@
 
 .post-author-name {
     font-weight: 600;
-    color: var(--color-body-text);
+    color: var(--color-white-primary);
     font-size: 0.95rem;
 }
 
 .post-time {
     font-size: 0.8rem;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
 }
 
 .post-delete-btn {
     background: none;
     border: none;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
     cursor: pointer;
     padding: var(--spacing-xs);
     opacity: 0.5;
+    transition: opacity 0.2s ease, color 0.2s ease;
+
+    &:hover {
+        opacity: 1;
+        color: #e74c3c;
+    }
 }
 
 // Post Content
@@ -482,6 +604,7 @@
     p {
         margin: 0;
         line-height: 1.5;
+        color: var(--color-white-secondary);
     }
 }
 
@@ -491,7 +614,7 @@
     align-items: center;
     gap: var(--spacing-md);
     padding-top: var(--spacing-sm);
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .reaction-form {
@@ -500,7 +623,7 @@
 
 .reaction-btn,
 .reaction-display {
-    background: none;
+    background: rgba(255, 255, 255, 0.08);
     border: none;
     cursor: pointer;
     display: flex;
@@ -508,7 +631,11 @@
     gap: 4px;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 20px;
-    transition: background-color 0.2s;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
 }
 
 .reaction-emoji {
@@ -517,13 +644,13 @@
 
 .reaction-count {
     font-size: 0.85rem;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
 }
 
 .reply-toggle-btn {
-    background: none;
+    background: rgba(255, 255, 255, 0.08);
     border: none;
-    color: var(--color-secondary-text);
+    color: var(--color-white-secondary);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -531,14 +658,18 @@
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 20px;
     font-size: 0.9rem;
-    transition: background-color 0.2s;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
 }
 
 // Replies Section
 .post-replies {
     margin-top: var(--spacing-md);
     padding-top: var(--spacing-md);
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
 
     &.is-hidden {
         display: none;
@@ -555,22 +686,24 @@
 .comment-item {
     display: flex;
     gap: var(--spacing-sm);
-    background-color: #F5F1E8; /* Updated from #f9f9f9 */
-    border-radius: 8px;
-    padding: var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .comment-avatar {
     width: 28px;
     height: 28px;
-    background-color: var(--color-secondary-text);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.20);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #F5F1E8; /* Updated from white */
+    color: var(--color-white-primary);
     flex-shrink: 0;
 }
 
@@ -589,52 +722,86 @@
 .comment-author {
     font-weight: 600;
     font-size: 0.85rem;
-    color: var(--color-body-text);
+    color: var(--color-white-primary);
 }
 
 .comment-time {
     font-size: 0.75rem;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
 }
 
 .comment-content {
     margin: 0;
     font-size: 0.9rem;
     line-height: 1.4;
+    color: var(--color-white-secondary);
 }
 
 .comment-delete-btn {
     background: none;
     border: none;
-    color: var(--color-secondary-text);
+    color: var(--color-white-tertiary);
     cursor: pointer;
     padding: 2px 6px;
     opacity: 0.4;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+
+    &:hover {
+        opacity: 1;
+        color: #e74c3c;
+    }
 }
 
 // Reply Form
 .reply-form {
-    .reply-input-row {
-        display: flex;
-        gap: var(--spacing-sm);
-    }
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
 
     .reply-input {
-        flex: 1;
-        border: 1px solid #e0e0e0;
-        border-radius: 20px;
-        padding: var(--spacing-xs) var(--spacing-md);
+        width: 100%;
+        min-height: 60px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 12px;
+        padding: var(--spacing-sm) var(--spacing-md);
         font-family: var(--font-body);
         font-size: 0.9rem;
+        resize: vertical;
+        box-sizing: border-box;
+        color: var(--color-white-primary);
+
+        &::placeholder {
+            color: var(--color-white-tertiary);
+        }
+
+        &:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.12);
+        }
+    }
+
+    .reply-actions {
+        display: flex;
+        justify-content: flex-end;
     }
 
     .btn-reply {
-        background-color: var(--color-title);
-        color: #F5F1E8; /* Updated from white */
-        border: none;
-        padding: var(--spacing-xs) var(--spacing-md);
-        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.18);
+        color: var(--color-white-primary);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 6px 16px;
+        border-radius: 16px;
         cursor: pointer;
         font-size: 0.85rem;
+        font-weight: 500;
+        transition: background 0.2s ease, border-color 0.2s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.28);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
     }
 }

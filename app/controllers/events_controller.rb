@@ -100,6 +100,7 @@ class EventsController < ApplicationController
       :starts_on,
       :ends_on,
       :event_private,
+      :hero_image,
       :hero_image_choice,
       category_ids: []
     )
@@ -109,10 +110,15 @@ class EventsController < ApplicationController
     choice = params.dig(:event, :hero_image_choice)
     return if choice.blank?
 
-    path = Rails.root.join("app/assets/images/hero_library", choice)
+    # Images are stored in public/hero_library/ (no fingerprinting issues)
+    path = Rails.root.join("public/hero_library", choice)
     return unless File.exist?(path)
 
     event.hero_image.purge if event.hero_image.attached?
-    event.hero_image.attach(io: File.open(path), filename: choice)
+    event.hero_image.attach(
+      io: File.open(path),
+      filename: choice,
+      content_type: Marcel::MimeType.for(name: choice)
+    )
   end
 end

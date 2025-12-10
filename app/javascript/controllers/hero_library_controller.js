@@ -21,14 +21,15 @@ export default class extends Controller {
 
   // User clicks on a hero image
   choose(event) {
-    const selectedImage = event.currentTarget.dataset.image
+    const filename = event.currentTarget.dataset.image
+    const previewUrl = event.currentTarget.dataset.imagePreview
 
-    // Update hidden field
-    this.inputTarget.value = selectedImage
+    // Update hidden field with filename only (for backend)
+    this.inputTarget.value = filename
 
-    // Update live preview on the form
+    // Update live preview on the form (with full asset URL)
     this.previewTarget.innerHTML = `
-      <img src="${selectedImage}" class="hero-image-preview">
+      <img src="${previewUrl}" class="hero-image-preview">
     `
 
     // Close the modal

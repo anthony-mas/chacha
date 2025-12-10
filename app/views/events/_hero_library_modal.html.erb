@@ -2,8 +2,8 @@
   <div class="hero-modal-content">
 
     <div class="hero-modal-header">
-      <h2>Add Background</h2>
-      <button class="hero-close-btn" data-action="hero-library#close">✕</button>
+      <h2 style="color: #F5F1E8;">Add Background</h2>
+      <button style="color: #F5F1E8;" class="hero-close-btn" data-action="hero-library#close">✕</button>
     </div>
 
    <div class="hero-grid">
@@ -17,9 +17,10 @@
       <% images.each do |img| %>
         <div class="hero-thumb"
             data-action="click->hero-library#choose"
-            data-image="<%= asset_path("hero_library/#{img}") %>">
+            data-image="<%= img %>"
+            data-image-preview="/hero_library/<%= img %>">
 
-          <%= image_tag "hero_library/#{img}" %>
+          <img src="/hero_library/<%= img %>" alt="<%= img %>">
 
         </div>
       <% end %>
