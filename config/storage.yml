@@ -1,14 +1,24 @@
-test:
-  service: Disk
-  root: <%= Rails.root.join("tmp/storage") %>
+# config/storage.yml
 
+# Default configuration to store files locally (disk storage).
+# Used in development environment by default.
 local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+# Configuration for the test environment.
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+# Configuration for the Cloudinary service.
+# It reads the credentials from environment variables set on Heroku.
 cloudinary:
   service: Cloudinary
-  cloud_name: <%= ENV.fetch("CLOUDINARY_CLOUD_NAME") %>
-  api_key: <%= ENV.fetch("CLOUDINARY_API_KEY") %>
-  api_secret: <%= ENV.fetch("CLOUDINARY_API_SECRET") %>
-  folder: chacha_<%= Rails.env %>
+  cloud_name: <%= ENV['CLOUDINARY_CLOUD_NAME'] %>
+  api_key: <%= ENV['CLOUDINARY_API_KEY'] %>
+  api_secret: <%= ENV['CLOUDINARY_API_SECRET'] %>
+
+# Tell Active Storage to use the 'cloudinary' service in production.
+production:
+  service: cloudinary
