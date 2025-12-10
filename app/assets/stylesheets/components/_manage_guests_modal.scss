@@ -314,3 +314,15 @@
     outline: none;
     border-color: var(--color-title);
 }
+
+// Host status change form (inline, no extra spacing)
+.host-status-form {
+    display: inline-flex;
+}
+
+.host-status-select {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    min-width: 100px;
+    border-radius: 8px;
+}

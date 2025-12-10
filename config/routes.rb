@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   # resources :users, only: [:show] <-- REMOVED
 
   resources :events do
-    resources :participations, only: [:create, :update, :destroy]
+    resources :participations, only: [:create, :update, :destroy] do
+      member do
+        patch :update_guest_status
+      end
+    end
     resources :posts, only: [:create, :destroy]
   end
 

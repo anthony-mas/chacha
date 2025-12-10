@@ -1,0 +1,56 @@
+<%# Single guest row - used in manage guests modal for both host and invitee %>
+<%# Host sees a dropdown to change status, invitee sees a badge %>
+
+<%
+  def row_initials(user)
+    if user.name.present?
+      parts = user.name.strip.split
+      parts.length >= 2 ? "#{parts.first[0]}#{parts.last[0]}".upcase : parts.first[0..1].upcase
+    else
+      user.email.split("@").first[0..1].upcase
+    end
+  end
+
+  status_class = case participation.status
+                 when "going" then "status-going"
+                 when "maybe" then "status-maybe"
+                 else "status-not-going"
+                 end
+
+  status_label = case participation.status
+                 when "going" then "Going"
+                 when "maybe" then "Maybe"
+                 else "Not going"
+                 end
+%>
+
+<li class="manage-guests-item">
+  <div class="guest-info">
+    <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
+      <%= row_initials(participation.user) %>
+    </div>
+    <div class="guest-details">
+      <span class="guest-name"><%= participation.user.name.presence || participation.user.email.split("@").first %></span>
+      <% if participation.extra_guests.to_i > 0 %>
+        <small class="extra-guests-badge">+<%= participation.extra_guests %></small>
+      <% end %>
+    </div>
+  </div>
+
+  <% if is_host %>
+    <%# Host control: dropdown to change guest status %>
+    <%= form_with url: update_guest_status_event_participation_path(event, participation),
+                  method: :patch,
+                  class: "host-status-form",
+                  data: { turbo: true } do |f| %>
+      <select name="participation[status]" class="host-status-select rsvp-input" onchange="this.form.requestSubmit()">
+        <option value="going" <%= 'selected' if participation.status == 'going' %>>Going</option>
+        <option value="maybe" <%= 'selected' if participation.status == 'maybe' %>>Maybe</option>
+        <option value="not_going" <%= 'selected' if participation.status == 'not_going' || participation.status == 'declined' %>>Not going</option>
+      </select>
+    <% end %>
+  <% else %>
+    <%# Invitee view: read-only badge %>
+    <span class="guest-status-badge <%= status_class %>"><%= status_label %></span>
+  <% end %>
+</li>
