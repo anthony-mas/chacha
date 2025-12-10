@@ -5,17 +5,20 @@
 # Run: rails db:drop db:create db:migrate db:seed
 # =============================================================================
 
+require 'fileutils' # Ensure FileUtils is required for clearing local storage in dev/test
+
 puts "=" * 60
 puts "ChaCha Demo Seeds"
 puts "=" * 60
 
 # -----------------------------------------------------------------------------
-# Use local storage for seeding (avoids Cloudinary API issues during seed)
+# Active Storage Configuration Check (The fix is that we rely on config/environments/X.rb)
 # -----------------------------------------------------------------------------
-original_service = ActiveStorage::Blob.service
-local_config = { local: { service: "Disk", root: Rails.root.join("storage") } }
-ActiveStorage::Blob.service = ActiveStorage::Service.configure(:local, local_config)
-puts "[INFO] Using local storage for seeding hero images"
+# If you are seeding with images, Active Storage must be configured to use
+# a PERSISTENT service (like Cloudinary on Heroku).
+# We REMOVE the manual override to :local storage here, so the environment
+# configuration (Cloudinary in Production) is used automatically.
+# -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
 # 0. Clear existing data (in dependency order)
@@ -31,9 +34,18 @@ Event.destroy_all
 User.destroy_all
 Category.destroy_all
 
-# Clear local storage files
-FileUtils.rm_rf(Rails.root.join("storage"))
-FileUtils.mkdir_p(Rails.root.join("storage"))
+# Clear associated files using Active Storage's method (works for Cloudinary and Disk)
+ActiveStorage::Blob.all.each(&:purge_later)
+
+# In development/test, we also clear the local storage folder for good measure.
+if ActiveStorage::Blob.service.class.name.include?("DiskService")
+  puts "[INFO] Clearing local disk storage folder."
+  FileUtils.rm_rf(Rails.root.join("storage"))
+  FileUtils.mkdir_p(Rails.root.join("storage"))
+else
+  # On Heroku (Cloudinary), this message confirms we are using cloud storage
+  puts "[INFO] Using cloud storage for seeding hero images"
+end
 
 puts "  -> All tables and storage cleared"
 
@@ -84,7 +96,7 @@ other_users = users.values
 puts "  -> #{User.count} users ready (main demo user: #{charlotte.email})"
 
 # -----------------------------------------------------------------------------
-# 3. Helper: Attach hero image (uses local storage)
+# 3. Helper: Attach hero image
 # -----------------------------------------------------------------------------
 def attach_hero_image(event, filename)
   path = Rails.root.join("app/assets/images/hero_library", filename)
@@ -361,7 +373,7 @@ Participation.create!(event: events[:halloween], user: users[:claire], status: "
 Participation.create!(event: events[:halloween], user: users[:pierre], status: "not_going", extra_guests: 0)
 
 puts "  -> #{Participation.count} participations ready"
-puts "     Charlotte's participations: #{charlotte.participations.count} (should be 0)"
+puts "     Charlotte's participations: #{charlotte.participations.count} (should be 0 for Discover to work)"
 
 # -----------------------------------------------------------------------------
 # 6. Posts (Activity Feed) - For 7 events with 2-4 posts each
@@ -515,5 +527,4 @@ puts "  - #{Category.count} categories"
 puts "  - #{Event.joins(:hero_image_attachment).count} events with hero images"
 puts "=" * 60
 
-# Restore original storage service
-ActiveStorage::Blob.service = original_service
+# NOTE: The restoration of the original service has been REMOVED here.
