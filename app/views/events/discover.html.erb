@@ -1,30 +1,53 @@
 <div class="discover-page-container">
   <div class="container pt-4 pb-4">
+
     <h1 class="discover-title mb-3" style="color: #F5F1E8;">Discover</h1>
+
+    <!-- ============================= -->
+    <!-- FILTER BAR -->
+    <!-- ============================= -->
 
     <div class="filter-bar mb-4">
       <div class="filter-scroll-container">
 
-        <%# FIX: Changed discover_events_path to discover_path %>
-        <%= link_to discover_path(location: @current_location, filter: @current_filter, category: params[:category]), class: "filter-tag location-tag active", style: "color: #111111 !important;" do %>
-          <i class="fa-solid fa-location-dot me-1"></i> <%= @current_location %>
+        <!-- LOCATION TAG — active ONLY when no filter is selected -->
+
+        <!-- TOP FILTER -->
+        <% if params[:filter] == "top" %>
+          <%= link_to "Top",
+            discover_path,
+            class: "filter-tag #{'active' if params[:filter] == 'top'}",
+            style: "color: #F5F1E8 !important;" %>
+        <% else %>
+          <%= link_to "Top",
+            discover_path(filter: "top"),
+            class: "filter-tag #{'active' if params[:filter] == 'top'}",
+            style: "color: #F5F1E8 !important;" %>
         <% end %>
 
-        <%# FIX: Changed discover_events_path to discover_path %>
-        <%= link_to "Top", discover_path(location: @current_location, filter: 'top'), class: "filter-tag #{'active' if @current_filter == 'top'}", style: "color: #F5F1E8 !important;" %>
 
-        <% if current_user %>
-          <%# FIX: Changed discover_events_path to discover_path %>
-          <%= link_to "Friends", discover_path(location: @current_location, filter: 'friends'), class: "filter-tag #{'active' if @current_filter == 'friends'}", style: "color: #F5F1E8 !important;" %>
-        <% end %>
-
+        <!-- CATEGORY FILTERS -->
         <% @categories.each do |category| %>
-          <%# FIX: Changed discover_events_path to discover_path %>
-          <%= link_to category, discover_path(location: @current_location, category: category), class: "filter-tag category-tag #{'active' if @current_filter == category}", style: "color: #F5F1E8 !important;" %>
+          <% if params[:filter] == category %>
+            <%= link_to category,
+              discover_path(),
+              class: "filter-tag category-tag #{'active' if params[:filter] == category}",
+              style: "color: #F5F1E8 !important;" %>
+          <% else %>
+            <%= link_to category,
+              discover_path(filter: category),
+              class: "filter-tag category-tag",
+              style: "color: #F5F1E8 !important;" %>
+          <% end %>
         <% end %>
+
+
       </div>
     </div>
 
+    <!-- ============================= -->
+    <!-- EVENTS LIST -->
+    <!-- ============================= -->
 
     <div class="event-cards-list">
       <% if @events.any? %>
@@ -37,5 +60,6 @@
         </p>
       <% end %>
     </div>
+
   </div>
 </div>
