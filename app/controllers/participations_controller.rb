@@ -1,6 +1,7 @@
 class ParticipationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_event, only: [:create, :update, :destroy]
+  before_action :set_event, only: [:create, :update, :destroy, :update_guest_status]
+  before_action :authorize_host!, only: [:update_guest_status]
 
   def create
     @participation = @event.participations.find_by(user: current_user)
@@ -49,10 +50,27 @@ class ParticipationsController < ApplicationController
     end
   end
 
+  # Host-only action to change any guest's status
+  def update_guest_status
+    @participation = @event.participations.find(params[:id])
+
+    if @participation.update(participation_params)
+      respond_to_participation_change
+    else
+      head :unprocessable_entity
+    end
+  end
+
   private
 
   def set_event
     @event = Event.find(params[:event_id])
+  end
+
+  def authorize_host!
+    unless @event.user == current_user
+      head :forbidden
+    end
   end
 
   def participation_params

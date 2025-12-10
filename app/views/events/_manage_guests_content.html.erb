@@ -1,7 +1,7 @@
-<%# Manage Guests Content - Inner content for the manage guests modal %>
-<%# This partial is wrapped in a turbo_frame_tag "manage-guests-content" in the parent modal %>
+<%# Manage Guests Content - Unified layout for host and invitee %>
+<%# Host sees the same layout as invitee, but with controls to change guest status %>
 
-<%# Compute participation counts using same logic as _guests_list %>
+<%# Compute participation counts %>
 <% all_participations = event.participations.includes(:user).order("users.name ASC") %>
 <% going_participations = all_participations.where(status: "going") %>
 <% maybe_participations = all_participations.where(status: "maybe") %>
@@ -10,7 +10,7 @@
 <%# Count participations (people who RSVP'd) %>
 <% going_participation_count = going_participations.count %>
 <% maybe_participation_count = maybe_participations.count %>
-<% not_going_count = not_going_participations.count %>
+<% not_going_participation_count = not_going_participations.count %>
 
 <%# Calculate totals including extra guests %>
 <% going_extra_guests = going_participations.sum(:extra_guests) %>
@@ -21,7 +21,7 @@
 <%# Check if current user is the host %>
 <% is_host = user_signed_in? && event.user == current_user %>
 
-<%# Helper to compute initials (same as _guests_list) %>
+<%# Helper to compute initials %>
 <%
   def content_initials(user)
     if user.name.present?
@@ -34,126 +34,48 @@
 %>
 
 <%= turbo_frame_tag "manage-guests-content" do %>
-<% if is_host %>
-  <%# ═══════════════════════════════════════════════════════════ %>
-  <%# HOST VIEW: Full management controls %>
-  <%# ═══════════════════════════════════════════════════════════ %>
-  <h2 class="manage-guests-title">Manage Guests</h2>
+  <%# Unified header %>
+  <h2 class="manage-guests-title"><%= is_host ? "Manage Guests" : "Who's Going" %></h2>
 
-  <div class="manage-guests-tools">
-    <div class="manage-guests-search">
-      <input type="search" placeholder="Find a guest..." class="rsvp-input">
-    </div>
-
-    <div class="manage-guests-filter">
-      <select class="rsvp-input status-filter-select">
-        <option value="all">All Statuses</option>
-        <option value="going">Going</option>
-        <option value="maybe">Maybe</option>
-        <option value="not_going">Not going</option>
-      </select>
-    </div>
-
-    <div class="manage-guests-status-tabs">
-      <button type="button" class="status-tab active" data-status="going">
-        <span class="status-emoji">👍</span>
-        <span class="status-label">Going</span>
-        <span class="status-count"><%= going_count %></span>
-      </button>
-      <button type="button" class="status-tab" data-status="maybe">
-        <span class="status-emoji">🤔</span>
-        <span class="status-label">Maybe</span>
-        <span class="status-count"><%= maybe_count %></span>
-      </button>
-      <button type="button" class="status-tab" data-status="not_going">
-        <span class="status-emoji">👎</span>
-        <span class="status-label">Not going</span>
-        <span class="status-count"><%= not_going_count %></span>
-      </button>
-    </div>
-  </div>
-
-  <ul class="manage-guests-list">
-    <% all_participations.each do |participation| %>
-      <li class="manage-guests-item" data-status="<%= participation.status %>">
-        <div class="guest-info">
-          <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
-            <%= content_initials(participation.user) %>
-          </div>
-          <div class="guest-details">
-            <span class="guest-name"><%= participation.user.name.presence || participation.user.email.split("@").first %></span>
-            <% if participation.extra_guests.to_i > 0 %>
-              <small class="extra-guests-badge">+<%= participation.extra_guests %></small>
-            <% end %>
-          </div>
-        </div>
-
-        <select class="guest-status-select">
-          <option value="going" <%= 'selected' if participation.status == 'going' %>>👍 Going</option>
-          <option value="maybe" <%= 'selected' if participation.status == 'maybe' %>>🤔 Maybe</option>
-          <option value="not_going" <%= 'selected' if participation.status == 'not_going' || participation.status == 'declined' %>>👎 Not going</option>
-        </select>
-      </li>
-    <% end %>
-  </ul>
-
-<% else %>
-  <%# ═══════════════════════════════════════════════════════════ %>
-  <%# INVITEE VIEW: Read-only guest list %>
-  <%# ═══════════════════════════════════════════════════════════ %>
-  <h2 class="manage-guests-title">Who's Going</h2>
-
-  <%# Summary counts (no emojis for invitee view) %>
+  <%# Summary counts (no emojis) %>
   <div class="guests-modal-summary">
     <span class="summary-item summary-going"><%= going_count %> going</span>
     <% if maybe_count > 0 %>
       <span class="summary-item summary-maybe"><%= maybe_count %> maybe</span>
     <% end %>
+    <% if is_host && not_going_participation_count > 0 %>
+      <span class="summary-item summary-not-going"><%= not_going_participation_count %> not going</span>
+    <% end %>
   </div>
 
+  <%# Going section %>
   <% if going_participation_count > 0 %>
-    <ul class="manage-guests-list guests-readonly">
+    <ul class="manage-guests-list<%= ' guests-readonly' unless is_host %>">
       <% going_participations.each do |participation| %>
-        <li class="manage-guests-item">
-          <div class="guest-info">
-            <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
-              <%= content_initials(participation.user) %>
-            </div>
-            <div class="guest-details">
-              <span class="guest-name"><%= participation.user.name.presence || participation.user.email.split("@").first %></span>
-              <% if participation.extra_guests.to_i > 0 %>
-                <small class="extra-guests-badge">+<%= participation.extra_guests %></small>
-              <% end %>
-            </div>
-          </div>
-          <span class="guest-status-badge status-going">Going</span>
-        </li>
+        <%= render "events/manage_guests_row", event: event, participation: participation, is_host: is_host %>
       <% end %>
     </ul>
   <% else %>
     <p class="guests-modal-empty">No one has confirmed yet.</p>
   <% end %>
 
+  <%# Maybe section %>
   <% if maybe_participation_count > 0 %>
     <h3 class="guests-modal-subheading">Maybe attending</h3>
-    <ul class="manage-guests-list guests-readonly">
+    <ul class="manage-guests-list<%= ' guests-readonly' unless is_host %>">
       <% maybe_participations.each do |participation| %>
-        <li class="manage-guests-item">
-          <div class="guest-info">
-            <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
-              <%= content_initials(participation.user) %>
-            </div>
-            <div class="guest-details">
-              <span class="guest-name"><%= participation.user.name.presence || participation.user.email.split("@").first %></span>
-              <% if participation.extra_guests.to_i > 0 %>
-                <small class="extra-guests-badge">+<%= participation.extra_guests %></small>
-              <% end %>
-            </div>
-          </div>
-          <span class="guest-status-badge status-maybe">Maybe</span>
-        </li>
+        <%= render "events/manage_guests_row", event: event, participation: participation, is_host: is_host %>
       <% end %>
     </ul>
   <% end %>
-<% end %>
+
+  <%# Not going section (host only) %>
+  <% if is_host && not_going_participation_count > 0 %>
+    <h3 class="guests-modal-subheading">Not going</h3>
+    <ul class="manage-guests-list">
+      <% not_going_participations.each do |participation| %>
+        <%= render "events/manage_guests_row", event: event, participation: participation, is_host: is_host %>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>
