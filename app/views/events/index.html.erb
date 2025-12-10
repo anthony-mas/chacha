@@ -11,11 +11,9 @@
     </div>
 
     <% if @events.any? %>
-      <div class="event-card-container">
+      <div class="event-cards-list">
         <% @events.each do |event| %>
-          <div class="glass-event-card">
-            <%= render "event_card", event: event %>
-          </div>
+          <%= render "event_card", event: event %>
         <% end %>
       </div>
     <% else %>

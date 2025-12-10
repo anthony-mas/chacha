@@ -80,6 +80,13 @@
     gap: var(--spacing-lg);
 }
 
+// Use same styling as discover page for event-cards-list
+.my-events-page .event-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 // ===========================================
 // Glass Event Card Wrapper
 // ===========================================
