@@ -1,43 +1,9 @@
 <%# RSVP Modal with Segmented Control %>
-<% current_participation = user_signed_in? ? @event.participations.find_by(user: current_user) : nil %>
-<% current_status = current_participation&.status %>
 
 <div class="rsvp-modal-overlay is-hidden">
   <div class="rsvp-modal">
     <button type="button" class="rsvp-modal-close" aria-label="Close">&times;</button>
 
-    <%# Segmented control replacing emoji row %>
-    <div class="rsvp-modal-segmented-wrapper">
-      <%= render "shared/rsvp_segmented_control", current_status: current_status, context: "modal" %>
-    </div>
-
-    <%= form_with url: event_participations_path(@event), method: (current_participation ? :patch : :post),
-        class: "rsvp-form", id: "rsvp-form", data: { turbo: true } do |f| %>
-
-      <%# Hidden field for status - updated by JS when clicking segments %>
-      <input type="hidden" name="participation[status]" id="rsvp-status-field" value="<%= current_status || 'going' %>">
-
-      <div class="rsvp-field">
-        <label class="d-none" for="rsvp_name">Name</label>
-        <input type="text" id="rsvp_name" name="user[name]"
-               placeholder="Your name" class="rsvp-input"
-               value="">
-      </div>
-
-      <div class="rsvp-field my-2">
-        <label class="d-none" for="rsvp_mobile">Mobile number</label>
-        <input type="tel" id="rsvp_mobile" name="rsvp[mobile]"
-               placeholder="Your mobile number" class="rsvp-input">
-      </div>
-
-      <div class="rsvp-field">
-        <label class="d-none" for="rsvp_plus_one">+1 Guest</label>
-        <input type="text" id="rsvp_plus_one" name="participation[extra_guests]"
-               placeholder="Number of extra guests (optional)" class="rsvp-input"
-               value="<%= current_participation&.extra_guests if current_participation&.extra_guests.to_i > 0 %>">
-      </div>
-
-      <button type="submit" class="rsvp-submit-button">RSVP</button>
-    <% end %>
+    <%= render "events/rsvp_modal_content" %>
   </div>
 </div>

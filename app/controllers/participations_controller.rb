@@ -5,8 +5,8 @@ class ParticipationsController < ApplicationController
   def create
     @participation = @event.participations.find_by(user: current_user)
 
-    # Update user's name if provided in the form
-    update_user_name_if_provided
+    # Update user's name and mobile if provided in the form
+    update_user_info_if_provided
 
     if @participation
       # Update existing participation
@@ -28,6 +28,9 @@ class ParticipationsController < ApplicationController
 
   def update
     @participation = @event.participations.find_by!(user: current_user)
+
+    # Update user's name and mobile if provided in the form
+    update_user_info_if_provided
 
     if @participation.update(participation_params)
       respond_to_participation_change
@@ -56,11 +59,10 @@ class ParticipationsController < ApplicationController
     params.fetch(:participation, {}).permit(:status, :guest_approval, :role, :extra_guests)
   end
 
-  def update_user_name_if_provided
-    user_name = params.dig(:user, :name)
-    if user_name.present?
-      current_user.update(name: user_name)
-    end
+  def update_user_info_if_provided
+    user_params = params.fetch(:user, {}).permit(:name, :mobile_number)
+    updates = user_params.to_h.select { |_, v| v.present? }
+    current_user.update(updates) if updates.any?
   end
 
   def respond_to_participation_change
@@ -71,7 +73,9 @@ class ParticipationsController < ApplicationController
           turbo_stream.replace("rsvp-segmented-control", partial: "shared/rsvp_segmented_control", locals: {
             current_status: @participation&.persisted? ? @participation.status : nil,
             context: "page"
-          })
+          }),
+          turbo_stream.replace("manage-guests-content", partial: "events/manage_guests_content", locals: { event: @event }),
+          turbo_stream.replace("rsvp-modal-content", partial: "events/rsvp_modal_content")
         ]
       end
       format.html { redirect_to @event }
