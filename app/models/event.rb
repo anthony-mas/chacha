@@ -14,6 +14,18 @@ class Event < ApplicationRecord
   # SCOPES
   # ===========================
 
+  # Events for "My Events" page: hosted by user OR user is going/maybe
+  # Note: We use subquery for participating IDs to avoid structural mismatch with .or()
+  scope :for_user, ->(user) {
+    participating_event_ids = Participation
+      .where(user_id: user.id, status: %w[going maybe])
+      .select(:event_id)
+
+    where(user_id: user.id)
+      .or(where(id: participating_event_ids))
+      .distinct
+  }
+
   scope :most_popular, -> {
     joins(:participations)
       .group("events.id")

@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = user_signed_in? ? current_user.events : Event.none
+    @events = user_signed_in? ? Event.for_user(current_user).order(starts_on: :asc) : Event.none
   end
 
   def show; end
