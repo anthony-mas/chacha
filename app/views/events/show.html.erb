@@ -108,32 +108,40 @@
   // ─────────────────────────────────────────────────────────────
   const rsvpOverlay = document.querySelector('.rsvp-modal-overlay:not(.manage-guests-overlay)');
   const rsvpCloseBtn = rsvpOverlay ? rsvpOverlay.querySelector('.rsvp-modal-close') : null;
- const rsvpForm = document.getElementById('rsvp-form');
-  const rsvpStatusField = document.getElementById('rsvp-status-field');
+
+  // Query form and status field dynamically (they get replaced by Turbo streams)
+  function getRsvpForm() {
+    return document.getElementById('rsvp-form');
+  }
+  function getRsvpStatusField() {
+    return document.getElementById('rsvp-status-field');
+  }
+
   // Page segmented control (outside modal)
   function getPageSegments() {
     return document.querySelectorAll('[data-rsvp-context="page"] .rsvp-segment');
- }
+  }
 
   // Modal segmented control (inside modal)
   function getModalSegments() {
     return rsvpOverlay ?
- rsvpOverlay.querySelectorAll('[data-rsvp-context="modal"] .rsvp-segment') : [];
+      rsvpOverlay.querySelectorAll('[data-rsvp-context="modal"] .rsvp-segment') : [];
   }
 
   function openRsvpModal(status) {
     if (!rsvpOverlay) return;
     rsvpOverlay.classList.remove('is-hidden');
     document.body.style.overflow = 'hidden';
- // Set the modal segmented control to match the clicked status
+    // Set the modal segmented control to match the clicked status
     const modalSegments = getModalSegments();
- modalSegments.forEach(btn => {
+    modalSegments.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.rsvpStatus === status);
     });
- // Update hidden field
-    if (rsvpStatusField) {
-      rsvpStatusField.value = status;
- }
+    // Update hidden field
+    const statusField = getRsvpStatusField();
+    if (statusField) {
+      statusField.value = status;
+    }
   }
 
   function closeRsvpModal() {
@@ -158,7 +166,7 @@
       openRsvpModal(status);
     }
   });
- // Modal segmented control: click updates hidden field and visual state
+  // Modal segmented control: click updates hidden field and visual state
   document.addEventListener('click', (e) => {
     const modalSegment = e.target.closest('[data-rsvp-context="modal"] .rsvp-segment');
     if (modalSegment) {
@@ -170,9 +178,9 @@
       });
 
       // Update hidden field
-      if (rsvpStatusField) {
-        rsvpStatusField.value
- = status;
+      const statusField = getRsvpStatusField();
+      if (statusField) {
+        statusField.value = status;
       }
 
       // Also update page segments to stay in sync
@@ -189,14 +197,13 @@
     });
  }
 
-  // Form submission handler
-  if (rsvpForm) {
-    rsvpForm.addEventListener('turbo:submit-end', (event) => {
-      if (event.detail.success) {
-        closeRsvpModal();
-      }
-    });
- }
+  // Form submission handler (use event delegation since form gets replaced by Turbo)
+  document.addEventListener('turbo:submit-end', (event) => {
+    const form = event.target;
+    if (form && form.id === 'rsvp-form' && event.detail.success) {
+      closeRsvpModal();
+    }
+  });
 
   // ─────────────────────────────────────────────────────────────
   // Manage Guests Modal

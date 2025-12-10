@@ -1,0 +1,46 @@
+<%# RSVP Modal Content - wrapped in turbo frame for live updates %>
+<% current_participation = user_signed_in? ? @event.participations.find_by(user: current_user) : nil %>
+<% current_status = current_participation&.status %>
+
+<%= turbo_frame_tag "rsvp-modal-content" do %>
+  <%# Segmented control replacing emoji row %>
+  <div class="rsvp-modal-segmented-wrapper">
+    <%= render "shared/rsvp_segmented_control", current_status: current_status, context: "modal" %>
+  </div>
+
+  <% form_url = current_participation ? event_participation_path(@event, current_participation) : event_participations_path(@event) %>
+  <%= form_with url: form_url, method: (current_participation ? :patch : :post),
+      class: "rsvp-form", id: "rsvp-form", data: { turbo: true } do |f| %>
+
+    <%# Hidden field for status - updated by JS when clicking segments %>
+    <input type="hidden" name="participation[status]" id="rsvp-status-field" value="<%= current_status || 'going' %>">
+
+    <div class="rsvp-field">
+      <label class="d-none" for="rsvp_name">Name</label>
+      <input type="text" id="rsvp_name" name="user[name]"
+             placeholder="Your name" class="rsvp-input"
+             value="<%= current_user&.name %>">
+    </div>
+
+    <div class="rsvp-field my-2">
+      <label class="d-none" for="rsvp_mobile">Mobile number</label>
+      <input type="tel" id="rsvp_mobile" name="user[mobile_number]"
+             placeholder="Your mobile number" class="rsvp-input"
+             value="<%= current_user&.mobile_number %>">
+    </div>
+
+    <div class="rsvp-field">
+      <label class="d-none" for="rsvp_extra_guests">Extra Guests</label>
+      <select id="rsvp_extra_guests" name="participation[extra_guests]" class="rsvp-input">
+        <option value="0" <%= 'selected' if current_participation&.extra_guests.to_i == 0 %>>No extra guests</option>
+        <option value="1" <%= 'selected' if current_participation&.extra_guests.to_i == 1 %>>+1 guest</option>
+        <option value="2" <%= 'selected' if current_participation&.extra_guests.to_i == 2 %>>+2 guests</option>
+        <option value="3" <%= 'selected' if current_participation&.extra_guests.to_i == 3 %>>+3 guests</option>
+        <option value="4" <%= 'selected' if current_participation&.extra_guests.to_i == 4 %>>+4 guests</option>
+        <option value="5" <%= 'selected' if current_participation&.extra_guests.to_i == 5 %>>+5 guests</option>
+      </select>
+    </div>
+
+    <button type="submit" class="rsvp-submit-button">RSVP</button>
+  <% end %>
+<% end %>
