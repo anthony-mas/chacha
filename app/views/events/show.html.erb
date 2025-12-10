@@ -69,26 +69,20 @@
         <%= render "shared/rsvp_segmented_control", current_status: current_status, context: "page" %>
       </section>
 
-      <%= render "rsvp_modal" %>
-
       <section class="event-main-layout">
         <div class="event-guests-panel">
           <%= render "guests_list", event: @event %>
         </div>
 
-        <div class="event-activity-panel">
+        <div class="event-activity-panel" >
           <%= render "events/activity", event: @event %>
         </div>
       </section>
-
-      <p>
-        <%= link_to "Back to my events", events_path %>
-      </p>
-
     </div>
   </div>
 </div>
 
+<%= render "rsvp_modal" %>
 <%= render "events/share_modal" %>
 <%= render "events/manage_guests_modal", event: @event %>
 

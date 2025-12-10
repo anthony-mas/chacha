@@ -238,7 +238,7 @@
         scroll-snap-align: center;
         box-shadow: var(--shadow-md);
         transform: scale(0.9);
-        opacity: 0.7;
+        opacity: 1;
 
         &:first-child { margin-left: calc((100% - 72%) / 2); }
         &:last-child { margin-right: calc((100% - 72%) / 2); }
