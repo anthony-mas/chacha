@@ -1,51 +1,39 @@
 class EventsController < ApplicationController
-  # Allow non-logged-in users to see the show page, discover, and the calendar download
   before_action :authenticate_user!, except: [:show, :discover, :calendar]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :calendar]
   before_action :set_categories, only: [:new, :edit]
 
-  # --- NEW ACTION ---
+  # --- DISCOVER ACTION ---
   def discover
-    # Determine default or current location for filtering
-    location = params[:location].presence || current_user.try(:city) || 'Paris'
+    location = params[:filter].presence || current_user.try(:city) || "Paris"
 
-    # The categories available for filters
-    @categories = ['Social', 'Sport', 'Art & Culture', 'Networking', 'Hobbies']
+    @categories = [
+      "Social", "Sport", "Art & Culture", "Networking", "Hobbies"
+    ]
 
-    # Fetch and filter events using the new model method
-    @events = Event.discover_filter(
-      params.merge(location: location),
-      current_user
-    )
+    # Pass all filtering to Event model
+    @events = Event.discover_filter(params, current_user)
 
-    # Pass the applied filters for styling the active tags
     @current_location = location
-    @current_filter = params[:filter].presence || params[:category].presence
+    @current_filter   = params[:filter]
+    
   end
 
-  # Host dashboard – list only current_user's events
   def index
-    if user_signed_in?
-      @events = current_user.events
-    else
-      @events = Event.none
-    end
+    @events = user_signed_in? ? current_user.events : Event.none
   end
 
-  # Public event page (host + guests see this)
-  def show
-  end
+  def show; end
 
-  # ADDED: Action to export event as iCalendar (.ics) file
   def calendar
     respond_to do |format|
       format.ics do
-        # Set headers to download a file named after the event title
-        headers['Content-Type'] = 'text/calendar; charset=UTF-8'
-        headers['Content-Disposition'] = "attachment; filename=\"#{@event.title.parameterize}.ics\""
-        render 'events/calendar', formats: [:ics] # Render the template at app/views/events/calendar.ics.erb
+        headers["Content-Type"] = "text/calendar; charset=UTF-8"
+        headers["Content-Disposition"] =
+          "attachment; filename=\"#{@event.title.parameterize}.ics\""
+
+        render "events/calendar", formats: [:ics]
       end
-      # Fallback for non-ics requests
       format.html { redirect_to @event }
     end
   end
@@ -65,8 +53,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @event.update(event_params)
@@ -106,11 +93,11 @@ class EventsController < ApplicationController
     )
   end
 
+  # Static hero image selection
   def attach_hero_image_from_choice(event)
     choice = params.dig(:event, :hero_image_choice)
     return if choice.blank?
 
-    # Images are stored in public/hero_library/ (no fingerprinting issues)
     path = Rails.root.join("public/hero_library", choice)
     return unless File.exist?(path)
 

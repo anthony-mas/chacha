@@ -10,13 +10,19 @@ class Event < ApplicationRecord
   has_many :category_events, dependent: :destroy
   has_many :categories, through: :category_events
 
+  # ===========================
+  # SCOPES
+  # ===========================
+
   scope :most_popular, -> {
     joins(:participations)
-      .group('events.id')
-      .order('COUNT(participations.id) DESC')
+      .group("events.id")
+      .order("COUNT(participations.id) DESC")
   }
 
-  scope :by_location, ->(location) { where("location ILIKE ?", "%#{location.downcase}%") if location.present? }
+  scope :by_location, ->(location) {
+    where("LOWER(location) LIKE ?", "%#{location.downcase}%") if location.present?
+  }
 
   scope :by_category_name, ->(category_name) {
     joins(:categories)
@@ -28,30 +34,42 @@ class Event < ApplicationRecord
     return none unless current_user&.respond_to?(:friends) && current_user.friends.present?
 
     friend_ids = current_user.friends.pluck(:id)
-    joins(:participations).where(participations: { user_id: friend_ids }).distinct
+    joins(:participations)
+      .where(participations: { user_id: friend_ids })
+      .distinct
   end
+
+  # ===========================
+  # DISCOVER FILTER LOGIC
+  # ===========================
 
   def self.discover_filter(params, current_user)
     events = Event.where(event_private: false)
 
-    if params[:filter] == 'top'
+    if params[:filter] == "top"
       events = events.most_popular
-    elsif params[:filter] == 'friends'
+
+    elsif params[:filter] == "friends"
       events = events.attended_by_friends(current_user)
-    elsif params[:category].present?
-      events = events.by_category_name(params[:category])
+
+    elsif params[:filter].present? && params[:filter] != params[:location]
+      events = events.by_category_name(params[:filter])
     end
 
     events = events.by_location(params[:location]) if params[:location].present?
 
-    events = events.order(starts_on: :asc) unless params[:filter] == 'top'
+    events = events.order(starts_on: :asc) unless params[:filter] == "top"
 
     events
   end
 
+  # ===========================
+  # HELPERS
+  # ===========================
+
   def display_time_and_location
-    time = starts_on.strftime('%-I%P').downcase
-    date_prefix = starts_on.to_date == Date.current ? 'Today' : starts_on.strftime('%A')
+    time = starts_on.strftime("%-I%P").downcase
+    date_prefix = (starts_on.to_date == Date.current ? "Today" : starts_on.strftime("%A"))
     "#{date_prefix} #{time} - #{location.upcase}"
   end
 end
