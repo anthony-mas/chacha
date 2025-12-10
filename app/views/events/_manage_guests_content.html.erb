@@ -103,11 +103,11 @@
   <%# ═══════════════════════════════════════════════════════════ %>
   <h2 class="manage-guests-title">Who's Going</h2>
 
-  <%# Summary counts %>
+  <%# Summary counts (no emojis for invitee view) %>
   <div class="guests-modal-summary">
-    <span class="summary-item summary-going">👍 <%= going_count %> going</span>
+    <span class="summary-item summary-going"><%= going_count %> going</span>
     <% if maybe_count > 0 %>
-      <span class="summary-item summary-maybe">🤔 <%= maybe_count %> maybe</span>
+      <span class="summary-item summary-maybe"><%= maybe_count %> maybe</span>
     <% end %>
   </div>
 
