@@ -1,34 +1,36 @@
-<div class="event-card overlay-style">
-  <%= link_to event_path(event), class: "event-card-link" do %>
+<% @events.each do |event| %>
+  <div class="event-card overlay-style">
+    <%= link_to event_path(event), class: "event-card-link" do %>
 
-    <% if event.hero_image.attached? %>
-      <%= image_tag event.hero_image, class: "event-card-image" %>
-    <% else %>
-      <div class="event-card-image placeholder">
-        <span class="placeholder-icon">🖼️</span>
+      <% if event.hero_image.attached? %>
+        <%= image_tag event.hero_image, class: "event-card-image" %>
+      <% else %>
+        <div class="event-card-image placeholder">
+          <span class="placeholder-icon">🖼️</span>
+        </div>
+      <% end %>
+
+      <div class="event-card-overlay">
+        <h3 class="event-card-title"><%= event.title.presence || "Untitled Event" %></h3>
+        <p class="event-card-date">
+          <%= event.starts_on&.strftime("%A %d %B, %H:%M") %>
+        </p>
+        <p class="event-card-location">
+          <%= event.location %>
+        </p>
       </div>
+
     <% end %>
 
-    <div class="event-card-overlay">
-      <h3 class="event-card-title"><%= event.title.presence || "Untitled Event" %></h3>
-      <p class="event-card-date">
-        <%= event.starts_on&.strftime("%A %d %B, %H:%M") %>
-      </p>
-      <p class="event-card-location">
-        <%= event.location %>
-      </p>
+    <div class="event-actions d-flex justify-content-between align-items-center px-4 pb-3">
+      <span class="event-save-btn text-muted">
+        <i class="fa-regular fa-star star-icon"></i>
+        <span class="save-text">Interested</span>
+      </span>
+
+      <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#shareModal_#{event.id}" }, class: "event-share-btn text-muted" do %>
+        <i class="fa-solid fa-share arrow-icon"></i>
+      <% end %>
     </div>
-
-  <% end %>
-
-  <div class="event-actions d-flex justify-content-between align-items-center px-4 pb-3">
-    <span class="event-save-btn text-muted">
-      <i class="fa-regular fa-star star-icon"></i>
-      <span class="save-text">Interested</span>
-    </span>
-
-    <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#shareModal_#{event.id}" }, class: "event-share-btn text-muted" do %>
-      <i class="fa-solid fa-share arrow-icon"></i>
-    <% end %>
   </div>
-</div>
+<% end %>
