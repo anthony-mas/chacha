@@ -38,7 +38,7 @@
   // ==========================================
 
   /* OPTIMIZED: High-Contrast Elements use Dark Primary for FILL */
-  --color-title: var(--color-dark-primary);     /* Titles are DARK for light background events, but overridden to light on dark pages. This seems right based on the old logic */
+  --color-title: var(--color-white-primary);     /* Titles are DARK for light background events, but overridden to light on dark pages. This seems right based on the old logic */
   --color-body-text: var(--color-white-secondary); /* Body text is light */
   --color-secondary-text: var(--color-text-tertiary); /* Low contrast text for dates/hints */
 
