@@ -1,4 +1,8 @@
-// Specific CSS for your home-page
+// =====================================================
+// HOME PAGE — Full Styling
+// =====================================================
+
+// HERO SECTION
 .homepage-hero {
     min-height: 80vh;
     display: flex;
@@ -31,6 +35,7 @@
     color: #F5F1E8;
 }
 
+// MAIN HOMEPAGE WRAPPER
 .homepage {
     text-align: center;
     padding: var(--spacing-xl) var(--spacing-md);
@@ -39,7 +44,7 @@
     color: #F5F1E8;
 }
 
-// Force white on all text elements in homepage section
+// Force white on all text in homepage
 .homepage h1,
 .homepage h2,
 .homepage h3,
@@ -49,9 +54,9 @@
     color: #F5F1E8 !important;
 }
 
-// ADDED: Styling for intro and sub text to make them lighter
+// INTRO & SUBTEXT
 .intro-text {
-    font-size: 1.25rem; /* Slightly bigger, subtle distinction */
+    font-size: 1.25rem;
     font-weight: 300;
     margin-bottom: var(--spacing-md);
 }
@@ -63,7 +68,13 @@
     margin-bottom: var(--spacing-xl);
 }
 
-// Event preview cards (carousel)
+
+
+// =====================================================
+// EVENT PREVIEW CAROUSEL — DESKTOP
+// Enlarged premium cards
+// =====================================================
+
 .event-preview-container {
     display: flex;
     justify-content: center;
@@ -73,15 +84,22 @@
 }
 
 .event-preview {
-    width: 180px;
-    height: 250px;
-    background: linear-gradient(145deg, #F5F1E8 0%, #F5F1E8 50%, #F5F1E8 100%);
-    border-radius: 20px;
+    width: 260px;        /* Enlarged */
+    height: 340px;       /* Enlarged */
+    background: #F5F1E8;
+    border-radius: 24px;
+    overflow: hidden;
     box-shadow:
         0 10px 40px rgba(0, 0, 0, 0.12),
         0 2px 10px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+}
+
+.event-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .event-preview:hover {
@@ -91,7 +109,13 @@
         0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
-// MOBILE: Apple Invites Style Carousel
+
+
+// =====================================================
+// EVENT PREVIEW CAROUSEL — MOBILE (Apple-style)
+// Enlarged and centered dynamically
+// =====================================================
+
 @media (max-width: 480px) {
     .event-preview-container {
         display: flex;
@@ -99,7 +123,7 @@
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        gap: 12px;
+        gap: 4px;                 /* 🔥 reduced gap (was 12px) */
         padding: 20px 0;
         margin: 0;
         justify-content: flex-start;
@@ -113,23 +137,31 @@
 
     .event-preview {
         flex: 0 0 auto;
-        width: 72%;
-        max-width: 290px;
-        height: 280px;
-        border-radius: 28px;
+        width: 82%;
+        max-width: 300px;
+        height: 430px;            /* 🔥 increased height */
+        border-radius: 30px;
         scroll-snap-align: center;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
         transform: scale(0.9);
         opacity: 0.7;
         transition: transform 0.3s ease, opacity 0.3s ease;
+        overflow: hidden;
     }
 
+    .event-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Adjust centering since gap changed */
     .event-preview:first-child {
-        margin-left: calc((100% - 72%) / 2);
+        margin-left: calc((100% - 82%) / 2);
     }
 
     .event-preview:last-child {
-        margin-right: calc((100% - 72%) / 2);
+        margin-right: calc((100% - 82%) / 2);
     }
 
     .event-preview:hover {
@@ -141,23 +173,27 @@
     }
 }
 
+// =====================================================
+// BUTTONS
+// =====================================================
+
 .login-btn {
     display: inline-block;
     padding: var(--spacing-sm) var(--spacing-xl);
-    background-color: var(--color-dark-primary); /* MODIFIED: Set to black (#111111) for consistency, overriding general styling */
-    color: #F5F1E8; /* MODIFIED: Set text color */
-    border-radius: 16px; /* MODIFIED: Standardize radius */
+    background-color: var(--color-dark-primary);
+    color: #F5F1E8;
+    border-radius: 16px;
     font-family: var(--font-body);
-    font-weight: 700; /* MODIFIED: Set to bold */
+    font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
     transition: background-color 0.2s ease, transform 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 
     &:hover {
-        background-color: var(--color-dark-secondary); /* Keep dark on hover */
+        background-color: var(--color-dark-secondary);
         color: #F5F1E8;
         transform: scale(1.02);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Added shadow for visual lift */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     }
 }
