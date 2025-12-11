@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["startsOn", "endsOn"]
 
   connect() {
-    console.log("Event form controller connected")
     if (!this.startsOnTarget.value && !this.endsOnTarget.value) {
       this.updateEndsOn()
     }
