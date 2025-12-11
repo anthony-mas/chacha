@@ -21,17 +21,6 @@
 <%# Check if current user is the host %>
 <% is_host = user_signed_in? && event.user == current_user %>
 
-<%# Helper to compute initials %>
-<%
-  def content_initials(user)
-    if user.name.present?
-      parts = user.name.strip.split
-      parts.length >= 2 ? "#{parts.first[0]}#{parts.last[0]}".upcase : parts.first[0..1].upcase
-    else
-      user.email.split("@").first[0..1].upcase
-    end
-  end
-%>
 
 <%= turbo_frame_tag "manage-guests-content" do %>
   <%# Unified header %>
