@@ -2,15 +2,6 @@
 <%# Host sees a dropdown to change status, invitee sees a badge %>
 
 <%
-  def row_initials(user)
-    if user.name.present?
-      parts = user.name.strip.split
-      parts.length >= 2 ? "#{parts.first[0]}#{parts.last[0]}".upcase : parts.first[0..1].upcase
-    else
-      user.email.split("@").first[0..1].upcase
-    end
-  end
-
   status_class = case participation.status
                  when "going" then "status-going"
                  when "maybe" then "status-maybe"
@@ -26,8 +17,8 @@
 
 <li class="manage-guests-item">
   <div class="guest-info">
-    <div class="guest-avatar" style="background-color: #<%= Digest::MD5.hexdigest(participation.user.email)[0..5] %>;">
-      <%= row_initials(participation.user) %>
+    <div class="guest-avatar" style="background-color: <%= avatar_color_for(participation.user) %>;">
+      <%= avatar_initials_for(participation.user) %>
     </div>
     <div class="guest-details">
       <span class="guest-name"><%= participation.user.name.presence || participation.user.email.split("@").first %></span>

@@ -2,8 +2,8 @@
 <div class="post-card" data-controller="post">
   <div class="post-header">
     <div class="post-author">
-      <div class="post-avatar">
-        <%= post.user.name.present? ? post.user.name[0].upcase : "?" %>
+      <div class="post-avatar" style="background-color: <%= avatar_color_for(post.user) %>;">
+        <%= avatar_initials_for(post.user) %>
       </div>
       <div class="post-meta">
         <span class="post-author-name"><%= post.user.name.presence || post.user.email.split("@").first %></span>

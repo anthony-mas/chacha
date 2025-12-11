@@ -1,7 +1,7 @@
 <%# Single Comment/Reply %>
 <div class="comment-item">
-  <div class="comment-avatar">
-    <%= comment.user.name.present? ? comment.user.name[0].upcase : "?" %>
+  <div class="comment-avatar" style="background-color: <%= avatar_color_for(comment.user) %>;">
+    <%= avatar_initials_for(comment.user) %>
   </div>
   <div class="comment-body">
     <div class="comment-header">

@@ -15,21 +15,6 @@
 <% displayed_participations = going_participations.order("users.name ASC").limit(max_avatars) %>
 <% overflow_count = going_count > max_avatars ? going_count - max_avatars : 0 %>
 
-<%# Helper to compute initials from name or email %>
-<%
-  def compute_initials(user)
-    if user.name.present?
-      parts = user.name.strip.split
-      if parts.length >= 2
-        "#{parts.first[0]}#{parts.last[0]}".upcase
-      else
-        parts.first[0..1].upcase
-      end
-    else
-      user.email.split("@").first[0..1].upcase
-    end
-  end
-%>
 
 <%= turbo_frame_tag "guests-list" do %>
 <div class="guests-list-container">
@@ -65,12 +50,8 @@
   <% if going_count > 0 %>
     <div class="guests-avatars-row">
       <% displayed_participations.each do |participation| %>
-        <%
-          initials = compute_initials(participation.user)
-          color = "##{Digest::MD5.hexdigest(participation.user.email)[0..5]}"
-        %>
-        <div class="guests-avatar-bubble" style="background-color: <%= color %>;" title="<%= participation.user.name.presence || participation.user.email %>">
-          <%= initials %>
+        <div class="guests-avatar-bubble" style="background-color: <%= avatar_color_for(participation.user) %>;" title="<%= participation.user.name.presence || participation.user.email %>">
+          <%= avatar_initials_for(participation.user) %>
         </div>
       <% end %>
 
